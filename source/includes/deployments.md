@@ -59,10 +59,10 @@ print r.json()
 
 ```
 
-```http
-GET https://api.garuda.io/v2/flight/deployments HTTP/1.1
-Host: api.garuda.io/v2
-Accept: application/json
+```shell
+curl -X GET 'https://api.garuda.io/v2/flight/deployments' \
+     -H 'Authorization: Bearer <AUTH_TOKEN>' \
+     -H 'X-API-Key: <API_KEY>' \
 ```
 
 ```javascript
@@ -93,46 +93,44 @@ fetch('https://api.garuda.io/v2/flight/deployments',
   "success": true,
   "data": [
     {
-      "name": "Zhao Shi Chong's Deployment on 2018-05-22",
-      "deployment_id": "0c5c21b6a42fadb018a5d1863c312345",
+      "name": "DEPLOYMENT-001",
+      "deployment_id": "9703889c2bb4322025815ed1a0509eba",
       "drones": [
         {
-          "name": "DEV-001",
-          "drone_id": "0c5c21b6a42fadb018a5d1863c312345",
+          "name": "DRONE-001",
+          "drone_id": "ceaf7e6dc205b365e156bf4f86930408",
           "model_name": "M400 UAV",
-          "model_id": "0c5c21b6a42fadb018a5d1863c312345"
+          "model_id": "7bd6798cdb0dcb26ca6d3c0ca9c2ae79"
         }
       ],
       "batteries": [
         {
           "name": "BATTERY-001",
-          "battery_id": "0c5c21b6a42fadb018a5d1863c312345",
+          "battery_id": "f42074ff0948fbb1d11f7a96c07cdcdd",
           "model_name": "Multistar 6S 6600",
-          "model_id": "0c5c21b6a42fadb018a5d1863c312345"
+          "model_id": "4b38b7383fdb23fbff8c3a6a694e4533"
         }
       ],
       "cameras": [
         {
           "name": "CAMERA-001",
-          "camera_id": "0c5c21b6a42fadb018a5d1863c312345",
-          "model_name": "Huawei P30 Pro",
-          "model_id": "0c5c21b6a42fadb018a5d1863c312345"
+          "camera_id": "0b53479856488f542a18fef96b84119d",
+          "model_name": "Powershot S100",
+          "model_id": "0e51493cd1ae85c097547de808642659"
         }
       ],
       "personnel": [
         {
-          "name": "Jayson Beltran",
-          "user_id": "0c5c21b6a42fadb018a5d1863c312345"
+          "name": "USER-002",
+          "user_id": "53494af9b7e38f5df3447d17fe0b7547"
         }
       ],
       "lead": {
-        "name": "Asher Solomon",
-        "user_id": "0c5c21b6a42fadb018a5d1863c312345"
+        "name": "USER-001",
+        "user_id": "3b20c067ab91da9436ddaea6b83a9536"
       },
       "purpose": [
-        "Photography",
-        "Analytics",
-        "Security checks"
+        "Aerial Photography"
       ],
       "start_date": "1559571926000",
       "end_date": "1559572026000",
@@ -188,38 +186,53 @@ print r.json()
 
 ```
 
-```http
-POST https://api.garuda.io/v2/flight/deployments HTTP/1.1
-Host: api.garuda.io/v2
-Content-Type: application/json
-Accept: application/json
+```shell
+curl -X POST 'https://api.garuda.io/v2/flight/deployments' \
+     -H 'Authorization: Bearer <AUTH_TOKEN>' \
+     -H 'X-API-Key: <API_KEY>' \
+     -d '{
+      "name": "DEPLOYMENT-001",
+      "drones": [
+        "ceaf7e6dc205b365e156bf4f86930408"
+      ],
+      "batteries": [
+        "f42074ff0948fbb1d11f7a96c07cdcdd"
+      ],
+      "cameras": [
+        "0b53479856488f542a18fef96b84119d"
+      ],
+      "personnel": [
+        "53494af9b7e38f5df3447d17fe0b7547"
+      ],
+      "lead": "3b20c067ab91da9436ddaea6b83a9536",
+      "purpose": [
+        "Aerial Photography",
+      ],
+      "start_date": "1559571926000",
+      "end_date": "1559572026000",
+      "geo_json": "{ \"type\": \"Polygon\", \"coordinates\": [ [ [ -118.37099075317383, 33.85505651142062 ], [ -118.37305068969727, 33.85502978214579 ], [ -118.37347984313963, 33.854673391015496 ], [ -118.37306141853333, 33.85231226221667 ], [ -118.37193489074707, 33.85174201755203 ], [ -118.36997151374815, 33.85176874785573 ], [ -118.36995005607605, 33.8528112231754 ], [ -118.37099075317383, 33.85505651142062 ] ] ] }"
+     }'
 ```
 
 ```javascript
 const fetch = require('node-fetch');
 const inputBody = '{
-  "name": "Zhao Shi Chong's Deployment on 2018-05-22",
+  "name": "DEPLOYMENT-001",
   "drones": [
-    "0c5c21b6a42fadb018a5d1863c312345",
-    "0c5c21b6a42fadb018a5d1863c312345"
+    "ceaf7e6dc205b365e156bf4f86930408"
   ],
   "batteries": [
-    "0c5c21b6a42fadb018a5d1863c312345",
-    "0c5c21b6a42fadb018a5d1863c312345"
+    "f42074ff0948fbb1d11f7a96c07cdcdd"
   ],
   "cameras": [
-    "0c5c21b6a42fadb018a5d1863c312345",
-    "0c5c21b6a42fadb018a5d1863c312345"
+    "0b53479856488f542a18fef96b84119d"
   ],
   "personnel": [
-    "0c5c21b6a42fadb018a5d1863c312345",
-    "0c5c21b6a42fadb018a5d1863c312345"
+    "53494af9b7e38f5df3447d17fe0b7547"
   ],
-  "lead": "0c5c21b6a42fadb018a5d1863c312345",
+  "lead": "3b20c067ab91da9436ddaea6b83a9536",
   "purpose": [
-    "Photography",
-    "Analytics",
-    "Security checks"
+    "Aerial Photography",
   ],
   "start_date": "1559571926000",
   "end_date": "1559572026000",
@@ -251,46 +264,44 @@ fetch('https://api.garuda.io/v2/flight/deployments',
 {
   "success": true,
   "data": {
-    "name": "Zhao Shi Chong's Deployment on 2018-05-22",
-    "deployment_id": "0c5c21b6a42fadb018a5d1863c312345",
+    "name": "DEPLOYMENT-001",
+    "deployment_id": "9703889c2bb4322025815ed1a0509eba",
     "drones": [
       {
-        "name": "DEV-001",
-        "drone_id": "0c5c21b6a42fadb018a5d1863c312345",
+        "name": "DRONE-001",
+        "drone_id": "ceaf7e6dc205b365e156bf4f86930408",
         "model_name": "M400 UAV",
-        "model_id": "0c5c21b6a42fadb018a5d1863c312345"
+        "model_id": "7bd6798cdb0dcb26ca6d3c0ca9c2ae79"
       }
     ],
     "batteries": [
       {
         "name": "BATTERY-001",
-        "battery_id": "0c5c21b6a42fadb018a5d1863c312345",
+        "battery_id": "f42074ff0948fbb1d11f7a96c07cdcdd",
         "model_name": "Multistar 6S 6600",
-        "model_id": "0c5c21b6a42fadb018a5d1863c312345"
+        "model_id": "4b38b7383fdb23fbff8c3a6a694e4533"
       }
     ],
     "cameras": [
       {
         "name": "CAMERA-001",
-        "camera_id": "0c5c21b6a42fadb018a5d1863c312345",
-        "model_name": "Huawei P30 Pro",
-        "model_id": "0c5c21b6a42fadb018a5d1863c312345"
+        "camera_id": "0b53479856488f542a18fef96b84119d",
+        "model_name": "Powershot S100",
+        "model_id": "0e51493cd1ae85c097547de808642659"
       }
     ],
     "personnel": [
       {
-        "name": "Jayson Beltran",
-        "user_id": "0c5c21b6a42fadb018a5d1863c312345"
+        "name": "USER-002",
+        "user_id": "53494af9b7e38f5df3447d17fe0b7547"
       }
     ],
     "lead": {
-      "name": "Asher Solomon",
-      "user_id": "0c5c21b6a42fadb018a5d1863c312345"
+      "name": "USER-001",
+      "user_id": "3b20c067ab91da9436ddaea6b83a9536"
     },
     "purpose": [
-      "Photography",
-      "Analytics",
-      "Security checks"
+      "Aerial Photography"
     ],
     "start_date": "1559571926000",
     "end_date": "1559572026000",
@@ -364,11 +375,10 @@ print r.json()
 
 ```
 
-```http
-GET https://api.garuda.io/v2/flight/deployments/{deployment_id} HTTP/1.1
-Host: api.garuda.io/v2
-Accept: application/json
-
+```shell
+curl -X GET 'https://api.garuda.io/v2/flight/deployments/{deployment_id}' \
+     -H 'Authorization: Bearer <AUTH_TOKEN>' \
+     -H 'X-API-Key: <API_KEY>' \
 ```
 
 ```javascript
@@ -400,46 +410,44 @@ fetch('https://api.garuda.io/v2/flight/deployments/{deployment_id}',
   "success": true,
   "data": [
     {
-      "name": "Zhao Shi Chong's Deployment on 2018-05-22",
-      "deployment_id": "0c5c21b6a42fadb018a5d1863c312345",
+      "name": "DEPLOYMENT-001",
+      "deployment_id": "9703889c2bb4322025815ed1a0509eba",
       "drones": [
         {
-          "name": "DEV-001",
-          "drone_id": "0c5c21b6a42fadb018a5d1863c312345",
+          "name": "DRONE-001",
+          "drone_id": "ceaf7e6dc205b365e156bf4f86930408",
           "model_name": "M400 UAV",
-          "model_id": "0c5c21b6a42fadb018a5d1863c312345"
+          "model_id": "7bd6798cdb0dcb26ca6d3c0ca9c2ae79"
         }
       ],
       "batteries": [
         {
           "name": "BATTERY-001",
-          "battery_id": "0c5c21b6a42fadb018a5d1863c312345",
+          "battery_id": "f42074ff0948fbb1d11f7a96c07cdcdd",
           "model_name": "Multistar 6S 6600",
-          "model_id": "0c5c21b6a42fadb018a5d1863c312345"
+          "model_id": "4b38b7383fdb23fbff8c3a6a694e4533"
         }
       ],
       "cameras": [
         {
           "name": "CAMERA-001",
-          "camera_id": "0c5c21b6a42fadb018a5d1863c312345",
-          "model_name": "Huawei P30 Pro",
-          "model_id": "0c5c21b6a42fadb018a5d1863c312345"
+          "camera_id": "0b53479856488f542a18fef96b84119d",
+          "model_name": "Powershot S100",
+          "model_id": "0e51493cd1ae85c097547de808642659"
         }
       ],
       "personnel": [
         {
-          "name": "Jayson Beltran",
-          "user_id": "0c5c21b6a42fadb018a5d1863c312345"
+          "name": "USER-002",
+          "user_id": "53494af9b7e38f5df3447d17fe0b7547"
         }
       ],
       "lead": {
-        "name": "Asher Solomon",
-        "user_id": "0c5c21b6a42fadb018a5d1863c312345"
+        "name": "USER-001",
+        "user_id": "3b20c067ab91da9436ddaea6b83a9536"
       },
       "purpose": [
-        "Photography",
-        "Analytics",
-        "Security checks"
+        "Aerial Photography"
       ],
       "start_date": "1559571926000",
       "end_date": "1559572026000",
@@ -493,44 +501,28 @@ print r.json()
 
 ```
 
-```http
-PATCH https://api.garuda.io/v2/flight/deployments/{deployment_id} HTTP/1.1
-Host: api.garuda.io/v2
-Content-Type: application/json
-Accept: application/json
-
+```shell
+curl -X PATCH 'https://api.garuda.io/v2/flight/deployments/{deployment_id}' \
+     -H 'Authorization: Bearer <AUTH_TOKEN>' \
+     -H 'X-API-Key: <API_KEY>' \
+     -d '{
+       "purpose": [
+         "Demonstration",
+         "Training (Academy)"
+       ]
+     }'
 ```
+
 
 ```javascript
 const fetch = require('node-fetch');
 const inputBody = '{
-  "name": "Zhao Shi Chong's Deployment on 2018-05-22",
-  "drones": [
-    "0c5c21b6a42fadb018a5d1863c312345",
-    "0c5c21b6a42fadb018a5d1863c312345"
-  ],
-  "batteries": [
-    "0c5c21b6a42fadb018a5d1863c312345",
-    "0c5c21b6a42fadb018a5d1863c312345"
-  ],
-  "cameras": [
-    "0c5c21b6a42fadb018a5d1863c312345",
-    "0c5c21b6a42fadb018a5d1863c312345"
-  ],
-  "personnel": [
-    "0c5c21b6a42fadb018a5d1863c312345",
-    "0c5c21b6a42fadb018a5d1863c312345"
-  ],
-  "lead": "0c5c21b6a42fadb018a5d1863c312345",
   "purpose": [
-    "Photography",
-    "Analytics",
-    "Security checks"
-  ],
-  "start_date": "1559571926000",
-  "end_date": "1559572026000",
-  "geo_json": "{ \"type\": \"Polygon\", \"coordinates\": [ [ [ -118.37099075317383, 33.85505651142062 ], [ -118.37305068969727, 33.85502978214579 ], [ -118.37347984313963, 33.854673391015496 ], [ -118.37306141853333, 33.85231226221667 ], [ -118.37193489074707, 33.85174201755203 ], [ -118.36997151374815, 33.85176874785573 ], [ -118.36995005607605, 33.8528112231754 ], [ -118.37099075317383, 33.85505651142062 ] ] ] }"
+    "Demonstration",
+    "Training (Academy)"
+  ]
 }';
+
 const headers = {
   'Content-Type':'application/json',
   'Accept':'application/json'
@@ -557,68 +549,45 @@ fetch('https://api.garuda.io/v2/flight/deployments/{deployment_id}',
 {
   "success": true,
   "data": {
-    "name": "Zhao Shi Chong's Deployment on 2018-05-22",
-    "deployment_id": "0c5c21b6a42fadb018a5d1863c312345",
+    "name": "DEPLOYMENT-001",
+    "deployment_id": "9703889c2bb4322025815ed1a0509eba",
     "drones": [
       {
-        "name": "DEV-001",
-        "drone_id": "0c5c21b6a42fadb018a5d1863c312345",
+        "name": "DRONE-001",
+        "drone_id": "ceaf7e6dc205b365e156bf4f86930408",
         "model_name": "M400 UAV",
-        "model_id": "0c5c21b6a42fadb018a5d1863c312345"
-      },
-      {
-        "name": "DEV-002",
-        "drone_id": "0c5c21b6a42fadb018a5d1863c312345",
-        "model_name": "M408 UAV",
-        "model_id": "0c5c21b6a42fadb018a5d1863c312345"
+        "model_id": "7bd6798cdb0dcb26ca6d3c0ca9c2ae79"
       }
     ],
     "batteries": [
       {
         "name": "BATTERY-001",
-        "battery_id": "0c5c21b6a42fadb018a5d1863c312345",
+        "battery_id": "f42074ff0948fbb1d11f7a96c07cdcdd",
         "model_name": "Multistar 6S 6600",
-        "model_id": "0c5c21b6a42fadb018a5d1863c312345"
-      },
-      {
-        "name": "BATTERY-002",
-        "battery_id": "0c5c21b6a42fadb018a5d1863c312345",
-        "model_name": "Multistar 6S 8000",
-        "model_id": "0c5c21b6a42fadb018a5d1863c312345"
+        "model_id": "4b38b7383fdb23fbff8c3a6a694e4533"
       }
     ],
     "cameras": [
       {
         "name": "CAMERA-001",
-        "camera_id": "0c5c21b6a42fadb018a5d1863c312345",
-        "model_name": "Huawei P30 Pro",
-        "model_id": "0c5c21b6a42fadb018a5d1863c312345"
-      },
-      {
-        "name": "CAMERA-002",
-        "camera_id": "0c5c21b6a42fadb018a5d1863c312345",
-        "model_name": "Huawei P30 Pro X50",
-        "model_id": "0c5c21b6a42fadb018a5d1863c312345"
+        "camera_id": "0b53479856488f542a18fef96b84119d",
+        "model_name": "Powershot S100",
+        "model_id": "0e51493cd1ae85c097547de808642659"
       }
     ],
     "personnel": [
       {
-        "name": "Jayson Beltran",
-        "user_id": "0c5c21b6a42fadb018a5d1863c312345"
-      },
-      {
-        "name": "Ahmed Major",
-        "user_id": "0c5c21b6a42fadb018a5d1863c312345"
+        "name": "USER-002",
+        "user_id": "53494af9b7e38f5df3447d17fe0b7547"
       }
     ],
     "lead": {
-      "name": "Asher Solomon",
-      "user_id": "0c5c21b6a42fadb018a5d1863c312345"
+      "name": "USER-001",
+      "user_id": "3b20c067ab91da9436ddaea6b83a9536"
     },
     "purpose": [
-      "Photography",
-      "Analytics",
-      "Security checks"
+      "Demonstration",
+      "Training (Academy)"
     ],
     "start_date": "1559571926000",
     "end_date": "1559572026000",
@@ -646,7 +615,7 @@ To update a specific deployment, you can pass whichever properties that you wish
 | `personnel`          | Array  | Array of user IDs of the personnel involved in the deployment                      |
 | `purpose`            | String | Description of the purpose of deployment                                           |
 
-A deployment that has been successfully updated will return a response with a `"success": true` body and a `200 OK` status.
+A deployment that has been successfully updated will return a response with a `"success": true` body and a `200 OK` status. Response body will also contain the updated `deployment` object.
 
 <div></div>
 
@@ -684,11 +653,10 @@ print r.json()
 
 ```
 
-```http
-DELETE https://api.garuda.io/v2/flight/deployments/{deployment_id} HTTP/1.1
-Host: api.garuda.io/v2
-Accept: application/json
-
+```shell
+curl -X DELETE 'https://api.garuda.io/v2/flight/deployments/{deployment_id}' \
+     -H 'Authorization: Bearer <AUTH_TOKEN>' \
+     -H 'X-API-Key: <API_KEY>' \
 ```
 
 ```javascript
@@ -719,68 +687,44 @@ fetch('https://api.garuda.io/v2/flight/deployments/{deployment_id}',
 {
   "success": true,
   "data": {
-    "name": "Zhao Shi Chong's Deployment on 2018-05-22",
-    "deployment_id": "0c5c21b6a42fadb018a5d1863c312345",
+    "name": "DEPLOYMENT-001",
+    "deployment_id": "9703889c2bb4322025815ed1a0509eba",
     "drones": [
       {
-        "name": "DEV-001",
-        "drone_id": "0c5c21b6a42fadb018a5d1863c312345",
+        "name": "DRONE-001",
+        "drone_id": "ceaf7e6dc205b365e156bf4f86930408",
         "model_name": "M400 UAV",
-        "model_id": "0c5c21b6a42fadb018a5d1863c312345"
-      },
-      {
-        "name": "DEV-002",
-        "drone_id": "0c5c21b6a42fadb018a5d1863c312345",
-        "model_name": "M408 UAV",
-        "model_id": "0c5c21b6a42fadb018a5d1863c312345"
+        "model_id": "7bd6798cdb0dcb26ca6d3c0ca9c2ae79"
       }
     ],
     "batteries": [
       {
         "name": "BATTERY-001",
-        "battery_id": "0c5c21b6a42fadb018a5d1863c312345",
+        "battery_id": "f42074ff0948fbb1d11f7a96c07cdcdd",
         "model_name": "Multistar 6S 6600",
-        "model_id": "0c5c21b6a42fadb018a5d1863c312345"
-      },
-      {
-        "name": "BATTERY-002",
-        "battery_id": "0c5c21b6a42fadb018a5d1863c312345",
-        "model_name": "Multistar 6S 8000",
-        "model_id": "0c5c21b6a42fadb018a5d1863c312345"
+        "model_id": "4b38b7383fdb23fbff8c3a6a694e4533"
       }
     ],
     "cameras": [
       {
         "name": "CAMERA-001",
-        "camera_id": "0c5c21b6a42fadb018a5d1863c312345",
-        "model_name": "Huawei P30 Pro",
-        "model_id": "0c5c21b6a42fadb018a5d1863c312345"
-      },
-      {
-        "name": "CAMERA-002",
-        "camera_id": "0c5c21b6a42fadb018a5d1863c312345",
-        "model_name": "Huawei P30 Pro X50",
-        "model_id": "0c5c21b6a42fadb018a5d1863c312345"
+        "camera_id": "0b53479856488f542a18fef96b84119d",
+        "model_name": "Powershot S100",
+        "model_id": "0e51493cd1ae85c097547de808642659"
       }
     ],
     "personnel": [
       {
-        "name": "Jayson Beltran",
-        "user_id": "0c5c21b6a42fadb018a5d1863c312345"
-      },
-      {
-        "name": "Ahmed Major",
-        "user_id": "0c5c21b6a42fadb018a5d1863c312345"
+        "name": "USER-002",
+        "user_id": "53494af9b7e38f5df3447d17fe0b7547"
       }
     ],
     "lead": {
-      "name": "Asher Solomon",
-      "user_id": "0c5c21b6a42fadb018a5d1863c312345"
+      "name": "USER-001",
+      "user_id": "3b20c067ab91da9436ddaea6b83a9536"
     },
     "purpose": [
-      "Photography",
-      "Analytics",
-      "Security checks"
+      "Aerial Photography"
     ],
     "start_date": "1559571926000",
     "end_date": "1559572026000",
@@ -792,5 +736,7 @@ fetch('https://api.garuda.io/v2/flight/deployments/{deployment_id}',
 `DELETE /flight/deployments/{deployment_id}`
 
 Delete a specific deployment belonging to the company of the user. A valid `deployment_id` in the path parameter is required for a successful call.
+
+A successful deletion will return a `200 OK` status and the deleted deployment object in the response body.
 
 <div></div>

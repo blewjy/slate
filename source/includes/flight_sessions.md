@@ -463,3 +463,4 @@ fetch('https://localhost:8080/flight/deployments/{deployment_id}/sessions/{fligh
 Delete a specific flight session for a deployment belonging to the company of the user.
 
 <div></div>
+

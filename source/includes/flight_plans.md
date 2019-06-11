@@ -273,7 +273,7 @@ You should pass in at minimum the following details in the request body:
 | `description` | String | Description of the flight plan             |
 | `plan`        | Object | Object representing the actual flight plan |
 
-Refer to the description of the [flight plan object](#) for details on each property.
+Refer to the description of the [flight plan object](#flight-plans) for details on each property.
 
 
 
