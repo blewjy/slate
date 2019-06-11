@@ -25,7 +25,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://localhost:8080/flight/deployments/{deployment_id}/sessions',
+result = RestClient.get 'https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions',
   params: {
   }, headers: headers
 
@@ -39,7 +39,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://localhost:8080/flight/deployments/{deployment_id}/sessions', params={
+r = requests.get('https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions', params={
 
 }, headers = headers)
 
@@ -47,11 +47,10 @@ print r.json()
 
 ```
 
-```http
-GET https://localhost:8080/flight/deployments/{deployment_id}/sessions HTTP/1.1
-Host: localhost:8080
-Accept: application/json
-
+```shell
+curl -X GET 'https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions' \
+     -H 'Authorization: Bearer <AUTH_TOKEN>' \
+     -H 'X-API-Key: <API_KEY>' \
 ```
 
 ```javascript
@@ -62,7 +61,7 @@ const headers = {
 
 };
 
-fetch('https://localhost:8080/flight/deployments/{deployment_id}/sessions',
+fetch('https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions',
 {
   method: 'GET',
 
@@ -83,9 +82,9 @@ fetch('https://localhost:8080/flight/deployments/{deployment_id}/sessions',
   "success": true,
   "data": [
     {
-      "flight_session_id": "034611ca922f665baa9444059fad251c",
-      "flight_plan_id": "034611ca922f665baa9444059fad251c",
-      "deployment_id": "034611ca922f665baa9444059fad251c",
+      "flight_session_id": "0b28db84d57ea15b5c26e5c3ffce67fc",
+      "flight_plan_id": "fc5583b754db73cc526a6ffa919d393a",
+      "deployment_id": "9703889c2bb4322025815ed1a0509eba",
       "start_date_time": 1527469200000,
       "end_date_time": 1527479200000
     }
@@ -112,7 +111,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.post 'https://localhost:8080/flight/deployments/{deployment_id}/sessions',
+result = RestClient.post 'https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions',
   params: {
   }, headers: headers
 
@@ -127,7 +126,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://localhost:8080/flight/deployments/{deployment_id}/sessions', params={
+r = requests.post('https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions', params={
 
 }, headers = headers)
 
@@ -135,18 +134,21 @@ print r.json()
 
 ```
 
-```http
-POST https://localhost:8080/flight/deployments/{deployment_id}/sessions HTTP/1.1
-Host: localhost:8080
-Content-Type: application/json
-Accept: application/json
-
+```shell
+curl -X POST 'https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions' \
+     -H 'Authorization: Bearer <AUTH_TOKEN>' \
+     -H 'X-API-Key: <API_KEY>' \
+     -d '{
+      "flight_plan_id": "fc5583b754db73cc526a6ffa919d393a",
+      "start_date_time": 1527469200000,
+      "end_date_time": 1527479200000
+     }'
 ```
 
 ```javascript
 const fetch = require('node-fetch');
 const inputBody = '{
-  "flight_plan_id": "034611ca922f665baa9444059fad251c",
+  "flight_plan_id": "fc5583b754db73cc526a6ffa919d393a",
   "start_date_time": 1527469200000,
   "end_date_time": 1527479200000
 }';
@@ -156,7 +158,7 @@ const headers = {
 
 };
 
-fetch('https://localhost:8080/flight/deployments/{deployment_id}/sessions',
+fetch('https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions',
 {
   method: 'POST',
   body: inputBody,
@@ -176,9 +178,9 @@ fetch('https://localhost:8080/flight/deployments/{deployment_id}/sessions',
 {
   "success": true,
   "data": {
-    "flight_session_id": "034611ca922f665baa9444059fad251c",
-    "flight_plan_id": "034611ca922f665baa9444059fad251c",
-    "deployment_id": "034611ca922f665baa9444059fad251c",
+    "flight_session_id": "0b28db84d57ea15b5c26e5c3ffce67fc",
+    "flight_plan_id": "fc5583b754db73cc526a6ffa919d393a",
+    "deployment_id": "9703889c2bb4322025815ed1a0509eba",
     "start_date_time": 1527469200000,
     "end_date_time": 1527479200000
   }
@@ -210,7 +212,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://localhost:8080/flight/deployments/{deployment_id}/sessions/{flight_session_id}',
+result = RestClient.get 'https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions/{flight_session_id}',
   params: {
   }, headers: headers
 
@@ -224,7 +226,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://localhost:8080/flight/deployments/{deployment_id}/sessions/{flight_session_id}', params={
+r = requests.get('https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions/{flight_session_id}', params={
 
 }, headers = headers)
 
@@ -232,11 +234,11 @@ print r.json()
 
 ```
 
-```http
-GET https://localhost:8080/flight/deployments/{deployment_id}/sessions/{flight_session_id} HTTP/1.1
-Host: localhost:8080
-Accept: application/json
 
+```shell
+curl -X GET 'https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions/{flight_session_id}' \
+     -H 'Authorization: Bearer <AUTH_TOKEN>' \
+     -H 'X-API-Key: <API_KEY>' \
 ```
 
 ```javascript
@@ -247,7 +249,7 @@ const headers = {
 
 };
 
-fetch('https://localhost:8080/flight/deployments/{deployment_id}/sessions/{flight_session_id}',
+fetch('https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions/{flight_session_id}',
 {
   method: 'GET',
 
@@ -267,9 +269,9 @@ fetch('https://localhost:8080/flight/deployments/{deployment_id}/sessions/{fligh
 {
   "success": true,
   "data": {
-    "flight_session_id": "034611ca922f665baa9444059fad251c",
-    "flight_plan_id": "034611ca922f665baa9444059fad251c",
-    "deployment_id": "034611ca922f665baa9444059fad251c",
+    "flight_session_id": "0b28db84d57ea15b5c26e5c3ffce67fc",
+    "flight_plan_id": "fc5583b754db73cc526a6ffa919d393a",
+    "deployment_id": "9703889c2bb4322025815ed1a0509eba",
     "start_date_time": 1527469200000,
     "end_date_time": 1527479200000
   }
@@ -292,7 +294,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.patch 'https://localhost:8080/flight/deployments/{deployment_id}/sessions/{flight_session_id}',
+result = RestClient.patch 'https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions/{flight_session_id}',
   params: {
   }, headers: headers
 
@@ -307,7 +309,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.patch('https://localhost:8080/flight/deployments/{deployment_id}/sessions/{flight_session_id}', params={
+r = requests.patch('https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions/{flight_session_id}', params={
 
 }, headers = headers)
 
@@ -315,20 +317,19 @@ print r.json()
 
 ```
 
-```http
-PATCH https://localhost:8080/flight/deployments/{deployment_id}/sessions/{flight_session_id} HTTP/1.1
-Host: localhost:8080
-Content-Type: application/json
-Accept: application/json
-
+```shell
+curl -X PATCH 'https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions/{flight_session_id}' \
+     -H 'Authorization: Bearer <AUTH_TOKEN>' \
+     -H 'X-API-Key: <API_KEY>' \
+     -d '{
+       "end_date_time": 1527480200000
+     }'
 ```
 
 ```javascript
 const fetch = require('node-fetch');
 const inputBody = '{
-  "flight_plan_id": "034611ca922f665baa9444059fad251c",
-  "start_date_time": 1527469200000,
-  "end_date_time": 1527479200000
+  "end_date_time": 1527480200000
 }';
 const headers = {
   'Content-Type':'application/json',
@@ -336,7 +337,7 @@ const headers = {
 
 };
 
-fetch('https://localhost:8080/flight/deployments/{deployment_id}/sessions/{flight_session_id}',
+fetch('https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions/{flight_session_id}',
 {
   method: 'PATCH',
   body: inputBody,
@@ -356,11 +357,11 @@ fetch('https://localhost:8080/flight/deployments/{deployment_id}/sessions/{fligh
 {
   "success": true,
   "data": {
-    "flight_session_id": "034611ca922f665baa9444059fad251c",
-    "flight_plan_id": "034611ca922f665baa9444059fad251c",
-    "deployment_id": "034611ca922f665baa9444059fad251c",
+    "flight_session_id": "0b28db84d57ea15b5c26e5c3ffce67fc",
+    "flight_plan_id": "fc5583b754db73cc526a6ffa919d393a",
+    "deployment_id": "9703889c2bb4322025815ed1a0509eba",
     "start_date_time": 1527469200000,
-    "end_date_time": 1527479200000
+    "end_date_time": 1527480200000
   }
 }
 ```
@@ -392,7 +393,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.delete 'https://localhost:8080/flight/deployments/{deployment_id}/sessions/{flight_session_id}',
+result = RestClient.delete 'https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions/{flight_session_id}',
   params: {
   }, headers: headers
 
@@ -406,7 +407,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.delete('https://localhost:8080/flight/deployments/{deployment_id}/sessions/{flight_session_id}', params={
+r = requests.delete('https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions/{flight_session_id}', params={
 
 }, headers = headers)
 
@@ -414,11 +415,10 @@ print r.json()
 
 ```
 
-```http
-DELETE https://localhost:8080/flight/deployments/{deployment_id}/sessions/{flight_session_id} HTTP/1.1
-Host: localhost:8080
-Accept: application/json
-
+```shell
+curl -X DELETE 'https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions/{flight_session_id}' \
+     -H 'Authorization: Bearer <AUTH_TOKEN>' \
+     -H 'X-API-Key: <API_KEY>' \
 ```
 
 ```javascript
@@ -429,7 +429,7 @@ const headers = {
 
 };
 
-fetch('https://localhost:8080/flight/deployments/{deployment_id}/sessions/{flight_session_id}',
+fetch('https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions/{flight_session_id}',
 {
   method: 'DELETE',
 
@@ -449,9 +449,9 @@ fetch('https://localhost:8080/flight/deployments/{deployment_id}/sessions/{fligh
 {
   "success": true,
   "data": {
-    "flight_session_id": "034611ca922f665baa9444059fad251c",
-    "flight_plan_id": "034611ca922f665baa9444059fad251c",
-    "deployment_id": "034611ca922f665baa9444059fad251c",
+    "flight_session_id": "0b28db84d57ea15b5c26e5c3ffce67fc",
+    "flight_plan_id": "fc5583b754db73cc526a6ffa919d393a",
+    "deployment_id": "9703889c2bb4322025815ed1a0509eba",
     "start_date_time": 1527469200000,
     "end_date_time": 1527479200000
   }
@@ -461,6 +461,8 @@ fetch('https://localhost:8080/flight/deployments/{deployment_id}/sessions/{fligh
 `DELETE /flight/deployments/{deployment_id}/sessions/{flight_session_id}`
 
 Delete a specific flight session for a deployment belonging to the company of the user.
+
+A successful deletion will return a `200 OK` status and the deleted flight session object in the response body.
 
 <div></div>
 

@@ -42,7 +42,7 @@ The seven parameters are `Camera`, `Target`, `ReturnLocation`, `Navigate`, `Move
 
 *(To flesh this part out with more details, including the requirements object, and also the plan_type - enum?)*
 
-### Get all deployment flight plans
+### Get all flight plans
 
 > Code samples
 
@@ -75,11 +75,10 @@ r = requests.get('https://api.garuda.io/v2/flight/deployments/{deployment_id}/pl
 print r.json()
 ```
 
-```http
-GET https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans HTTP/1.1
-Host: api.garuda.io/v2
-Accept: application/json
-
+```shell
+curl -X GET 'https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans' \
+     -H 'Authorization: Bearer <AUTH_TOKEN>' \
+     -H 'X-API-Key: <API_KEY>' \
 ```
 
 ```javascript
@@ -109,12 +108,12 @@ fetch('https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans',
   "success": true,
   "data": [
     {
-      "flight_plan_id": "0c5c21b6a42fadb018a5d1863c312345",
-      "deployment_id": "0c5c21b6a42fadb018a5d1863c312345",
+      "flight_plan_id": "fc5583b754db73cc526a6ffa919d393a",
+      "deployment_id": "9703889c2bb4322025815ed1a0509eba",
       "plan_type": "ardupilot",
-      "description": "Best flight plan ever",
-      "last_modified_date": "string",
-      "last_modified_by": "string",
+      "description": "FLIGHTPLAN-001",
+      "last_modified_date": "1245591926000",
+      "last_modified_by": "3b20c067ab91da9436ddaea6b83a9536",
       "plan": {
         "requirements": {},
         "commands": [
@@ -135,7 +134,6 @@ fetch('https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans',
   ]
 }
 ```
-
 
 `GET /flight/deployments/{deployment_id}/plans`
 
@@ -179,19 +177,37 @@ print r.json()
 
 ```
 
-```http
-POST https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans HTTP/1.1
-Host: api.garuda.io/v2
-Content-Type: application/json
-Accept: application/json
-
+```shell
+curl -X POST 'https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans' \
+     -H 'Authorization: Bearer <AUTH_TOKEN>' \
+     -H 'X-API-Key: <API_KEY>' \
+     -d '{
+      "plan_type": "ardupilot",
+      "description": "FLIGHTPLAN-001",
+      "plan": {
+        "requirements": {},
+        "commands": [
+          {
+            "id": "22",
+            "param1": "15",
+            "param2": "16",
+            "param3": "17",
+            "param4": "18",
+            "param5": "19",
+            "param6": "20",
+            "param7": "21",
+            "description": "Take off (location TBD)"
+          }
+        ]
+      }
+    }'
 ```
 
 ```javascript
 const fetch = require('node-fetch');
 const inputBody = '{
   "plan_type": "ardupilot",
-  "description": "Best flight plan ever",
+  "description": "FLIGHTPLAN-001",
   "plan": {
     "requirements": {},
     "commands": [
@@ -235,12 +251,12 @@ fetch('https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans',
 {
   "success": true,
   "data": {
-    "flight_plan_id": "0c5c21b6a42fadb018a5d1863c312345",
-    "deployment_id": "0c5c21b6a42fadb018a5d1863c312345",
+    "flight_plan_id": "fc5583b754db73cc526a6ffa919d393a",
+    "deployment_id": "9703889c2bb4322025815ed1a0509eba",
     "plan_type": "ardupilot",
-    "description": "Best flight plan ever",
-    "last_modified_date": "string",
-    "last_modified_by": "string",
+    "description": "FLIGHTPLAN-001",
+    "last_modified_date": "1245591926000",
+    "last_modified_by": "3b20c067ab91da9436ddaea6b83a9536",
     "plan": {
       "requirements": {},
       "commands": [
@@ -274,7 +290,6 @@ You should pass in at minimum the following details in the request body:
 | `plan`        | Object | Object representing the actual flight plan |
 
 Refer to the description of the [flight plan object](#flight-plans) for details on each property.
-
 
 
 <div></div>
@@ -314,11 +329,10 @@ print r.json()
 
 ```
 
-```http
-GET https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans/{flight_plan_id} HTTP/1.1
-Host: api.garuda.io/v2
-Accept: application/json
-
+```shell
+curl -X GET 'https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans/{flight_plan_id}' \
+     -H 'Authorization: Bearer <AUTH_TOKEN>' \
+     -H 'X-API-Key: <API_KEY>' \
 ```
 
 ```javascript
@@ -353,12 +367,12 @@ Get a specific flight plan for a deployment belonging to the company of the user
 {
   "success": true,
   "data": {
-    "flight_plan_id": "0c5c21b6a42fadb018a5d1863c312345",
-    "deployment_id": "0c5c21b6a42fadb018a5d1863c312345",
+    "flight_plan_id": "fc5583b754db73cc526a6ffa919d393a",
+    "deployment_id": "9703889c2bb4322025815ed1a0509eba",
     "plan_type": "ardupilot",
-    "description": "Best flight plan ever",
-    "last_modified_date": "string",
-    "last_modified_by": "string",
+    "description": "FLIGHTPLAN-001",
+    "last_modified_date": "1245591926000",
+    "last_modified_by": "3b20c067ab91da9436ddaea6b83a9536",
     "plan": {
       "requirements": {},
       "commands": [
@@ -423,27 +437,19 @@ Accept: application/json
 
 ```
 
+```shell
+curl -X PATCH 'https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans/{flight_plan_id}' \
+     -H 'Authorization: Bearer <AUTH_TOKEN>' \
+     -H 'X-API-Key: <API_KEY>' \
+     -d '{
+      "description": "FLIGHTPLAN-001_rev-1"
+    }'
+```
+
 ```javascript
 const fetch = require('node-fetch');
 const inputBody = '{
-  "plan_type": "ardupilot",
-  "description": "Best flight plan ever",
-  "plan": {
-    "requirements": {},
-    "commands": [
-      {
-        "id": "22",
-        "param1": "15",
-        "param2": "16",
-        "param3": "17",
-        "param4": "18",
-        "param5": "19",
-        "param6": "20",
-        "param7": "21",
-        "description": "Take off (location TBD)"
-      }
-    ]
-  }
+  "description": "FLIGHTPLAN-001_rev-1"
 }';
 const headers = {
   'Content-Type':'application/json',
@@ -465,19 +471,18 @@ fetch('https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans/{flight
 
 ```
 
-
 > 200 Response
 
 ```json
 {
   "success": true,
   "data": {
-    "flight_plan_id": "0c5c21b6a42fadb018a5d1863c312345",
-    "deployment_id": "0c5c21b6a42fadb018a5d1863c312345",
+    "flight_plan_id": "fc5583b754db73cc526a6ffa919d393a",
+    "deployment_id": "9703889c2bb4322025815ed1a0509eba",
     "plan_type": "ardupilot",
-    "description": "Best flight plan ever",
-    "last_modified_date": "string",
-    "last_modified_by": "string",
+    "description": "FLIGHTPLAN-001_rev-1",
+    "last_modified_date": "1245591926000",
+    "last_modified_by": "3b20c067ab91da9436ddaea6b83a9536",
     "plan": {
       "requirements": {},
       "commands": [
@@ -553,11 +558,11 @@ print r.json()
 
 ```
 
-```http
-DELETE https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans/{flight_plan_id} HTTP/1.1
-Host: api.garuda.io/v2
-Accept: application/json
 
+```shell
+curl -X DELETE 'https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans/{flight_plan_id}' \
+     -H 'Authorization: Bearer <AUTH_TOKEN>' \
+     -H 'X-API-Key: <API_KEY>' \
 ```
 
 ```javascript
@@ -586,18 +591,20 @@ fetch('https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans/{flight
 
 Delete a specific flight plan for a deployment belonging to the company of the user.
 
+A successful deletion will return a `200 OK` status and the deleted flight plan object in the response body.
+
 > 200 Response
 
 ```json
 {
   "success": true,
   "data": {
-    "flight_plan_id": "0c5c21b6a42fadb018a5d1863c312345",
-    "deployment_id": "0c5c21b6a42fadb018a5d1863c312345",
+    "flight_plan_id": "fc5583b754db73cc526a6ffa919d393a",
+    "deployment_id": "9703889c2bb4322025815ed1a0509eba",
     "plan_type": "ardupilot",
-    "description": "Best flight plan ever",
-    "last_modified_date": "string",
-    "last_modified_by": "string",
+    "description": "FLIGHTPLAN-001",
+    "last_modified_date": "1245591926000",
+    "last_modified_by": "3b20c067ab91da9436ddaea6b83a9536",
     "plan": {
       "requirements": {},
       "commands": [
