@@ -20,6 +20,12 @@ includes:
   - drones
   - drone_providers
   - drone_models
+  - cameras
+  - camera_providers
+  - camera_models
+  - batteries
+  - battery_providers
+  - battery_models
 
 search: true
 ---

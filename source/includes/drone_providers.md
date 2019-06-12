@@ -45,7 +45,7 @@ print r.json()
 ```
 
 ```shell
-curl -X GET 'https://api.garuda.io/v2/fleet/drones-providers' \
+curl -X GET 'https://api.garuda.io/v2/fleet/drone-providers' \
      -H 'Authorization: Bearer <AUTH_TOKEN>' \
      -H 'X-API-Key: <API_KEY>' \
 ```
