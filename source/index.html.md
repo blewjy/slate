@@ -16,6 +16,10 @@ includes:
   - deployments
   - flight_plans
   - flight_sessions
+  - fleet
+  - drones
+  - drone_providers
+  - drone_models
 
 search: true
 ---
