@@ -1,16 +1,16 @@
 //= require ../lib/_jquery
 //= require ../lib/_imagesloaded.min
-;(function () {
+; (function () {
   'use strict';
 
   var htmlPattern = /<[^>]*>/g;
   var loaded = false;
 
-  var debounce = function(func, waitTime) {
+  var debounce = function (func, waitTime) {
     var timeout = false;
-    return function() {
+    return function () {
       if (timeout === false) {
-        setTimeout(function() {
+        setTimeout(function () {
           func();
           timeout = false;
         }, waitTime);
@@ -19,7 +19,7 @@
     };
   };
 
-  var closeToc = function() {
+  var closeToc = function () {
     $(".toc-wrapper").removeClass('open');
     $("#nav-button").removeClass('open');
   };
@@ -30,12 +30,12 @@
     var windowHeight = 0;
     var originalTitle = document.title;
 
-    var recacheHeights = function() {
+    var recacheHeights = function () {
       headerHeights = {};
       pageHeight = $(document).height();
       windowHeight = $(window).height();
 
-      $toc.find(tocLinkSelector).each(function() {
+      $toc.find(tocLinkSelector).each(function () {
         var targetId = $(this).attr('href');
         if (targetId[0] === "#") {
           headerHeights[targetId] = $(targetId).offset().top;
@@ -43,7 +43,7 @@
       });
     };
 
-    var refreshToc = function() {
+    var refreshToc = function () {
       var currentTop = $(document).scrollTop() + scrollOffset;
 
       if (currentTop + windowHeight >= pageHeight) {
@@ -73,8 +73,8 @@
         $toc.find(".active").removeClass("active");
         $toc.find(".active-parent").removeClass("active-parent");
         $best.addClass("active");
-        $best.parents(tocListSelector).addClass("active").siblings(tocLinkSelector).addClass('active-parent');
         $best.siblings(tocListSelector).addClass("active");
+        $best.parents(tocListSelector).addClass("active").siblings(tocLinkSelector).addClass('active-parent');
         $toc.find(tocListSelector).filter(":not(.active)").slideUp(150);
         $toc.find(tocListSelector).filter(".active").slideDown(150);
         if (window.history.replaceState) {
@@ -89,11 +89,11 @@
       }
     };
 
-    var makeToc = function() {
+    var makeToc = function () {
       recacheHeights();
       refreshToc();
 
-      $("#nav-button").click(function() {
+      $("#nav-button").click(function () {
         $(".toc-wrapper").toggleClass('open');
         $("#nav-button").toggleClass('open');
         return false;
@@ -102,8 +102,8 @@
       $(".toc-link").click(closeToc);
 
       // reload immediately after scrolling on toc click
-      $toc.find(tocLinkSelector).click(function() {
-        setTimeout(function() {
+      $toc.find(tocLinkSelector).click(function () {
+        setTimeout(function () {
           refreshToc();
         }, 0);
       });

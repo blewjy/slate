@@ -13,7 +13,7 @@ A `flight session` essentially tracks the `flight plan` of the flight, as well a
 | `start_date_time` | String | Start time of flight session in epoch (Unix timestamp), converted to milliseconds    |
 | `end_date_time`   | String | End time of flight session in epoch (Unix timestamp), converted to milliseconds (ms) |
 
-### Get all deployment flight sessions
+### Get all flight sessions
 
 > Code samples
 
