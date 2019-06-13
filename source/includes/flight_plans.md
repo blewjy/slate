@@ -2,28 +2,82 @@
 
 Every flight requires a valid and approved `flight plan` before your drone can safely take off. There are many factors that need to be taken into account when creating a `flight plan`, including the `plan type`, `requirements`, `commands`, and more. Every `flight plan` must be tagged to an existing `deployment`, and each `flight plan` can be reused as required for multiple `flight sessions`. 
 
+> A full `flight_plan` object, including all optional properties
+
+```json
+{
+  "flight_plan_id": "fc5583b754db73cc526a6ffa919d393a",
+  "deployment_id": "9703889c2bb4322025815ed1a0509eba",
+  "description": "FLIGHTPLAN-001",
+  "last_modified_date": "1245591926000",
+  "last_modified_by": "3b20c067ab91da9436ddaea6b83a9536",
+  "plan_type": "ardupilot",
+  "plan": {
+    "requirements": {
+      "RTL_ALT": 3000,
+      "FS_BATT_ENABLE": 2,
+      "FS_GCS_ENABLE": 2,
+      "FS_THR_ENABLE": 1
+    },
+    "commands": [
+      {
+        "id": "22",
+        "param1": "",
+        "param2": "",
+        "param3": "",
+        "param4": "",
+        "param5": "",
+        "param6": "",
+        "param7": "30",
+        "description": "Take off (location TBD)"
+      }
+    ],
+    "home_location": {
+      "lat": "1.0",
+      "lng": "103.0"
+    },
+    "rtl_path": [
+      {
+        "id": "20",
+        "param1": "",
+        "param2": "",
+        "param3": "",
+        "param4": "",
+        "param5": "",
+        "param6": "",
+        "param7": "",
+        "description": "Survey complete, return to launch location"
+      }
+    ]
+  }
+}
+```
+
 Each `flight plan` object will have the following properties:
 
-| Property             | Type   | Description                                                                                            |
-| -------------------- | ------ | ------------------------------------------------------------------------------------------------------ |
-| `flight_plan_id`     | String | Unique flight plan ID                                                                                  |
-| `deployment_id`      | String | Deployment ID that the flight plan is tagged to                                                        |
-| `plan_type`          | String | The type of the flight plan                                                                            |
-| `description`        | String | Description of the flight plan                                                                         |
-| `last_modified_date` | String | Date of last modification to the flight plan in epoch (Unix timestamp), converted to milliseconds (ms) |
-| `last_modified_by`   | String | User ID of the user that last modified the flight plan                                                 |
-| `plan`               | Object | Object representing the details of the flight plan                                                     |
+| Property             | Type   | Description                                                                                        |
+| -------------------- | ------ | -------------------------------------------------------------------------------------------------- |
+| `flight_plan_id`     | String | Unique flight plan ID                                                                              |
+| `deployment_id`      | String | Deployment ID that the flight plan is tagged to                                                    |
+| `description`        | String | Description of the flight plan                                                                     |
+| `last_modified_date` | String | Date of last modification to flight plan in epoch (Unix timestamp), converted to milliseconds (ms) |
+| `last_modified_by`   | String | User ID of the user that last modified the flight plan                                             |
+| `plan_type`          | String | The type of the flight plan: currently only `arudpilot` is supported                               |
+| `plan`               | Object | Object representing the details of the flight plan                                                 |
 
 The `plan` object is represented by the following properties:
 
-| Property       | Type   | Description                                                                                                                                                       |
-| -------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `requirements` | Object | Object representing the requirements of the flight plan                                                                                                           |
-| `commands`     | Array  | Array of objects representing the commands that will be executed during the flight plan. Each command is made up of an `id`, 7 `parameters`, and a `description`. |
+| Property        | Type   | Description                                                                                                                                                                                                                                                                                                                                |
+| --------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `requirements`  | Object | Object representing the requirements of the flight plan. Requirements to be described as parameters. 4 different parameters are supported: `RTL_ALT`, `FS_BATT_ENABLE`, `FS_GCS_ENABLE`, `FS_THR_ENABLE`. Refer to the [ardupilot documentation](http://ardupilot.org/copter/docs/introduction.html#) for information on these parameters. |
+| `commands`      | Array  | Array of objects representing the commands that will be executed during the flight plan. Each command is made up of an `id`, 7 `parameters`, a `description` and some optional `properties`.                                                                                                                                               |
+| `home_location` | Object | Object with properties `lat` and `lng`, specifying where the drone will take off from. This property is optional.                                                                                                                                                                                                                          |
+| `rtl_path`      | Array  | Array of objects representing the commands that define a custom 'Return To Launch' (RTL) path that will override the default RTL behaviour. This property is optional.                                                                                                                                                                     |
 
 A `command` object has the following JSON format:
 
 <div class="center-column"></div>
+
 ```json
 {
   "id": "22",
@@ -34,13 +88,17 @@ A `command` object has the following JSON format:
   "param5": "19",
   "param6": "20",
   "param7": "21",
-  "description": "Take off (location TBD)"
+  "description": "Take off (location TBD)",
+  "properties": { // Optional properties
+    "conditionYawTarget": { 
+        "lat": "2.0",
+        "lng": "104.0"
+    }
+  }
 }
 ```
 
 The seven parameters are `Camera`, `Target`, `ReturnLocation`, `Navigate`, `Move`, `Yaw`, `TakeOff`, in that order. 
-
-*(To flesh this part out with more details, including the requirements object, and also the plan_type - enum?)*
 
 ### Get all flight plans
 
@@ -110,12 +168,17 @@ fetch('https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans',
     {
       "flight_plan_id": "fc5583b754db73cc526a6ffa919d393a",
       "deployment_id": "9703889c2bb4322025815ed1a0509eba",
-      "plan_type": "ardupilot",
       "description": "FLIGHTPLAN-001",
       "last_modified_date": "1245591926000",
       "last_modified_by": "3b20c067ab91da9436ddaea6b83a9536",
+      "plan_type": "ardupilot",
       "plan": {
-        "requirements": {},
+        "requirements": {
+          "RTL_ALT": 3000,
+     			"FS_BATT_ENABLE": 2,
+     			"FS_GCS_ENABLE": 2,
+     			"FS_THR_ENABLE": 1
+        },
         "commands": [
           {
             "id": "22",
@@ -182,10 +245,15 @@ curl -X POST 'https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans'
      -H 'Authorization: Bearer <AUTH_TOKEN>' \
      -H 'X-API-Key: <API_KEY>' \
      -d '{
-      "plan_type": "ardupilot",
       "description": "FLIGHTPLAN-001",
+      "plan_type": "ardupilot",
       "plan": {
-        "requirements": {},
+        "requirements": {
+          "RTL_ALT": 3000,
+          "FS_BATT_ENABLE": 2,
+          "FS_GCS_ENABLE": 2,
+          "FS_THR_ENABLE": 1
+        },
         "commands": [
           {
             "id": "22",
@@ -206,10 +274,15 @@ curl -X POST 'https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans'
 ```javascript
 const fetch = require('node-fetch');
 const inputBody = '{
-  "plan_type": "ardupilot",
   "description": "FLIGHTPLAN-001",
+  "plan_type": "ardupilot",
   "plan": {
-    "requirements": {},
+    "requirements": {
+      "RTL_ALT": 3000,
+      "FS_BATT_ENABLE": 2,
+      "FS_GCS_ENABLE": 2,
+      "FS_THR_ENABLE": 1
+    },
     "commands": [
       {
         "id": "22",
@@ -253,12 +326,17 @@ fetch('https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans',
   "data": {
     "flight_plan_id": "fc5583b754db73cc526a6ffa919d393a",
     "deployment_id": "9703889c2bb4322025815ed1a0509eba",
-    "plan_type": "ardupilot",
     "description": "FLIGHTPLAN-001",
     "last_modified_date": "1245591926000",
     "last_modified_by": "3b20c067ab91da9436ddaea6b83a9536",
+    "plan_type": "ardupilot",
     "plan": {
-      "requirements": {},
+      "requirements": {
+        "RTL_ALT": 3000,
+        "FS_BATT_ENABLE": 2,
+        "FS_GCS_ENABLE": 2,
+        "FS_THR_ENABLE": 1
+      },
       "commands": [
         {
           "id": "22",
@@ -289,8 +367,16 @@ You should pass in at minimum the following details in the request body:
 | `description` | String | Description of the flight plan             |
 | `plan`        | Object | Object representing the actual flight plan |
 
-Refer to the description of the [flight plan object](#flight-plans) for details on each property.
+Within the `plan` object, there are some properties that are optional:
 
+| Property        | Type   | Required  | Description                                                                                                                 |
+| --------------- | ------ | --------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `requirements`  | Object | **true**  | Requirements of the flight plan. Object containing properties `RTL_ALT`, `FS_BATT_ENABLE`, `FS_GCS_ENABLE`, `FS_THR_ENABLE` |
+| `commands`      | Array  | **true**  | Array of command objects representing the flight plan.                                                                      |
+| `home_location` | Object | **false** | Object with properties `lat` and `long`, specifying the home location of the flight.                                        |
+| `rtl_path`      | Array  | **false** | Array of command objects representing a custom RTL path.                                                                    |
+
+Refer to the description of the [flight plan object](#flight-plans) for more details on each property.
 
 <div></div>
 
@@ -369,12 +455,17 @@ Get a specific flight plan for a deployment belonging to the company of the user
   "data": {
     "flight_plan_id": "fc5583b754db73cc526a6ffa919d393a",
     "deployment_id": "9703889c2bb4322025815ed1a0509eba",
-    "plan_type": "ardupilot",
     "description": "FLIGHTPLAN-001",
     "last_modified_date": "1245591926000",
     "last_modified_by": "3b20c067ab91da9436ddaea6b83a9536",
+    "plan_type": "ardupilot",
     "plan": {
-      "requirements": {},
+      "requirements": {
+        "RTL_ALT": 3000,
+        "FS_BATT_ENABLE": 2,
+        "FS_GCS_ENABLE": 2,
+        "FS_THR_ENABLE": 1
+      },
       "commands": [
         {
           "id": "22",
@@ -479,12 +570,17 @@ fetch('https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans/{flight
   "data": {
     "flight_plan_id": "fc5583b754db73cc526a6ffa919d393a",
     "deployment_id": "9703889c2bb4322025815ed1a0509eba",
-    "plan_type": "ardupilot",
     "description": "FLIGHTPLAN-001_rev-1",
     "last_modified_date": "1245591926000",
     "last_modified_by": "3b20c067ab91da9436ddaea6b83a9536",
+    "plan_type": "ardupilot",
     "plan": {
-      "requirements": {},
+      "requirements": {
+        "RTL_ALT": 3000,
+        "FS_BATT_ENABLE": 2,
+        "FS_GCS_ENABLE": 2,
+        "FS_THR_ENABLE": 1
+      },
       "commands": [
         {
           "id": "22",
@@ -601,12 +697,17 @@ A successful deletion will return a `200 OK` status and the deleted flight plan 
   "data": {
     "flight_plan_id": "fc5583b754db73cc526a6ffa919d393a",
     "deployment_id": "9703889c2bb4322025815ed1a0509eba",
-    "plan_type": "ardupilot",
     "description": "FLIGHTPLAN-001",
     "last_modified_date": "1245591926000",
     "last_modified_by": "3b20c067ab91da9436ddaea6b83a9536",
+    "plan_type": "ardupilot",
     "plan": {
-      "requirements": {},
+      "requirements": {
+        "RTL_ALT": 3000,
+        "FS_BATT_ENABLE": 2,
+        "FS_GCS_ENABLE": 2,
+        "FS_THR_ENABLE": 1
+      },
       "commands": [
         {
           "id": "22",
