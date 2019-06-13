@@ -198,9 +198,12 @@ fetch('https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans',
 }
 ```
 
-`GET /flight/deployments/{deployment_id}/plans`
+`GET /flight/plans`
+`GET /flight/plans?deployment_id=`
 
-Get all flight plans of a specific deployment belonging to the company of the user. This will return a response containing an array of all the flight plan objects belonging to the specified deployment.
+You can get all flight plans belonging to your company or belonging to a specific deplyoment via this endpoint. If you wish to filter and retrieve flight plans from only a specific deployment, you should specify the `deployment_id` via the query string. Otherwise, if no `deployment_id` is specified, all flight plans belonging to your company will be retrieved.
+
+The response body of this endpoint will contain an array of all the `flight_plan` objects.
 
 <div></div>
 
@@ -355,9 +358,9 @@ fetch('https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans',
 }
 ```
 
-`POST /flight/deployments/{deployment_id}/plans`
+`POST /flight/plans?deployment_id=`
 
-Create a new flight plan for a deployment belonging to the company of the user. Note that the `deployment_id` parameter in the request URL has to be a valid `deployment_id` belonging to your company. 
+Create a new flight plan for a deployment belonging to the company of the user. Note that the `deployment_id` query string in the request URL is **required**, and has to be a valid `deployment_id` belonging to your company. 
 
 You should pass in at minimum the following details in the request body:
 
@@ -443,7 +446,7 @@ fetch('https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans/{flight
 
 ```
 
-`GET /flight/deployments/{deployment_id}/plans/{flight_plan_id}`
+`GET /flight/plans/{flight_plan_id}`
 
 Get a specific flight plan for a deployment belonging to the company of the user.
 
@@ -599,24 +602,23 @@ fetch('https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans/{flight
 }
 ```
 
+`PATCH /flight/plans/{flight_plan_id}`
 
-`PATCH /flight/deployments/{deployment_id}/plans/{flight_plan_id}`
+To update a flight plan, you can pass in any subset of the following properties in the request body:
 
-Update a specific flight plan for a deployment belonging to the company of the user.
+| Property        | Type   | Description                                                                                    |
+| --------------- | ------ | ---------------------------------------------------------------------------------------------- |
+| `deployment_id` | String | A valid deployment ID that the flight plan is tagged to                                        |
+| `plan_type`     | String | The type of the flight plan                                                                    |
+| `description`   | String | Description of the flight plan                                                                 |
+| `requirements`  | Object | Requirements of the flight plan.                                                               |
+| `commands`      | Array  | Array of objects representing the commands that will be executed during the flight plan.       |
+| `home_location` | Object | Object with properties `lat` and `lng`, specifying where the drone will take off from.         |
+| `rtl_path`      | Array  | Array of objects representing the commands that define a custom 'Return To Launch' (RTL) path. |
 
-To update a flight plan, you can pass in any subset of the properties of the flight plan in the request body. All properties are optional.
+Only the properties specified in the request body will be updated in the `flight_plan`, and the rest of the properties will remain unchanged. For more detailed information on these properties, refer to the specification at the [start of this section](#flight-plans).
 
-| Property             | Type   | Description                                                                                            |
-| -------------------- | ------ | ------------------------------------------------------------------------------------------------------ |
-| `flight_plan_id`     | String | Unique flight plan ID                                                                                  |
-| `deployment_id`      | String | Deployment ID that the flight plan is tagged to                                                        |
-| `plan_type`          | String | The type of the flight plan                                                                            |
-| `description`        | String | Description of the flight plan                                                                         |
-| `last_modified_date` | String | Date of last modification to the flight plan in epoch (Unix timestamp), converted to milliseconds (ms) |
-| `last_modified_by`   | String | User ID of the user that last modified the flight plan                                                 |
-| `plan`               | Object | Object representing the details of the flight plan                                                     |
-
-A flight plan that has been successfully updated will return a response with a `"success": true` body and a `200 OK` status.
+A flight plan that has been successfully updated will return a response with a `"success": true` body and a `200 OK` status. The response body will also contain the updated `flight_plan` object.
 
 <div></div>
 
@@ -683,7 +685,7 @@ fetch('https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans/{flight
 
 ```
 
-`DELETE /flight/deployments/{deployment_id}/plans/{flight_plan_id}`
+`DELETE /flight/plans/{flight_plan_id}`
 
 Delete a specific flight plan for a deployment belonging to the company of the user.
 
