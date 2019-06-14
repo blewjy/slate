@@ -359,17 +359,18 @@ fetch('https://api.garuda.io/v2/flight/plans',
 }
 ```
 
-`POST /flight/plans?deployment_id=`
+`POST /flight/plans`
 
-Create a new flight plan for a deployment belonging to the company of the user. Note that the `deployment_id` query string in the request URL is **required**, and has to be a valid `deployment_id` belonging to your company. 
+Create a new flight plan for a deployment belonging to the company of the user.
 
 You should pass in at minimum the following details in the request body:
 
-| Property      | Type   | Description                                |
-| ------------- | ------ | ------------------------------------------ |
-| `plan_type`   | String | The type of the flight plan                |
-| `description` | String | Description of the flight plan             |
-| `plan`        | Object | Object representing the actual flight plan |
+| Property        | Type   | Description                                    |
+| --------------- | ------ | ---------------------------------------------- |
+| `deployment_id` | String | Valid deployment ID tagged to this flight plan |
+| `plan_type`     | String | The type of the flight plan                    |
+| `description`   | String | Description of the flight plan                 |
+| `plan`          | Object | Object representing the actual flight plan     |
 
 Within the `plan` object, there are some properties that are optional:
 

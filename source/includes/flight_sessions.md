@@ -4,10 +4,13 @@ Once you have your flight plan approved, you are ready to fly!
 
 Each drone flight is represented by a flight session. Each `flight session` must be tagged to a valid and approved `flight plan` and an existing `deployment`. This set of endpoints allow you to manage and log the flight history of your deployments easily.
 
-A `flight session` essentially tracks the `flight plan` of the flight, as well as the start and end time of the flight. A `flight session` has the following properties:
+A `flight session` essentially tracks the `flight plan` of the flight, as well as the start and end time of the flight. 
+
+A `flight session` has the following properties:
 
 | Property          | Type   | Description                                                                          |
 | ----------------- | ------ | ------------------------------------------------------------------------------------ |
+| `company_id`      | String | Company ID that the flight session is tagged to                                      |
 | `deployment_id`   | String | A valid deployment ID                                                                |
 | `flight_plan_id`  | String | A valid and approved flight plan ID                                                  |
 | `start_date_time` | String | Start time of flight session in epoch (Unix timestamp), converted to milliseconds    |
@@ -25,7 +28,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions',
+result = RestClient.get 'https://api.garuda.io/v2/flight/sessions',
   params: {
   }, headers: headers
 
@@ -39,7 +42,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions', params={
+r = requests.get('https://api.garuda.io/v2/flight/sessions', params={
 
 }, headers = headers)
 
@@ -48,7 +51,7 @@ print r.json()
 ```
 
 ```shell
-curl -X GET 'https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions' \
+curl -X GET 'https://api.garuda.io/v2/flight/sessions' \
      -H 'Authorization: Bearer <AUTH_TOKEN>' \
      -H 'X-API-Key: <API_KEY>' \
 ```
@@ -61,7 +64,7 @@ const headers = {
 
 };
 
-fetch('https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions',
+fetch('https://api.garuda.io/v2/flight/sessions',
 {
   method: 'GET',
 
@@ -92,9 +95,17 @@ fetch('https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions',
 }
 ```
 
-`GET /flight/deployments/{deployment_id}/sessions`
+`GET /flight/sessions`
 
-Get all flight sessions of a specific deployment belonging to the company of the user.
+`GET /flight/sessions?deployment_id=<DEPLOYMENT_ID>`
+
+`GET /flight/sessions?flight_plan_id=<FLIGHT_PLAN_ID>`
+
+`GET /flight/sessions?deployment_id=<DEPLOYMENT_ID>&flight_plan_id=<FLIGHT_PLAN_ID>`
+
+You can get all the flight sessions belonging to your company, filtered by `deployment_id` or `flight_plan_id` which can be specified as a query string. If both query strings are specified, only `flight sessions` that match both will be fetched. If none of the queries are specified, all flight sessions belonging to your company will be retrieved.
+
+The response body for this endpoint will contain an array of all the `flight_session` objects.
 
 <div></div>
 
@@ -111,7 +122,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.post 'https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions',
+result = RestClient.post 'https://api.garuda.io/v2/flight/sessions',
   params: {
   }, headers: headers
 
@@ -126,7 +137,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions', params={
+r = requests.post('https://api.garuda.io/v2/flight/sessions', params={
 
 }, headers = headers)
 
@@ -135,10 +146,11 @@ print r.json()
 ```
 
 ```shell
-curl -X POST 'https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions' \
+curl -X POST 'https://api.garuda.io/v2/flight/sessions' \
      -H 'Authorization: Bearer <AUTH_TOKEN>' \
      -H 'X-API-Key: <API_KEY>' \
      -d '{
+      "deployment_id": "9703889c2bb4322025815ed1a0509eba",
       "flight_plan_id": "fc5583b754db73cc526a6ffa919d393a",
       "start_date_time": 1527469200000,
       "end_date_time": 1527479200000
@@ -148,6 +160,7 @@ curl -X POST 'https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessio
 ```javascript
 const fetch = require('node-fetch');
 const inputBody = '{
+  "deployment_id": "9703889c2bb4322025815ed1a0509eba",
   "flight_plan_id": "fc5583b754db73cc526a6ffa919d393a",
   "start_date_time": 1527469200000,
   "end_date_time": 1527479200000
@@ -158,7 +171,7 @@ const headers = {
 
 };
 
-fetch('https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions',
+fetch('https://api.garuda.io/v2/flight/sessions',
 {
   method: 'POST',
   body: inputBody,
@@ -186,14 +199,16 @@ fetch('https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions',
   }
 }
 ```
-`POST /flight/deployments/{deployment_id}/sessions`
 
-This endpoint allows you to create a new `flight session` for a specific deployment. Note that the `deployment_id` parameter in the request URL has to be a valid `deployment_id` belonging to your company. 
+`POST /flight/sessions`
+
+This endpoint allows you to create a new `flight session` for a specific deployment.
 
 You should pass in at minimum the following details in the request body:
 
 | Item              | Type   | Description                                                                          |
 | ----------------- | ------ | ------------------------------------------------------------------------------------ |
+| `deployment_id`   | String | A valid deployment ID belonging to your company                                      |
 | `flight_plan_id`  | String | A valid and approved flight plan ID                                                  |
 | `start_date_time` | String | Start time of flight session in epoch (Unix timestamp), converted to milliseconds    |
 | `end_date_time`   | String | End time of flight session in epoch (Unix timestamp), converted to milliseconds (ms) |
@@ -212,7 +227,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions/{flight_session_id}',
+result = RestClient.get 'https://api.garuda.io/v2/flight/sessions/{flight_session_id}',
   params: {
   }, headers: headers
 
@@ -226,7 +241,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions/{flight_session_id}', params={
+r = requests.get('https://api.garuda.io/v2/flight/sessions/{flight_session_id}', params={
 
 }, headers = headers)
 
@@ -236,7 +251,7 @@ print r.json()
 
 
 ```shell
-curl -X GET 'https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions/{flight_session_id}' \
+curl -X GET 'https://api.garuda.io/v2/flight/sessions/{flight_session_id}' \
      -H 'Authorization: Bearer <AUTH_TOKEN>' \
      -H 'X-API-Key: <API_KEY>' \
 ```
@@ -249,7 +264,7 @@ const headers = {
 
 };
 
-fetch('https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions/{flight_session_id}',
+fetch('https://api.garuda.io/v2/flight/sessions/{flight_session_id}',
 {
   method: 'GET',
 
@@ -277,7 +292,7 @@ fetch('https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions/{fli
   }
 }
 ```
-`GET /flight/deployments/{deployment_id}/sessions/{flight_session_id}`
+`GET /flight/sessions/{flight_session_id}`
 
 Get a specific flight session for a deployment belonging to the company of the user.
 
@@ -294,7 +309,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.patch 'https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions/{flight_session_id}',
+result = RestClient.patch 'https://api.garuda.io/v2/flight/sessions/{flight_session_id}',
   params: {
   }, headers: headers
 
@@ -309,7 +324,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.patch('https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions/{flight_session_id}', params={
+r = requests.patch('https://api.garuda.io/v2/flight/sessions/{flight_session_id}', params={
 
 }, headers = headers)
 
@@ -318,7 +333,7 @@ print r.json()
 ```
 
 ```shell
-curl -X PATCH 'https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions/{flight_session_id}' \
+curl -X PATCH 'https://api.garuda.io/v2/flight/sessions/{flight_session_id}' \
      -H 'Authorization: Bearer <AUTH_TOKEN>' \
      -H 'X-API-Key: <API_KEY>' \
      -d '{
@@ -337,7 +352,7 @@ const headers = {
 
 };
 
-fetch('https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions/{flight_session_id}',
+fetch('https://api.garuda.io/v2/flight/sessions/{flight_session_id}',
 {
   method: 'PATCH',
   body: inputBody,
@@ -366,7 +381,7 @@ fetch('https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions/{fli
 }
 ```
 
-`PATCH /flight/deployments/{deployment_id}/sessions/{flight_session_id}`
+`PATCH /flight/sessions/{flight_session_id}`
 
 Update a specific flight session for a deployment belonging to the company of the user.
 
@@ -393,7 +408,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.delete 'https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions/{flight_session_id}',
+result = RestClient.delete 'https://api.garuda.io/v2/flight/sessions/{flight_session_id}',
   params: {
   }, headers: headers
 
@@ -407,7 +422,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.delete('https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions/{flight_session_id}', params={
+r = requests.delete('https://api.garuda.io/v2/flight/sessions/{flight_session_id}', params={
 
 }, headers = headers)
 
@@ -416,7 +431,7 @@ print r.json()
 ```
 
 ```shell
-curl -X DELETE 'https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions/{flight_session_id}' \
+curl -X DELETE 'https://api.garuda.io/v2/flight/sessions/{flight_session_id}' \
      -H 'Authorization: Bearer <AUTH_TOKEN>' \
      -H 'X-API-Key: <API_KEY>' \
 ```
@@ -429,7 +444,7 @@ const headers = {
 
 };
 
-fetch('https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions/{flight_session_id}',
+fetch('https://api.garuda.io/v2/flight/sessions/{flight_session_id}',
 {
   method: 'DELETE',
 
@@ -458,7 +473,7 @@ fetch('https://api.garuda.io/v2/flight/deployments/{deployment_id}/sessions/{fli
 }
 ```
 
-`DELETE /flight/deployments/{deployment_id}/sessions/{flight_session_id}`
+`DELETE /flight/sessions/{flight_session_id}`
 
 Delete a specific flight session for a deployment belonging to the company of the user.
 
