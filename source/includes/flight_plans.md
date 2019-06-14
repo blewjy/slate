@@ -112,7 +112,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans',
+result = RestClient.get 'https://api.garuda.io/v2/flight/plans',
   params: {
   }, headers: headers
 
@@ -126,7 +126,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans', params={
+r = requests.get('https://api.garuda.io/v2/flight/plans', params={
 
 }, headers = headers)
 
@@ -134,7 +134,7 @@ print r.json()
 ```
 
 ```shell
-curl -X GET 'https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans' \
+curl -X GET 'https://api.garuda.io/v2/flight/plans' \
      -H 'Authorization: Bearer <AUTH_TOKEN>' \
      -H 'X-API-Key: <API_KEY>' \
 ```
@@ -147,7 +147,7 @@ const headers = {
 
 };
 
-fetch('https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans',
+fetch('https://api.garuda.io/v2/flight/plans',
 {
   method: 'GET',
 
@@ -199,6 +199,7 @@ fetch('https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans',
 ```
 
 `GET /flight/plans`
+
 `GET /flight/plans?deployment_id=`
 
 You can get all flight plans belonging to your company or belonging to a specific deplyoment via this endpoint. If you wish to filter and retrieve flight plans from only a specific deployment, you should specify the `deployment_id` via the query string. Otherwise, if no `deployment_id` is specified, all flight plans belonging to your company will be retrieved.
@@ -220,7 +221,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.post 'https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans',
+result = RestClient.post 'https://api.garuda.io/v2/flight/plans',
   params: {
   }, headers: headers
 
@@ -235,7 +236,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans', params={
+r = requests.post('https://api.garuda.io/v2/flight/plans', params={
 
 }, headers = headers)
 
@@ -244,7 +245,7 @@ print r.json()
 ```
 
 ```shell
-curl -X POST 'https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans' \
+curl -X POST 'https://api.garuda.io/v2/flight/plans' \
      -H 'Authorization: Bearer <AUTH_TOKEN>' \
      -H 'X-API-Key: <API_KEY>' \
      -d '{
@@ -307,7 +308,7 @@ const headers = {
 
 };
 
-fetch('https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans',
+fetch('https://api.garuda.io/v2/flight/plans',
 {
   method: 'POST',
   body: inputBody,
@@ -396,7 +397,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans/{flight_plan_id}',
+result = RestClient.get 'https://api.garuda.io/v2/flight/plans/{flight_plan_id}',
   params: {
   }, headers: headers
 
@@ -410,7 +411,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans/{flight_plan_id}', params={
+r = requests.get('https://api.garuda.io/v2/flight/plans/{flight_plan_id}', params={
 
 }, headers = headers)
 
@@ -419,7 +420,7 @@ print r.json()
 ```
 
 ```shell
-curl -X GET 'https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans/{flight_plan_id}' \
+curl -X GET 'https://api.garuda.io/v2/flight/plans/{flight_plan_id}' \
      -H 'Authorization: Bearer <AUTH_TOKEN>' \
      -H 'X-API-Key: <API_KEY>' \
 ```
@@ -432,7 +433,7 @@ const headers = {
 
 };
 
-fetch('https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans/{flight_plan_id}',
+fetch('https://api.garuda.io/v2/flight/plans/{flight_plan_id}',
 {
   method: 'GET',
 
@@ -500,7 +501,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.patch 'https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans/{flight_plan_id}',
+result = RestClient.patch 'https://api.garuda.io/v2/flight/plans/{flight_plan_id}',
   params: {
   }, headers: headers
 
@@ -515,7 +516,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.patch('https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans/{flight_plan_id}', params={
+r = requests.patch('https://api.garuda.io/v2/flight/plans/{flight_plan_id}', params={
 
 }, headers = headers)
 
@@ -524,7 +525,7 @@ print r.json()
 ```
 
 ```http
-PATCH https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans/{flight_plan_id} HTTP/1.1
+PATCH https://api.garuda.io/v2/flight/plans/{flight_plan_id} HTTP/1.1
 Host: api.garuda.io/v2
 Content-Type: application/json
 Accept: application/json
@@ -532,7 +533,7 @@ Accept: application/json
 ```
 
 ```shell
-curl -X PATCH 'https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans/{flight_plan_id}' \
+curl -X PATCH 'https://api.garuda.io/v2/flight/plans/{flight_plan_id}' \
      -H 'Authorization: Bearer <AUTH_TOKEN>' \
      -H 'X-API-Key: <API_KEY>' \
      -d '{
@@ -551,7 +552,7 @@ const headers = {
 
 };
 
-fetch('https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans/{flight_plan_id}',
+fetch('https://api.garuda.io/v2/flight/plans/{flight_plan_id}',
 {
   method: 'PATCH',
   body: inputBody,
@@ -634,7 +635,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.delete 'https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans/{flight_plan_id}',
+result = RestClient.delete 'https://api.garuda.io/v2/flight/plans/{flight_plan_id}',
   params: {
   }, headers: headers
 
@@ -648,7 +649,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.delete('https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans/{flight_plan_id}', params={
+r = requests.delete('https://api.garuda.io/v2/flight/plans/{flight_plan_id}', params={
 
 }, headers = headers)
 
@@ -658,7 +659,7 @@ print r.json()
 
 
 ```shell
-curl -X DELETE 'https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans/{flight_plan_id}' \
+curl -X DELETE 'https://api.garuda.io/v2/flight/plans/{flight_plan_id}' \
      -H 'Authorization: Bearer <AUTH_TOKEN>' \
      -H 'X-API-Key: <API_KEY>' \
 ```
@@ -671,7 +672,7 @@ const headers = {
 
 };
 
-fetch('https://api.garuda.io/v2/flight/deployments/{deployment_id}/plans/{flight_plan_id}',
+fetch('https://api.garuda.io/v2/flight/plans/{flight_plan_id}',
 {
   method: 'DELETE',
 
