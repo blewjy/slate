@@ -8,6 +8,7 @@ Every flight requires a valid and approved `flight plan` before your drone can s
 {
   "flight_plan_id": "fc5583b754db73cc526a6ffa919d393a",
   "deployment_id": "9703889c2bb4322025815ed1a0509eba",
+  "company_id": "ca42ab884a633d6a823b45e6ebe9534c",
   "description": "FLIGHTPLAN-001",
   "last_modified_date": "1245591926000",
   "last_modified_by": "3b20c067ab91da9436ddaea6b83a9536",
@@ -59,6 +60,7 @@ Each `flight plan` object will have the following properties:
 | -------------------- | ------ | -------------------------------------------------------------------------------------------------- |
 | `flight_plan_id`     | String | Unique flight plan ID                                                                              |
 | `deployment_id`      | String | Deployment ID that the flight plan is tagged to                                                    |
+| `company_id`         | String | Unique company ID                                                                                  |
 | `description`        | String | Description of the flight plan                                                                     |
 | `last_modified_date` | String | Date of last modification to flight plan in epoch (Unix timestamp), converted to milliseconds (ms) |
 | `last_modified_by`   | String | User ID of the user that last modified the flight plan                                             |
@@ -168,6 +170,7 @@ fetch('https://api.garuda.io/v2/flight/plans',
     {
       "flight_plan_id": "fc5583b754db73cc526a6ffa919d393a",
       "deployment_id": "9703889c2bb4322025815ed1a0509eba",
+      "company_id": "ca42ab884a633d6a823b45e6ebe9534c",
       "description": "FLIGHTPLAN-001",
       "last_modified_date": "1245591926000",
       "last_modified_by": "3b20c067ab91da9436ddaea6b83a9536",
@@ -330,6 +333,7 @@ fetch('https://api.garuda.io/v2/flight/plans',
   "data": {
     "flight_plan_id": "fc5583b754db73cc526a6ffa919d393a",
     "deployment_id": "9703889c2bb4322025815ed1a0509eba",
+    "company_id": "ca42ab884a633d6a823b45e6ebe9534c",
     "description": "FLIGHTPLAN-001",
     "last_modified_date": "1245591926000",
     "last_modified_by": "3b20c067ab91da9436ddaea6b83a9536",
@@ -460,6 +464,7 @@ Get a specific flight plan for a deployment belonging to the company of the user
   "data": {
     "flight_plan_id": "fc5583b754db73cc526a6ffa919d393a",
     "deployment_id": "9703889c2bb4322025815ed1a0509eba",
+    "company_id": "ca42ab884a633d6a823b45e6ebe9534c",
     "description": "FLIGHTPLAN-001",
     "last_modified_date": "1245591926000",
     "last_modified_by": "3b20c067ab91da9436ddaea6b83a9536",
@@ -575,6 +580,7 @@ fetch('https://api.garuda.io/v2/flight/plans/{flight_plan_id}',
   "data": {
     "flight_plan_id": "fc5583b754db73cc526a6ffa919d393a",
     "deployment_id": "9703889c2bb4322025815ed1a0509eba",
+    "company_id": "ca42ab884a633d6a823b45e6ebe9534c",
     "description": "FLIGHTPLAN-001_rev-1",
     "last_modified_date": "1245591926000",
     "last_modified_by": "3b20c067ab91da9436ddaea6b83a9536",
@@ -701,6 +707,7 @@ A successful deletion will return a `200 OK` status and the deleted flight plan 
   "data": {
     "flight_plan_id": "fc5583b754db73cc526a6ffa919d393a",
     "deployment_id": "9703889c2bb4322025815ed1a0509eba",
+    "company_id": "ca42ab884a633d6a823b45e6ebe9534c",
     "description": "FLIGHTPLAN-001",
     "last_modified_date": "1245591926000",
     "last_modified_by": "3b20c067ab91da9436ddaea6b83a9536",

@@ -88,6 +88,7 @@ fetch('https://api.garuda.io/v2/flight/sessions',
       "flight_session_id": "0b28db84d57ea15b5c26e5c3ffce67fc",
       "flight_plan_id": "fc5583b754db73cc526a6ffa919d393a",
       "deployment_id": "9703889c2bb4322025815ed1a0509eba",
+      "company_id": "ca42ab884a633d6a823b45e6ebe9534c",
       "start_date_time": 1527469200000,
       "end_date_time": 1527479200000
     }
@@ -193,6 +194,7 @@ fetch('https://api.garuda.io/v2/flight/sessions',
   "data": {
     "flight_session_id": "0b28db84d57ea15b5c26e5c3ffce67fc",
     "flight_plan_id": "fc5583b754db73cc526a6ffa919d393a",
+    "company_id": "ca42ab884a633d6a823b45e6ebe9534c",
     "deployment_id": "9703889c2bb4322025815ed1a0509eba",
     "start_date_time": 1527469200000,
     "end_date_time": 1527479200000
@@ -287,6 +289,7 @@ fetch('https://api.garuda.io/v2/flight/sessions/{flight_session_id}',
     "flight_session_id": "0b28db84d57ea15b5c26e5c3ffce67fc",
     "flight_plan_id": "fc5583b754db73cc526a6ffa919d393a",
     "deployment_id": "9703889c2bb4322025815ed1a0509eba",
+    "company_id": "ca42ab884a633d6a823b45e6ebe9534c",
     "start_date_time": 1527469200000,
     "end_date_time": 1527479200000
   }
@@ -375,6 +378,7 @@ fetch('https://api.garuda.io/v2/flight/sessions/{flight_session_id}',
     "flight_session_id": "0b28db84d57ea15b5c26e5c3ffce67fc",
     "flight_plan_id": "fc5583b754db73cc526a6ffa919d393a",
     "deployment_id": "9703889c2bb4322025815ed1a0509eba",
+    "company_id": "ca42ab884a633d6a823b45e6ebe9534c",
     "start_date_time": 1527469200000,
     "end_date_time": 1527480200000
   }
@@ -467,6 +471,7 @@ fetch('https://api.garuda.io/v2/flight/sessions/{flight_session_id}',
     "flight_session_id": "0b28db84d57ea15b5c26e5c3ffce67fc",
     "flight_plan_id": "fc5583b754db73cc526a6ffa919d393a",
     "deployment_id": "9703889c2bb4322025815ed1a0509eba",
+    "company_id": "ca42ab884a633d6a823b45e6ebe9534c",
     "start_date_time": 1527469200000,
     "end_date_time": 1527479200000
   }
