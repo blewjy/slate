@@ -2,6 +2,8 @@
 
 Every flight requires a valid and approved `flight plan` before your drone can safely take off. There are many factors that need to be taken into account when creating a `flight plan`, including the `plan type`, `requirements`, `commands`, and more. Every `flight plan` must be tagged to an existing `deployment`, and each `flight plan` can be reused as required for multiple `flight sessions`. 
 
+The `plan` object within the `flight_plan` contains the main `commands` that will be executed during the flight. Each `command` object contains some parameters that will determine the absolute flight path of the drones. This path will also have to be within the `deployment_area` of the `deployment`, which should have been earlier specified by a GeoJSON FeatureCollection.
+
 > A full `flight_plan` object, including all optional properties
 
 ```json
@@ -10,6 +12,14 @@ Every flight requires a valid and approved `flight plan` before your drone can s
   "deployment_id": "9703889c2bb4322025815ed1a0509eba",
   "company_id": "ca42ab884a633d6a823b45e6ebe9534c",
   "description": "FLIGHTPLAN-001",
+  "drones": [
+    {
+      "name": "DRONE-001",
+      "drone_id": "ceaf7e6dc205b365e156bf4f86930408",
+      "model_name": "M400 UAV",
+      "model_id": "7bd6798cdb0dcb26ca6d3c0ca9c2ae79"
+    }
+  ],
   "last_modified_date": "1245591926000",
   "last_modified_by": "3b20c067ab91da9436ddaea6b83a9536",
   "plan_type": "ardupilot",
@@ -23,14 +33,20 @@ Every flight requires a valid and approved `flight plan` before your drone can s
     "commands": [
       {
         "id": "22",
-        "param1": "",
-        "param2": "",
-        "param3": "",
-        "param4": "",
-        "param5": "",
-        "param6": "",
-        "param7": "30",
-        "description": "Take off (location TBD)"
+        "param1": "15",
+        "param2": "16",
+        "param3": "17",
+        "param4": "18",
+        "param5": "19",
+        "param6": "20",
+        "param7": "21",
+        "description": "Take off (location TBD)",
+        "properties": { // Optional properties
+          "conditionYawTarget": { 
+              "lat": "2.0",
+              "lng": "104.0"
+          }
+        }
       }
     ],
     "home_location": {
@@ -62,6 +78,7 @@ Each `flight plan` object will have the following properties:
 | `deployment_id`      | String | Deployment ID that the flight plan is tagged to                                                    |
 | `company_id`         | String | Unique company ID                                                                                  |
 | `description`        | String | Description of the flight plan                                                                     |
+| `drones`             | Array  | Array of drone objects, specifying the drones that this flight plan is allowed fly.                |
 | `last_modified_date` | String | Date of last modification to flight plan in epoch (Unix timestamp), converted to milliseconds (ms) |
 | `last_modified_by`   | String | User ID of the user that last modified the flight plan                                             |
 | `plan_type`          | String | The type of the flight plan: currently only `arudpilot` is supported                               |
@@ -76,31 +93,17 @@ The `plan` object is represented by the following properties:
 | `home_location` | Object | Object with properties `lat` and `lng`, specifying where the drone will take off from. This property is optional.                                                                                                                                                                                                                          |
 | `rtl_path`      | Array  | Array of objects representing the commands that define a custom 'Return To Launch' (RTL) path that will override the default RTL behaviour. This property is optional.                                                                                                                                                                     |
 
-A `command` object has the following JSON format:
+A `command` object has an ID, 7 command parameters and a description. The 7 parameters follow the [ardupilot MAVLINK command parameters](http://ardupilot.org/copter/docs/common-mavlink-mission-command-messages-mav_cmd.html):
 
-<div class="center-column"></div>
-
-```json
-{
-  "id": "22",
-  "param1": "15",
-  "param2": "16",
-  "param3": "17",
-  "param4": "18",
-  "param5": "19",
-  "param6": "20",
-  "param7": "21",
-  "description": "Take off (location TBD)",
-  "properties": { // Optional properties
-    "conditionYawTarget": { 
-        "lat": "2.0",
-        "lng": "104.0"
-    }
-  }
-}
-```
-
-The seven parameters are `Camera`, `Target`, `ReturnLocation`, `Navigate`, `Move`, `Yaw`, `TakeOff`, in that order. 
+| Command Parameter | Description                                                                                                                                                                 |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `param1`          | Hold time at mission waypoint in decimal seconds - MAX 65535 seconds. (Copter/Rover only)                                                                                   |
+| `param2`          | Acceptance radius in meters (when plain inside the sphere of this radius, the waypoint is considered reached) (Plane only).                                                 |
+| `param3`          | 0 to pass through the WP, if > 0 radius in meters to pass by WP. Positive value for clockwise orbit, negative value for counter-clockwise orbit. Allows trajectory control. |
+| `param4`          | Desired yaw angle at waypoint target.(rotary wing)                                                                                                                          |
+| `param5`          | Target latitude. If zero, the Copter will hold at the current latitude.                                                                                                     |
+| `param6`          | Target longitude. If zero, the Copter will hold at the current longitude.                                                                                                   |
+| `param7`          | Target altitude. If zero, the Copter will hold at the current altitude.                                                                                                     |
 
 ### Get all flight plans
 
@@ -172,6 +175,14 @@ fetch('https://api.garuda.io/v2/flight/plans',
       "deployment_id": "9703889c2bb4322025815ed1a0509eba",
       "company_id": "ca42ab884a633d6a823b45e6ebe9534c",
       "description": "FLIGHTPLAN-001",
+      "drones": [
+        {
+          "name": "DRONE-001",
+          "drone_id": "ceaf7e6dc205b365e156bf4f86930408",
+          "model_name": "M400 UAV",
+          "model_id": "7bd6798cdb0dcb26ca6d3c0ca9c2ae79"
+        }
+      ],
       "last_modified_date": "1245591926000",
       "last_modified_by": "3b20c067ab91da9436ddaea6b83a9536",
       "plan_type": "ardupilot",
@@ -254,6 +265,9 @@ curl -X POST 'https://api.garuda.io/v2/flight/plans' \
      -d '{
       "description": "FLIGHTPLAN-001",
       "plan_type": "ardupilot",
+      "drones": [
+        "ceaf7e6dc205b365e156bf4f86930408"
+      ],
       "plan": {
         "requirements": {
           "RTL_ALT": 3000,
@@ -283,6 +297,9 @@ const fetch = require('node-fetch');
 const inputBody = '{
   "description": "FLIGHTPLAN-001",
   "plan_type": "ardupilot",
+  "drones": [
+    "ceaf7e6dc205b365e156bf4f86930408"
+  ],
   "plan": {
     "requirements": {
       "RTL_ALT": 3000,
@@ -335,6 +352,14 @@ fetch('https://api.garuda.io/v2/flight/plans',
     "deployment_id": "9703889c2bb4322025815ed1a0509eba",
     "company_id": "ca42ab884a633d6a823b45e6ebe9534c",
     "description": "FLIGHTPLAN-001",
+    "drones": [
+      {
+        "name": "DRONE-001",
+        "drone_id": "ceaf7e6dc205b365e156bf4f86930408",
+        "model_name": "M400 UAV",
+        "model_id": "7bd6798cdb0dcb26ca6d3c0ca9c2ae79"
+      }
+    ],
     "last_modified_date": "1245591926000",
     "last_modified_by": "3b20c067ab91da9436ddaea6b83a9536",
     "plan_type": "ardupilot",
@@ -369,12 +394,13 @@ Create a new flight plan for a deployment belonging to the company of the user.
 
 You should pass in at minimum the following details in the request body:
 
-| Property        | Type   | Description                                    |
-| --------------- | ------ | ---------------------------------------------- |
-| `deployment_id` | String | Valid deployment ID tagged to this flight plan |
-| `plan_type`     | String | The type of the flight plan                    |
-| `description`   | String | Description of the flight plan                 |
-| `plan`          | Object | Object representing the actual flight plan     |
+| Property        | Type   | Description                                           |
+| --------------- | ------ | ----------------------------------------------------- |
+| `deployment_id` | String | Valid deployment ID tagged to this flight plan        |
+| `drones`        | Array  | Array of valid drone IDs to be used during the flight |
+| `plan_type`     | String | The type of the flight plan                           |
+| `description`   | String | Description of the flight plan                        |
+| `plan`          | Object | Object representing the actual flight plan            |
 
 Within the `plan` object, there are some properties that are optional:
 
@@ -466,6 +492,14 @@ Get a specific flight plan for a deployment belonging to the company of the user
     "deployment_id": "9703889c2bb4322025815ed1a0509eba",
     "company_id": "ca42ab884a633d6a823b45e6ebe9534c",
     "description": "FLIGHTPLAN-001",
+    "drones": [
+      {
+        "name": "DRONE-001",
+        "drone_id": "ceaf7e6dc205b365e156bf4f86930408",
+        "model_name": "M400 UAV",
+        "model_id": "7bd6798cdb0dcb26ca6d3c0ca9c2ae79"
+      }
+    ],
     "last_modified_date": "1245591926000",
     "last_modified_by": "3b20c067ab91da9436ddaea6b83a9536",
     "plan_type": "ardupilot",
@@ -582,6 +616,14 @@ fetch('https://api.garuda.io/v2/flight/plans/{flight_plan_id}',
     "deployment_id": "9703889c2bb4322025815ed1a0509eba",
     "company_id": "ca42ab884a633d6a823b45e6ebe9534c",
     "description": "FLIGHTPLAN-001_rev-1",
+    "drones": [
+      {
+        "name": "DRONE-001",
+        "drone_id": "ceaf7e6dc205b365e156bf4f86930408",
+        "model_name": "M400 UAV",
+        "model_id": "7bd6798cdb0dcb26ca6d3c0ca9c2ae79"
+      }
+    ],
     "last_modified_date": "1245591926000",
     "last_modified_by": "3b20c067ab91da9436ddaea6b83a9536",
     "plan_type": "ardupilot",
@@ -709,6 +751,14 @@ A successful deletion will return a `200 OK` status and the deleted flight plan 
     "deployment_id": "9703889c2bb4322025815ed1a0509eba",
     "company_id": "ca42ab884a633d6a823b45e6ebe9534c",
     "description": "FLIGHTPLAN-001",
+    "drones": [
+      {
+        "name": "DRONE-001",
+        "drone_id": "ceaf7e6dc205b365e156bf4f86930408",
+        "model_name": "M400 UAV",
+        "model_id": "7bd6798cdb0dcb26ca6d3c0ca9c2ae79"
+      }
+    ],
     "last_modified_date": "1245591926000",
     "last_modified_by": "3b20c067ab91da9436ddaea6b83a9536",
     "plan_type": "ardupilot",

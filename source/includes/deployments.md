@@ -50,13 +50,47 @@ Every time pilots are activated to fly drones, it is known as a `deployment`. A 
     "name": "USER-001",
     "user_id": "3b20c067ab91da9436ddaea6b83a9536"
   },
-  "deployment_area": "{ \"type\": \"Polygon\", \"coordinates\": [ [ [ -118.37099075317383, 33.85505651142062 ], [ -118.37305068969727, 33.85502978214579 ], [ -118.37347984313963, 33.854673391015496 ], [ -118.37306141853333, 33.85231226221667 ], [ -118.37193489074707, 33.85174201755203 ], [ -118.36997151374815, 33.85176874785573 ], [ -118.36995005607605, 33.8528112231754 ], [ -118.37099075317383, 33.85505651142062 ] ] ] }",
+  "deployment_area": {
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                103.78140449523926,
+                1.292500533024804
+              ],
+              [
+                103.78011703491211,
+                1.2929295772415663
+              ],
+              [
+                103.78028869628905,
+                1.2908701643402538
+              ],
+              [
+                103.78286361694336,
+                1.2922431064599564
+              ],
+              [
+                103.78140449523926,
+                1.292500533024804
+              ]
+            ]
+          ]
+        }
+      }
+    ]
+  },
   "start_date": "1559571926000",
   "end_date": "1559572026000",
   "status": "new"
 }
 ```
-
 
 Each `deployment` object will have the following properties:
 
@@ -73,7 +107,7 @@ Each `deployment` object will have the following properties:
 | `payloads`        | Array  | Array of strings, each describing a payload tagged to the deployment                                               |
 | `personnel`       | Array  | Array of [user objects](#) representing the personnel involved in the deployment                                   |
 | `deployment_lead` | Object | [User object](#) representing the deployment lead                                                                  |
-| `deployment_area` | String | [GeoJSON](https://geojson.org) string representation of the deployment area                                        |
+| `deployment_area` | Object | [GeoJSON](https://geojson.org) FeatureCollection that represents the deployment area                               |
 | `start_date`      | String | Start date of deployment in epoch (Unix timestamp), converted to milliseconds (ms)                                 |
 | `end_date`        | String | End date of deployment in epoch (Unix timestamp), converted to milliseconds (ms)                                   |
 | `status`          | String | Enumerated string describing the status of the deployment. See below for the list of enums.                        |
@@ -89,8 +123,6 @@ The property `status` represents the status of deployment, and can be one of the
 | Status                                          | 
 | ----------------------------------------------- | 
 | `new`, `draft`, `pending`, `ready to fly`, `cancelled` |
-
-> *Currently the `deployment_area` is represented by a GeoJSON string. Should be updated to change to an actual GeoJSON object.*
 
 ### Get all deployments
 
@@ -161,44 +193,62 @@ fetch('https://api.garuda.io/v2/flight/deployments',
   "data": [
     {
       "name": "DEPLOYMENT-001",
-      "deployment_id": "9703889c2bb4322025815ed1a0509eba",
       "company_id": "ca42ab884a633d6a823b45e6ebe9534c",
-      "project_id": "2b6d1671011c488c6583f07824fbf2c1",
-      "purpose": [
-        "Aerial Photography"
-      ],
+      "deployment_id": "9703889c2bb4322025815ed1a0509eba",
+      "project_id": "123124",
       "drones": [
         {
           "name": "DRONE-001",
           "drone_id": "ceaf7e6dc205b365e156bf4f86930408",
-        }
-      ],
-      "batteries": [
-        {
-          "name": "BATTERY-001",
-          "battery_id": "f42074ff0948fbb1d11f7a96c07cdcdd",
-        }
-      ],
-      "cameras": [
-        {
-          "name": "CAMERA-001",
-          "camera_id": "0b53479856488f542a18fef96b84119d",
-        }
-      ],
-      "personnel": [
-        {
-          "name": "USER-002",
-          "user_id": "53494af9b7e38f5df3447d17fe0b7547"
+          "model_name": "M400 UAV",
+          "model_id": "7bd6798cdb0dcb26ca6d3c0ca9c2ae79"
         }
       ],
       "deployment_lead": {
         "name": "USER-001",
         "user_id": "3b20c067ab91da9436ddaea6b83a9536"
       },
-      "deployment_area": "{ \"type\": \"Polygon\", \"coordinates\": [ [ [ -118.37099075317383, 33.85505651142062 ], [ -118.37305068969727, 33.85502978214579 ], [ -118.37347984313963, 33.854673391015496 ], [ -118.37306141853333, 33.85231226221667 ], [ -118.37193489074707, 33.85174201755203 ], [ -118.36997151374815, 33.85176874785573 ], [ -118.36995005607605, 33.8528112231754 ], [ -118.37099075317383, 33.85505651142062 ] ] ] }",
-      "start_date": "1559571926000",
-      "end_date": "1559572026000",
-      "status": "ready to fly"
+      "purpose": [
+        "Aerial Photography"
+      ],
+      "start_date": 1559571926000,
+      "end_date": 1559572026000,
+      "deployment_area": {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "properties": {},
+            "geometry": {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [
+                    103.78140449523926,
+                    1.292500533024804
+                  ],
+                  [
+                    103.78011703491211,
+                    1.2929295772415663
+                  ],
+                  [
+                    103.78028869628905,
+                    1.2908701643402538
+                  ],
+                  [
+                    103.78286361694336,
+                    1.2922431064599564
+                  ],
+                  [
+                    103.78140449523926,
+                    1.292500533024804
+                  ]
+                ]
+              ]
+            }
+          }
+        ]
+      }
     }
   ]
 }
@@ -259,52 +309,106 @@ curl -X POST 'https://api.garuda.io/v2/flight/deployments' \
      -H 'Authorization: Bearer <AUTH_TOKEN>' \
      -H 'X-API-Key: <API_KEY>' \
      -d '{
-      "name": "DEPLOYMENT-001",
-      "drones": [
-        "ceaf7e6dc205b365e156bf4f86930408"
-      ],
-      "batteries": [
-        "f42074ff0948fbb1d11f7a96c07cdcdd"
-      ],
-      "cameras": [
-        "0b53479856488f542a18fef96b84119d"
-      ],
-      "personnel": [
-        "53494af9b7e38f5df3447d17fe0b7547"
-      ],
-      "lead": "3b20c067ab91da9436ddaea6b83a9536",
-      "purpose": [
-        "Aerial Photography",
-      ],
-      "start_date": "1559571926000",
-      "end_date": "1559572026000",
-      "geo_json": "{ \"type\": \"Polygon\", \"coordinates\": [ [ [ -118.37099075317383, 33.85505651142062 ], [ -118.37305068969727, 33.85502978214579 ], [ -118.37347984313963, 33.854673391015496 ], [ -118.37306141853333, 33.85231226221667 ], [ -118.37193489074707, 33.85174201755203 ], [ -118.36997151374815, 33.85176874785573 ], [ -118.36995005607605, 33.8528112231754 ], [ -118.37099075317383, 33.85505651142062 ] ] ] }"
-     }'
+       "name": "DEPLOYMENT-001",
+       "project_id": "123124",
+       "drones": [
+         "082e8ea46f49d95ef08233fde6da72ac"
+       ],
+       "deployment_lead_id": "3b20c067ab91da9436ddaea6b83a9536",
+       "purpose": [
+         "Aerial Photography"
+       ],
+       "start_date": 1559571926000,
+       "end_date": 1559572026000,
+       "deployment_area": {
+         "type": "FeatureCollection",
+         "features": [
+           {
+             "type": "Feature",
+             "properties": {},
+             "geometry": {
+               "type": "Polygon",
+               "coordinates": [
+                 [
+                   [
+                     103.78140449523926,
+                     1.292500533024804
+                   ],
+                   [
+                     103.78011703491211,
+                     1.2929295772415663
+                   ],
+                   [
+                     103.78028869628905,
+                     1.2908701643402538
+                   ],
+                   [
+                     103.78286361694336,
+                     1.2922431064599564
+                   ],
+                   [
+                     103.78140449523926,
+                     1.292500533024804
+                   ]
+                 ]
+               ]
+             }
+           }
+         ]
+       }
+      }'
 ```
 
 ```javascript
 const fetch = require('node-fetch');
 const inputBody = '{
   "name": "DEPLOYMENT-001",
+  "project_id": "123124",
   "drones": [
-    "ceaf7e6dc205b365e156bf4f86930408"
+    "082e8ea46f49d95ef08233fde6da72ac"
   ],
-  "batteries": [
-    "f42074ff0948fbb1d11f7a96c07cdcdd"
-  ],
-  "cameras": [
-    "0b53479856488f542a18fef96b84119d"
-  ],
-  "personnel": [
-    "53494af9b7e38f5df3447d17fe0b7547"
-  ],
-  "lead": "3b20c067ab91da9436ddaea6b83a9536",
+  "deployment_lead_id": "3b20c067ab91da9436ddaea6b83a9536",
   "purpose": [
-    "Aerial Photography",
+    "Aerial Photography"
   ],
-  "start_date": "1559571926000",
-  "end_date": "1559572026000",
-  "geo_json": "{ \"type\": \"Polygon\", \"coordinates\": [ [ [ -118.37099075317383, 33.85505651142062 ], [ -118.37305068969727, 33.85502978214579 ], [ -118.37347984313963, 33.854673391015496 ], [ -118.37306141853333, 33.85231226221667 ], [ -118.37193489074707, 33.85174201755203 ], [ -118.36997151374815, 33.85176874785573 ], [ -118.36995005607605, 33.8528112231754 ], [ -118.37099075317383, 33.85505651142062 ] ] ] }"
+  "start_date": 1559571926000,
+  "end_date": 1559572026000,
+  "deployment_area": {
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                103.78140449523926,
+                1.292500533024804
+              ],
+              [
+                103.78011703491211,
+                1.2929295772415663
+              ],
+              [
+                103.78028869628905,
+                1.2908701643402538
+              ],
+              [
+                103.78286361694336,
+                1.2922431064599564
+              ],
+              [
+                103.78140449523926,
+                1.292500533024804
+              ]
+            ]
+          ]
+        }
+      }
+    ]
+  }
 }';
 const headers = {
   'Content-Type':'application/json',
@@ -330,47 +434,62 @@ fetch('https://api.garuda.io/v2/flight/deployments',
 
 ```json
 {
-  "success": true,
-  "data": {
-    "name": "DEPLOYMENT-001",
-    "deployment_id": "9703889c2bb4322025815ed1a0509eba",
-    "company_id": "ca42ab884a633d6a823b45e6ebe9534c",
-    "project_id": "2b6d1671011c488c6583f07824fbf2c1",
-    "purpose": [
-      "Aerial Photography"
-    ],
-    "drones": [
+  "name": "DEPLOYMENT-001",
+  "deployment_id": "9703889c2bb4322025815ed1a0509eba",
+  "company_id": "ca42ab884a633d6a823b45e6ebe9534c",
+  "project_id": "123124",
+  "drones": [
+    {
+      "name": "DRONE-001",
+      "drone_id": "ceaf7e6dc205b365e156bf4f86930408",
+      "model_name": "M400 UAV",
+      "model_id": "7bd6798cdb0dcb26ca6d3c0ca9c2ae79"
+    }
+  ],
+  "deployment_lead": {
+    "name": "USER-001",
+    "user_id": "3b20c067ab91da9436ddaea6b83a9536"
+  },
+  "purpose": [
+    "Aerial Photography"
+  ],
+  "start_date": 1559571926000,
+  "end_date": 1559572026000,
+  "deployment_area": {
+    "type": "FeatureCollection",
+    "features": [
       {
-        "name": "DRONE-001",
-        "id": "ceaf7e6dc205b365e156bf4f86930408",
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                103.78140449523926,
+                1.292500533024804
+              ],
+              [
+                103.78011703491211,
+                1.2929295772415663
+              ],
+              [
+                103.78028869628905,
+                1.2908701643402538
+              ],
+              [
+                103.78286361694336,
+                1.2922431064599564
+              ],
+              [
+                103.78140449523926,
+                1.292500533024804
+              ]
+            ]
+          ]
+        }
       }
-    ],
-    "batteries": [
-      {
-        "name": "BATTERY-001",
-        "id": "f42074ff0948fbb1d11f7a96c07cdcdd",
-      }
-    ],
-    "cameras": [
-      {
-        "name": "CAMERA-001",
-        "id": "0b53479856488f542a18fef96b84119d",
-      }
-    ],
-    "personnel": [
-      {
-        "name": "USER-002",
-        "id": "53494af9b7e38f5df3447d17fe0b7547"
-      }
-    ],
-    "deployment_lead": {
-      "name": "USER-001",
-      "id": "3b20c067ab91da9436ddaea6b83a9536"
-    },
-    "deployment_area": "{ \"type\": \"Polygon\", \"coordinates\": [ [ [ -118.37099075317383, 33.85505651142062 ], [ -118.37305068969727, 33.85502978214579 ], [ -118.37347984313963, 33.854673391015496 ], [ -118.37306141853333, 33.85231226221667 ], [ -118.37193489074707, 33.85174201755203 ], [ -118.36997151374815, 33.85176874785573 ], [ -118.36995005607605, 33.8528112231754 ], [ -118.37099075317383, 33.85505651142062 ] ] ] }",
-    "start_date": "1559571926000",
-    "end_date": "1559572026000",
-    "status": "ready to fly"
+    ]
   }
 }
 ```
@@ -473,47 +592,100 @@ fetch('https://api.garuda.io/v2/flight/deployments/{deployment_id}',
 
 ```json
 {
-  "success": true,
-  "data": {
-    "name": "DEPLOYMENT-001",
-    "deployment_id": "9703889c2bb4322025815ed1a0509eba",
-    "company_id": "ca42ab884a633d6a823b45e6ebe9534c",
-    "project_id": "2b6d1671011c488c6583f07824fbf2c1",
-    "purpose": [
-      "Aerial Photography"
-    ],
-    "drones": [
+  "name": "DEPLOYMENT-001",
+  "deployment_id": "9703889c2bb4322025815ed1a0509eba",
+  "company_id": "ca42ab884a633d6a823b45e6ebe9534c",
+  "project_id": "123124",
+  "drones": [
+    {
+      "name": "DRONE-001",
+      "drone_id": "ceaf7e6dc205b365e156bf4f86930408",
+      "company_id": "ca42ab884a633d6a823b45e6ebe9534c",
+      "model_id": "7bd6798cdb0dcb26ca6d3c0ca9c2ae79",
+      "model": {
+        "name": "M400 UAV",
+        "provider_id": "0c5c21b6a42fadb018a5d1863c34b35d",
+        "category": "Quadcopter",
+        "avatar": "",
+        "compatibility": {
+          "batteries": [
+            "0c5c21b6a42fadb018a5d1863c37bb31",
+            "0c5c21b6a42fadb018a5d1863c36abd6"
+          ],
+          "cameras": [
+            "0c5c21b6a42fadb018a5d1863c35dc93",
+            "0c5c21b6a42fadb018a5d1863c35fea4"
+          ],
+          "payloads": []
+        },
+        "weight_kg": "2.100",
+        "properties": {
+          "dimensions": {
+            "width": "0.82",
+            "length": "0.82",
+            "height": "0.28"
+          },
+          "max_flight_time": "25",
+          "rc_frequency": "2.400 - 2.483GHz"
+        },
+        "provider": {
+          "name": "Garuda Robotics Pte Ltd",
+          "brand": "Garuda",
+          "company_logo": "",
+          "country": "Singapore",
+          "id": "0c5c21b6a42fadb018a5d1863c34b35d"
+        }
+      },
+      "notes": "Industrial-grade quadrotor UAV suitable for a variety of applications.",
+      "shared": false,
+      "serviceable": true,
+      "aquired_on": 1532103688243
+    }
+  ],
+  "deployment_lead": {
+    "name": "USER-001",
+    "user_id": "3b20c067ab91da9436ddaea6b83a9536"
+  },
+  "purpose": [
+    "Aerial Photography"
+  ],
+  "start_date": 1559571926000,
+  "end_date": 1559572026000,
+  "deployment_area": {
+    "type": "FeatureCollection",
+    "features": [
       {
-        "name": "DRONE-001",
-        "drone_id": "ceaf7e6dc205b365e156bf4f86930408",
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                103.78140449523926,
+                1.292500533024804
+              ],
+              [
+                103.78011703491211,
+                1.2929295772415663
+              ],
+              [
+                103.78028869628905,
+                1.2908701643402538
+              ],
+              [
+                103.78286361694336,
+                1.2922431064599564
+              ],
+              [
+                103.78140449523926,
+                1.292500533024804
+              ]
+            ]
+          ]
+        }
       }
-    ],
-    "batteries": [
-      {
-        "name": "BATTERY-001",
-        "battery_id": "f42074ff0948fbb1d11f7a96c07cdcdd",
-      }
-    ],
-    "cameras": [
-      {
-        "name": "CAMERA-001",
-        "camera_id": "0b53479856488f542a18fef96b84119d",
-      }
-    ],
-    "personnel": [
-      {
-        "name": "USER-002",
-        "user_id": "53494af9b7e38f5df3447d17fe0b7547"
-      }
-    ],
-    "deployment_lead": {
-      "name": "USER-001",
-      "user_id": "3b20c067ab91da9436ddaea6b83a9536"
-    },
-    "deployment_area": "{ \"type\": \"Polygon\", \"coordinates\": [ [ [ -118.37099075317383, 33.85505651142062 ], [ -118.37305068969727, 33.85502978214579 ], [ -118.37347984313963, 33.854673391015496 ], [ -118.37306141853333, 33.85231226221667 ], [ -118.37193489074707, 33.85174201755203 ], [ -118.36997151374815, 33.85176874785573 ], [ -118.36995005607605, 33.8528112231754 ], [ -118.37099075317383, 33.85505651142062 ] ] ] }",
-    "start_date": "1559571926000",
-    "end_date": "1559572026000",
-    "status": "ready to fly"
+    ]
   }
 }
 ```
@@ -608,51 +780,101 @@ fetch('https://api.garuda.io/v2/flight/deployments/{deployment_id}',
 
 ```json
 {
-  "success": true,
-  "data": {
-    "name": "DEPLOYMENT-001",
-    "deployment_id": "9703889c2bb4322025815ed1a0509eba",
-    "drones": [
+  "name": "DEPLOYMENT-001",
+  "deployment_id": "9703889c2bb4322025815ed1a0509eba",
+  "company_id": "ca42ab884a633d6a823b45e6ebe9534c",
+  "project_id": "123124",
+  "drones": [
+    {
+      "name": "DRONE-001",
+      "drone_id": "ceaf7e6dc205b365e156bf4f86930408",
+      "company_id": "ca42ab884a633d6a823b45e6ebe9534c",
+      "model_id": "7bd6798cdb0dcb26ca6d3c0ca9c2ae79",
+      "model": {
+        "name": "M400 UAV",
+        "provider_id": "0c5c21b6a42fadb018a5d1863c34b35d",
+        "category": "Quadcopter",
+        "avatar": "",
+        "compatibility": {
+          "batteries": [
+            "0c5c21b6a42fadb018a5d1863c37bb31",
+            "0c5c21b6a42fadb018a5d1863c36abd6"
+          ],
+          "cameras": [
+            "0c5c21b6a42fadb018a5d1863c35dc93",
+            "0c5c21b6a42fadb018a5d1863c35fea4"
+          ],
+          "payloads": []
+        },
+        "weight_kg": "2.100",
+        "properties": {
+          "dimensions": {
+            "width": "0.82",
+            "length": "0.82",
+            "height": "0.28"
+          },
+          "max_flight_time": "25",
+          "rc_frequency": "2.400 - 2.483GHz"
+        },
+        "provider": {
+          "name": "Garuda Robotics Pte Ltd",
+          "brand": "Garuda",
+          "company_logo": "",
+          "country": "Singapore",
+          "id": "0c5c21b6a42fadb018a5d1863c34b35d"
+        }
+      },
+      "notes": "Industrial-grade quadrotor UAV suitable for a variety of applications.",
+      "shared": false,
+      "serviceable": true,
+      "aquired_on": 1532103688243
+    }
+  ],
+  "deployment_lead": {
+    "name": "USER-001",
+    "user_id": "3b20c067ab91da9436ddaea6b83a9536"
+  },
+  "purpose": [
+    "Demonstration",
+    "Training (Academy)"
+  ],
+  "start_date": 1559571926000,
+  "end_date": 1559572026000,
+  "deployment_area": {
+    "type": "FeatureCollection",
+    "features": [
       {
-        "name": "DRONE-001",
-        "drone_id": "ceaf7e6dc205b365e156bf4f86930408",
-        "model_name": "M400 UAV",
-        "model_id": "7bd6798cdb0dcb26ca6d3c0ca9c2ae79"
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                103.78140449523926,
+                1.292500533024804
+              ],
+              [
+                103.78011703491211,
+                1.2929295772415663
+              ],
+              [
+                103.78028869628905,
+                1.2908701643402538
+              ],
+              [
+                103.78286361694336,
+                1.2922431064599564
+              ],
+              [
+                103.78140449523926,
+                1.292500533024804
+              ]
+            ]
+          ]
+        }
       }
-    ],
-    "batteries": [
-      {
-        "name": "BATTERY-001",
-        "battery_id": "f42074ff0948fbb1d11f7a96c07cdcdd",
-        "model_name": "Multistar 6S 6600",
-        "model_id": "4b38b7383fdb23fbff8c3a6a694e4533"
-      }
-    ],
-    "cameras": [
-      {
-        "name": "CAMERA-001",
-        "camera_id": "0b53479856488f542a18fef96b84119d",
-        "model_name": "Powershot S100",
-        "model_id": "0e51493cd1ae85c097547de808642659"
-      }
-    ],
-    "personnel": [
-      {
-        "name": "USER-002",
-        "user_id": "53494af9b7e38f5df3447d17fe0b7547"
-      }
-    ],
-    "lead": {
-      "name": "USER-001",
-      "user_id": "3b20c067ab91da9436ddaea6b83a9536"
-    },
-    "purpose": [
-      "Demonstration",
-      "Training (Academy)"
-    ],
-    "start_date": "1559571926000",
-    "end_date": "1559572026000",
-    "geo_json": "{ \"type\": \"Polygon\", \"coordinates\": [ [ [ -118.37099075317383, 33.85505651142062 ], [ -118.37305068969727, 33.85502978214579 ], [ -118.37347984313963, 33.854673391015496 ], [ -118.37306141853333, 33.85231226221667 ], [ -118.37193489074707, 33.85174201755203 ], [ -118.36997151374815, 33.85176874785573 ], [ -118.36995005607605, 33.8528112231754 ], [ -118.37099075317383, 33.85505651142062 ] ] ] }"
+    ]
   }
 }
 ```
@@ -671,7 +893,7 @@ To update a specific deployment, you can pass whichever properties that you wish
 | `deployment_lead_id` | String | User ID of the deployment lead                                                     |
 | `start_date`         | Number | Start date of deployment in epoch (Unix timestamp), converted to milliseconds (ms) |
 | `end_date`           | Number | End date of deployment in epoch (Unix timestamp), converted to milliseconds (ms)   |
-| `deployment_area`    | String | GeoJSON string representation of the deployment area                               |
+| `deployment_area`    | Object | GeoJSON FeatureCollection representation of the deployment area                    |
 | `purpose`            | String | Description of the purpose of deployment                                           |
 | `batteries`          | Array  | Array of battery IDs to be used for the deployment                                 |
 | `cameras`            | Array  | Array of camera IDs to be used for the deployment                                  |
@@ -749,50 +971,100 @@ fetch('https://api.garuda.io/v2/flight/deployments/{deployment_id}',
 
 ```json
 {
-  "success": true,
-  "data": {
-    "name": "DEPLOYMENT-001",
-    "deployment_id": "9703889c2bb4322025815ed1a0509eba",
-    "drones": [
+  "name": "DEPLOYMENT-001",
+  "deployment_id": "9703889c2bb4322025815ed1a0509eba",
+  "company_id": "ca42ab884a633d6a823b45e6ebe9534c",
+  "project_id": "123124",
+  "drones": [
+    {
+      "name": "DRONE-001",
+      "drone_id": "ceaf7e6dc205b365e156bf4f86930408",
+      "company_id": "ca42ab884a633d6a823b45e6ebe9534c",
+      "model_id": "7bd6798cdb0dcb26ca6d3c0ca9c2ae79",
+      "model": {
+        "name": "M400 UAV",
+        "provider_id": "0c5c21b6a42fadb018a5d1863c34b35d",
+        "category": "Quadcopter",
+        "avatar": "",
+        "compatibility": {
+          "batteries": [
+            "0c5c21b6a42fadb018a5d1863c37bb31",
+            "0c5c21b6a42fadb018a5d1863c36abd6"
+          ],
+          "cameras": [
+            "0c5c21b6a42fadb018a5d1863c35dc93",
+            "0c5c21b6a42fadb018a5d1863c35fea4"
+          ],
+          "payloads": []
+        },
+        "weight_kg": "2.100",
+        "properties": {
+          "dimensions": {
+            "width": "0.82",
+            "length": "0.82",
+            "height": "0.28"
+          },
+          "max_flight_time": "25",
+          "rc_frequency": "2.400 - 2.483GHz"
+        },
+        "provider": {
+          "name": "Garuda Robotics Pte Ltd",
+          "brand": "Garuda",
+          "company_logo": "",
+          "country": "Singapore",
+          "id": "0c5c21b6a42fadb018a5d1863c34b35d"
+        }
+      },
+      "notes": "Industrial-grade quadrotor UAV suitable for a variety of applications.",
+      "shared": false,
+      "serviceable": true,
+      "aquired_on": 1532103688243
+    }
+  ],
+  "deployment_lead": {
+    "name": "USER-001",
+    "user_id": "3b20c067ab91da9436ddaea6b83a9536"
+  },
+  "purpose": [
+    "Aerial Photography"
+  ],
+  "start_date": 1559571926000,
+  "end_date": 1559572026000,
+  "deployment_area": {
+    "type": "FeatureCollection",
+    "features": [
       {
-        "name": "DRONE-001",
-        "drone_id": "ceaf7e6dc205b365e156bf4f86930408",
-        "model_name": "M400 UAV",
-        "model_id": "7bd6798cdb0dcb26ca6d3c0ca9c2ae79"
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                103.78140449523926,
+                1.292500533024804
+              ],
+              [
+                103.78011703491211,
+                1.2929295772415663
+              ],
+              [
+                103.78028869628905,
+                1.2908701643402538
+              ],
+              [
+                103.78286361694336,
+                1.2922431064599564
+              ],
+              [
+                103.78140449523926,
+                1.292500533024804
+              ]
+            ]
+          ]
+        }
       }
-    ],
-    "batteries": [
-      {
-        "name": "BATTERY-001",
-        "battery_id": "f42074ff0948fbb1d11f7a96c07cdcdd",
-        "model_name": "Multistar 6S 6600",
-        "model_id": "4b38b7383fdb23fbff8c3a6a694e4533"
-      }
-    ],
-    "cameras": [
-      {
-        "name": "CAMERA-001",
-        "camera_id": "0b53479856488f542a18fef96b84119d",
-        "model_name": "Powershot S100",
-        "model_id": "0e51493cd1ae85c097547de808642659"
-      }
-    ],
-    "personnel": [
-      {
-        "name": "USER-002",
-        "user_id": "53494af9b7e38f5df3447d17fe0b7547"
-      }
-    ],
-    "lead": {
-      "name": "USER-001",
-      "user_id": "3b20c067ab91da9436ddaea6b83a9536"
-    },
-    "purpose": [
-      "Aerial Photography"
-    ],
-    "start_date": "1559571926000",
-    "end_date": "1559572026000",
-    "geo_json": "{ \"type\": \"Polygon\", \"coordinates\": [ [ [ -118.37099075317383, 33.85505651142062 ], [ -118.37305068969727, 33.85502978214579 ], [ -118.37347984313963, 33.854673391015496 ], [ -118.37306141853333, 33.85231226221667 ], [ -118.37193489074707, 33.85174201755203 ], [ -118.36997151374815, 33.85176874785573 ], [ -118.36995005607605, 33.8528112231754 ], [ -118.37099075317383, 33.85505651142062 ] ] ] }"
+    ]
   }
 }
 ```
