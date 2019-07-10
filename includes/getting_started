@@ -1,0 +1,20 @@
+<h1 id='getting-started'>Getting Started</h1>
+<p>To get started, you will require 2 items:</p>
+
+<ol>
+<li><strong>An API Key</strong></li>
+<li><strong>A Garuda Plex Account</strong></li>
+</ol>
+
+<p>Please speak to your account manager to request for an API Key. If you do not have an account manager or if you are an individual developer, please register your interest <a href="https://forms.gle/fjg1rdKMdCfkGa7o6">here</a>.</p>
+
+<p>To sign up for a Garuda Plex account, head down to the <a href="https://plex.garuda.io/signup">Garuda Plex sign up page</a> and complete the sign up process.</p>
+<h2 id='garuda-plex-api-key'>Garuda Plex API Key</h2>
+<p>This API Key must be kept <strong>secret</strong>. Exposing your API Key publicly can result in your account being compromised. By using the API Key to access your Garuda Plex account, you are subjected to same <a href="https://garuda.io/terms/">terms of use</a> of Garuda Plex.</p>
+
+<p>Some best practices to keep your API Key secure:</p>
+
+<ul>
+<li>Do not embed your API Key directly in code. Instead, store them as environment variables or in separate files.</li>
+<li>Do not store your API Key in any file that will be committed to your code repository. This is especially important when using a public source control system like GitHub, where anyone can view your committed files and potentially get access to your API Key.</li>
+</ul>

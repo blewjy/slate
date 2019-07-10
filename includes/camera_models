@@ -1,0 +1,672 @@
+<h2 id='camera-models'>Camera Models</h2>
+<p>Fleet APIs allow you to manage camera models. Each <code>camera_model</code> object contains information regarding a specific camera model provided by a camera provider. A <code>camera_model</code> object has the following properties:</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>name</code></td>
+<td>String</td>
+<td>Name of the camera model</td>
+</tr>
+<tr>
+<td><code>model_id</code></td>
+<td>String</td>
+<td>Camera model ID</td>
+</tr>
+<tr>
+<td><code>provider</code></td>
+<td>Object</td>
+<td>Object representing the camera provider. Contains the <code>name</code> of the provider and the <code>provider_id</code></td>
+</tr>
+<tr>
+<td><code>weight</code></td>
+<td>String</td>
+<td>Weight of the camera in kilograms (kg)</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>Array</td>
+<td>Array of enumerated strings describing the type of the camera. (see below)</td>
+</tr>
+<tr>
+<td><code>properties</code></td>
+<td>Object</td>
+<td>Object representing the properties of this camera model. (see below)</td>
+</tr>
+</tbody></table>
+
+<p>Each <code>camera_model</code> should be of one or both of 2 types, and this is specified under the <code>type</code> property of the <code>camera_model</code> object. The enumerations available for <code>type</code> are:</p>
+
+<table><thead>
+<tr>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>RGB</code>, <code>NDVI</code></td>
+</tr>
+</tbody></table>
+
+<p>Each <code>camera_model</code> has a set of <code>properties</code> that describes the specifications of the camera model. The <code>properties</code> in the <code>camera_model</code> is an object with the following properties:</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>sensor_size</code></td>
+<td>String</td>
+<td>sensor_size</td>
+</tr>
+<tr>
+<td><code>image_modes</code></td>
+<td>Array</td>
+<td>Array of strings of image_modes</td>
+</tr>
+<tr>
+<td><code>video_modes</code></td>
+<td>Array</td>
+<td>Array of strings of video_modes</td>
+</tr>
+<tr>
+<td><code>maximum_clip_length</code></td>
+<td>String</td>
+<td>maximum_clip_length</td>
+</tr>
+<tr>
+<td><code>image_file_formats</code></td>
+<td>Array</td>
+<td>Array of strings of supported image file formats</td>
+</tr>
+<tr>
+<td><code>video_file_formats</code></td>
+<td>Array</td>
+<td>Array of strings of supported video file formats</td>
+</tr>
+<tr>
+<td><code>lens_focal_length</code></td>
+<td>String</td>
+<td>lens_focal_length</td>
+</tr>
+<tr>
+<td><code>lens_focal_length_35mm_equiv</code></td>
+<td>String</td>
+<td>lens_focal_length_35mm_equiv</td>
+</tr>
+<tr>
+<td><code>optical_zoom</code></td>
+<td>String</td>
+<td>optical_zoom</td>
+</tr>
+<tr>
+<td><code>digital_zoom</code></td>
+<td>String</td>
+<td>digital_zoom</td>
+</tr>
+<tr>
+<td><code>aperture</code></td>
+<td>String</td>
+<td>aperture</td>
+</tr>
+<tr>
+<td><code>image_stabilization</code></td>
+<td>String</td>
+<td>image_stabilization</td>
+</tr>
+<tr>
+<td><code>auto_focus</code></td>
+<td>String</td>
+<td>auto_focus</td>
+</tr>
+<tr>
+<td><code>manual_focus</code></td>
+<td>Boolean</td>
+<td>Whether manual focus mode is supported</td>
+</tr>
+<tr>
+<td><code>af_modes</code></td>
+<td>Array</td>
+<td>Array of strings of supported AF Modes</td>
+</tr>
+<tr>
+<td><code>af_lock</code></td>
+<td>Boolean</td>
+<td>Whether AF lock is on</td>
+</tr>
+<tr>
+<td><code>af_assist_lamp</code></td>
+<td>Boolean</td>
+<td>Whether AF assist lamp is on</td>
+</tr>
+<tr>
+<td><code>focus_distance</code></td>
+<td>String</td>
+<td>focus_distance</td>
+</tr>
+<tr>
+<td><code>metering</code></td>
+<td>Array</td>
+<td>Array of strings describing the metering</td>
+</tr>
+<tr>
+<td><code>max_iso</code></td>
+<td>String</td>
+<td>max_iso</td>
+</tr>
+<tr>
+<td><code>shutter_speed</code></td>
+<td>String</td>
+<td>shutter_speed</td>
+</tr>
+<tr>
+<td><code>modes</code></td>
+<td>Array</td>
+<td>Array of strings describing the camera modes</td>
+</tr>
+<tr>
+<td><code>white_balance</code></td>
+<td>Array</td>
+<td>Array of strings of white balance modes(?)</td>
+</tr>
+<tr>
+<td><code>continuous_shooting</code></td>
+<td>String</td>
+<td>continuous_shooting</td>
+</tr>
+<tr>
+<td><code>connectivity</code></td>
+<td>Array</td>
+<td>Array of strings of supported connections</td>
+</tr>
+<tr>
+<td><code>storage</code></td>
+<td>Array</td>
+<td>Array of strings of supported storage</td>
+</tr>
+<tr>
+<td><code>power</code></td>
+<td>String</td>
+<td>power</td>
+</tr>
+<tr>
+<td><code>dimensions</code></td>
+<td>Object</td>
+<td>Object representing dimensions of camera. Properties are <code>width</code>, <code>length</code>, <code>height</code></td>
+</tr>
+</tbody></table>
+<h3 id='get-all-camera-models'>Get all camera models</h3>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'rest-client'</span>
+<span class="nb">require</span> <span class="s1">'json'</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">get</span> <span class="s1">'https://api.garuda.io/v2/fleet/camera-providers/{camera_provider_id}/camera-models'</span><span class="p">,</span>
+  <span class="ss">params: </span><span class="p">{</span>
+  <span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
+
+<span class="nb">p</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.garuda.io/v2/fleet/camera-providers/{camera_provider_id}/camera-models'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+
+<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+</code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="s1">'https://api.garuda.io/v2/fleet/camera-providers/{camera_provider_id}/camera-models'</span> <span class="se">\</span>
+     -H <span class="s1">'Authorization: Bearer &lt;AUTH_TOKEN&gt;'</span> <span class="se">\</span>
+     -H <span class="s1">'X-API-Key: &lt;API_KEY&gt;'</span> <span class="se">\</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
+
+<span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
+
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.garuda.io/v2/fleet/camera-providers/{camera_provider_id}/camera-models'</span><span class="p">,</span>
+<span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
+
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+
+</code></pre>
+<blockquote>
+<p>200 Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Powershot S100"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"model_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0e51493cd1ae85c097547de808642659"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"provider"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Canon Inc."</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"provider_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2db274b2709ce1ce89457057d6e9fd3b"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"RGB"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"NDIV"</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><code>GET /fleet/camera-providers/{camera_provider_id}/camera-models</code></p>
+
+<p>When getting all <code>camera_models</code> belonging to a specific camera provider in your company, you have to provide a valid and existing <code>camera_provider_id</code>. The HTTP response body will contain an array of <code>camera_model</code> objects belonging to your specified <code>camera_provider</code>.</p>
+
+<p>You can specify the extent of which to fetch the data via query strings:</p>
+
+<table><thead>
+<tr>
+<th>Query</th>
+<th>Default</th>
+<th>Values</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>options</code></td>
+<td><code>shallow</code></td>
+<td><code>shallow</code>, <code>deep</code></td>
+<td>Specify if data retrieved should be a deep or shallow fetch</td>
+</tr>
+</tbody></table>
+
+<p>For a <code>shallow</code> fetch (which is the default behaviour), only the <code>name</code>, <code>model_id</code>, <code>provider</code>, and <code>type</code> will be retrieved (see sample response on the left for how this will look like). A <code>deep</code> fetch will retrieve more information for each of the objects -- to see the exact properties that will be retrieved with a <code>deep</code> fetch, refer to the <a href="#camera-models">beginning of this section</a>.</p>
+
+<div></div>
+<h3 id='create-new-camera-model'>Create new camera model</h3>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'rest-client'</span>
+<span class="nb">require</span> <span class="s1">'json'</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Content-Type'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span><span class="p">,</span>
+  <span class="s1">'Accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">post</span> <span class="s1">'https://api.garuda.io/v2/fleet/camera-providers/{camera_provider_id}/camera-models'</span><span class="p">,</span>
+  <span class="ss">params: </span><span class="p">{</span>
+  <span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
+
+<span class="nb">p</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">,</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.garuda.io/v2/fleet/camera-providers/{camera_provider_id}/camera-models'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+
+<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+</code></pre><pre class="highlight shell tab-shell"><code>curl -X POST <span class="s1">'https://api.garuda.io/v2/fleet/camera-providers/{camera_provider_id}/camera-models'</span> <span class="se">\</span>
+     -H <span class="s1">'Authorization: Bearer &lt;AUTH_TOKEN&gt;'</span> <span class="se">\</span>
+     -H <span class="s1">'X-API-Key: &lt;API_KEY&gt;'</span> <span class="se">\</span>
+     -d <span class="s1">'{
+      "name": "Powershot S100",
+      "provider_id": "2db274b2709ce1ce89457057d6e9fd3b"
+      "type": [
+        "RGB", 
+        "NDIV"
+      ]
+     }'</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="s1">'{
+  "name": "Powershot S100",
+  "provider_id": "2db274b2709ce1ce89457057d6e9fd3b"
+  "type": [
+    "RGB", 
+    "NDIV"
+  ]
+}'</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/json'</span><span class="p">,</span>
+  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
+
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.garuda.io/v2/fleet/camera-providers/{camera_provider_id}/camera-models'</span><span class="p">,</span>
+<span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
+  <span class="na">body</span><span class="p">:</span> <span class="nx">inputBody</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+
+</code></pre>
+<blockquote>
+<p>200 Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Powershot S100"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"model_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0e51493cd1ae85c097547de808642659"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"provider"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Canon Inc."</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"provider_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2db274b2709ce1ce89457057d6e9fd3b"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"RGB"</span><span class="p">,</span><span class="w"> 
+      </span><span class="s2">"NDIV"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><code>POST /fleet/camera-providers/{camera_provider_id}/camera-models</code></p>
+
+<p>Every created <code>camera_model</code> has to belong to a valid and existing <code>camera_provider</code>. When calling this API, the <code>camera_provider_id</code> parameter has to be valid for a successful call.</p>
+
+<p>When creating a new <code>camera_model</code>, at minimum, you should pass in values for the following properties:</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>name</code></td>
+<td>String</td>
+<td>Name of the camera model</td>
+</tr>
+<tr>
+<td><code>provider_id</code></td>
+<td>String</td>
+<td>Camera provider ID</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>Array</td>
+<td>Array of <a href="#camera-models">enumerated strings</a> describing the type of the camera.</td>
+</tr>
+</tbody></table>
+
+<p>For more information on these properties, refer to the <code>camera_model</code> object description at the <a href="#camera-models">beginning of this section</a></p>
+
+<p>You can also choose to pass in more information on the camera model to flesh out the rest of the object:</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>weight</code></td>
+<td>String</td>
+<td>Weight of the camera in kilograms (kg)</td>
+</tr>
+<tr>
+<td><code>properties</code></td>
+<td>Object</td>
+<td>Object representing the properties of this camera model. (see below)</td>
+</tr>
+</tbody></table>
+
+<p>Otherwise, these properties can also be added at a later time with the <a href="#update-a-camera-model"><code>PATCH</code> endpoint</a>.</p>
+
+<div></div>
+<h3 id='update-a-camera-model'>Update a camera model</h3>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'rest-client'</span>
+<span class="nb">require</span> <span class="s1">'json'</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Content-Type'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span><span class="p">,</span>
+  <span class="s1">'Accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">patch</span> <span class="s1">'https://api.garuda.io/v2/fleet/camera-providers/{camera_provider_id}/camera-models/{camera_model_id}'</span><span class="p">,</span>
+  <span class="ss">params: </span><span class="p">{</span>
+  <span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
+
+<span class="nb">p</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">,</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span><span class="s">'https://api.garuda.io/v2/fleet/camera-providers/{camera_provider_id}/camera-models/{camera_model_id}'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+
+<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+</code></pre><pre class="highlight shell tab-shell"><code>curl -X PATCH <span class="s1">'https://api.garuda.io/v2/fleet/camera-providers/{camera_provider_id}/camera-models/{camera_model_id}'</span> <span class="se">\</span>
+     -H <span class="s1">'Authorization: Bearer &lt;AUTH_TOKEN&gt;'</span> <span class="se">\</span>
+     -H <span class="s1">'X-API-Key: &lt;API_KEY&gt;'</span> <span class="se">\</span>
+     -d <span class="s1">'{
+      "weight": "0.198",
+      "properties": {
+        "video_modes": [
+          "1920 x 1080 @ 24 fps",
+          "1280 x 720 @ 30fps"
+        ],
+        "video_file_formats": [
+          "H.264"
+        ]
+      }
+     }'</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="s1">'{
+  "weight": "0.198",
+  "properties": {
+    "video_modes": [
+      "1920 x 1080 @ 24 fps",
+      "1280 x 720 @ 30fps"
+    ],
+    "video_file_formats": [
+      "H.264"
+    ]
+  }
+}'</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/json'</span><span class="p">,</span>
+  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
+
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.garuda.io/v2/fleet/camera-providers/{camera_provider_id}/camera-models/{camera_model_id}'</span><span class="p">,</span>
+<span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s1">'PATCH'</span><span class="p">,</span>
+  <span class="na">body</span><span class="p">:</span> <span class="nx">inputBody</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+
+</code></pre>
+<blockquote>
+<p>200 Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Powershot S100"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"model_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0e51493cd1ae85c097547de808642659"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"provider"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Canon Inc."</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"provider_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2db274b2709ce1ce89457057d6e9fd3b"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"RGB"</span><span class="p">,</span><span class="w"> 
+      </span><span class="s2">"NDIV"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"weight"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.198"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"video_modes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"1920 x 1080 @ 24 fps"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"1280 x 720 @ 30fps"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"video_file_formats"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"H.264"</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><code>PATCH /fleet/camera-providers/{camera_provider_id}/camera-models/{camera_model_id}</code></p>
+
+<p>This endpoint allows you to edit and update information regarding a <code>camera_model</code> that has already been created. For the request body of this endpoint, it is not necessary to pass in values for all the properties of a <code>camera_model</code>. All of the following properties are optional: </p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>name</code></td>
+<td>String</td>
+<td>Name of the camera model</td>
+</tr>
+<tr>
+<td><code>model_id</code></td>
+<td>String</td>
+<td>Camera model ID</td>
+</tr>
+<tr>
+<td><code>provider</code></td>
+<td>Object</td>
+<td>Object representing the camera provider. Contains the <code>name</code> of the provider and the <code>provider_id</code></td>
+</tr>
+<tr>
+<td><code>weight</code></td>
+<td>String</td>
+<td>Weight of the camera in kilograms (kg)</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>Array</td>
+<td>Array of enumerated strings describing the type of the camera. (see below)</td>
+</tr>
+<tr>
+<td><code>properties</code></td>
+<td>Object</td>
+<td>Object representing the properties of this camera model. (see below)</td>
+</tr>
+</tbody></table>
+
+<p>For more information on these properties, refer to the <code>camera_model</code> object description at the <a href="#camera-models">beginning of this section</a></p>
+
+<p>A <code>camera_model</code> that has been successfully updated will return a response with a <code>&quot;success&quot;: true</code> body and a <code>200 OK</code> status. Response body will also contain the updated <code>camera_model</code> object.</p>
+
+<div></div>
+<h3 id='delete-a-camera-model'>Delete a camera model</h3>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'rest-client'</span>
+<span class="nb">require</span> <span class="s1">'json'</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">delete</span> <span class="s1">'https://api.garuda.io/v2/fleet/camera-providers/{camera_provider_id}/camera-models/{camera_model_id}'</span><span class="p">,</span>
+  <span class="ss">params: </span><span class="p">{</span>
+  <span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
+
+<span class="nb">p</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">'https://api.garuda.io/v2/fleet/camera-providers/{camera_provider_id}/camera-models/{camera_model_id}'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+
+<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+</code></pre><pre class="highlight shell tab-shell"><code>curl -X DELETE <span class="s1">'https://api.garuda.io/v2/fleet/camera-providers/{camera_provider_id}/camera-models/{camera_model_id}'</span> <span class="se">\</span>
+     -H <span class="s1">'Authorization: Bearer &lt;AUTH_TOKEN&gt;'</span> <span class="se">\</span>
+     -H <span class="s1">'X-API-Key: &lt;API_KEY&gt;'</span> <span class="se">\</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
+
+<span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
+
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.garuda.io/v2/fleet/camera-providers/{camera_provider_id}/camera-models/{camera_model_id}'</span><span class="p">,</span>
+<span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s1">'DELETE'</span><span class="p">,</span>
+
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+
+</code></pre>
+<blockquote>
+<p>200 Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Powershot S100"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"model_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0e51493cd1ae85c097547de808642659"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"provider"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Canon Inc."</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"provider_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2db274b2709ce1ce89457057d6e9fd3b"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"RGB"</span><span class="p">,</span><span class="w"> 
+      </span><span class="s2">"NDIV"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><code>DELETE /fleet/camera-providers/{camera_provider_id}/camera-models/{camera_model_id}</code></p>
+
+<p>Delete a specific camera model of a specific camera provider belonging to the company of the user.</p>

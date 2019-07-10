@@ -1,0 +1,2 @@
+<h1 id='introduction'>Introduction</h1>
+<p>Garuda Robotics provides a suite of APIs that extend the Garuda Plex Platform, allowing you to create your own proprietary applications to address a variety of drone use cases. The APIs are available for the entire lifecycle of drone operations, from <strong>pre-flight planning</strong>, to <strong>live flights</strong>, to <strong>post-flight analytics</strong>.</p>

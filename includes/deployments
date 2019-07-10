@@ -1,0 +1,1305 @@
+<h2 id='deployments'>Deployments</h2>
+<p>Every time pilots are activated to fly drones, it is known as a <code>deployment</code>. A <code>deployment</code> is part of larger <code>project</code>, typically spans at least 1 flight session (or maybe a few minutes to a few hours), or multiple flight sessions. For each <code>deployment</code>, a leader, known as the <code>deployment lead</code> will plan the deployment for success, enlisting <code>pilots</code>, <code>drones</code>, and other equipment necessary. Proper <code>risk management</code> is required for every deployment, as are <code>permits</code> by the relevant authority (such as an Activity Permit by CAAS). Insurance coverage might also be purchased on a <code>deployment</code> basis instead of annual basis.</p>
+
+<blockquote>
+<p>A full <code>deployment</code> object, including all optional properties</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DEPLOYMENT-001"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"deployment_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9703889c2bb4322025815ed1a0509eba"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ca42ab884a633d6a823b45e6ebe9534c"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"project_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2b6d1671011c488c6583f07824fbf2c1"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"purpose"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"Delivery, Discharge"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"deployment_lead"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USER-001"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3b20c067ab91da9436ddaea6b83a9536"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"personnel"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USER-002"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"53494af9b7e38f5df3447d17fe0b7547"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"drones"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DRONE-001"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"drone_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ceaf7e6dc205b365e156bf4f86930408"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"model_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"M400 UAV"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"model_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7bd6798cdb0dcb26ca6d3c0ca9c2ae79"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"batteries"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BATTERY-001"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"battery_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f42074ff0948fbb1d11f7a96c07cdcdd"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"model_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Multistar 6S 6600"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"model_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4b38b7383fdb23fbff8c3a6a694e4533"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"cameras"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CAMERA-001"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"camera_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0b53479856488f542a18fef96b84119d"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"model_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Powershot S100"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"model_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0e51493cd1ae85c097547de808642659"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"payloads"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"Small Box"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"checklist"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DRONE-001"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Equipment"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"checked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BATTERY-001"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Equipment"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"checked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CAMERA-001"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Equipment"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"checked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FeatureCollection"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"features"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Feature"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+        </span><span class="s2">"geometry"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Polygon"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">[</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">103.78140449523926</span><span class="p">,</span><span class="w">
+                </span><span class="mf">1.292500533024804</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">103.78011703491211</span><span class="p">,</span><span class="w">
+                </span><span class="mf">1.2929295772415663</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">103.78028869628905</span><span class="p">,</span><span class="w">
+                </span><span class="mf">1.2908701643402538</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">103.78286361694336</span><span class="p">,</span><span class="w">
+                </span><span class="mf">1.2922431064599564</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">103.78140449523926</span><span class="p">,</span><span class="w">
+                </span><span class="mf">1.292500533024804</span><span class="w">
+              </span><span class="p">]</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"start_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1559571926000</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"end_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1559572026000</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"new"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"create_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1562216203843</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"last_modified_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1562216203843</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"last_modified_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3b20c067ab91da9436ddaea6b83a9536"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Each <code>deployment</code> object will have the following properties:</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>name</code></td>
+<td>String</td>
+<td>Name of the deployment</td>
+</tr>
+<tr>
+<td><code>deployment_id</code></td>
+<td>String</td>
+<td>Unique deployment ID</td>
+</tr>
+<tr>
+<td><code>company_id</code></td>
+<td>String</td>
+<td>Unique company ID</td>
+</tr>
+<tr>
+<td><code>project_id</code></td>
+<td>String</td>
+<td>Unique project ID</td>
+</tr>
+<tr>
+<td><code>purpose</code></td>
+<td>Array</td>
+<td>Array of enumerated strings describing the purpose of the deployment. Refer to the table below for the valid enums</td>
+</tr>
+<tr>
+<td><code>deployment_lead</code></td>
+<td>Object</td>
+<td><a href="#">User object</a> representing the deployment lead</td>
+</tr>
+<tr>
+<td><code>personnel</code></td>
+<td>Array</td>
+<td>Array of <a href="#">user objects</a> representing the personnel involved in the deployment</td>
+</tr>
+<tr>
+<td><code>drones</code></td>
+<td>Array</td>
+<td>Array of <a href="#drones">drone objects</a> tagged to the deployment</td>
+</tr>
+<tr>
+<td><code>batteries</code></td>
+<td>Array</td>
+<td>Array of <a href="#batteries">battery objects</a> tagged to the deployment</td>
+</tr>
+<tr>
+<td><code>cameras</code></td>
+<td>Array</td>
+<td>Array of <a href="#cameras">camera objects</a> tagged to the deployment</td>
+</tr>
+<tr>
+<td><code>payloads</code></td>
+<td>Array</td>
+<td>Array of strings, each describing a payload tagged to the deployment</td>
+</tr>
+<tr>
+<td><code>checklist</code></td>
+<td>Array</td>
+<td>Array of objects, each describing a an equipment (drone, battery or camera) that is registered to the deployment, or a custom object that is also needed for the deployment.</td>
+</tr>
+<tr>
+<td><code>targets</code></td>
+<td>Object</td>
+<td><a href="https://geojson.org">GeoJSON</a> FeatureCollection that represents the deployment targets.</td>
+</tr>
+<tr>
+<td><code>start_date</code></td>
+<td>Number</td>
+<td>Start date of deployment in epoch (Unix timestamp), converted to milliseconds (ms)</td>
+</tr>
+<tr>
+<td><code>end_date</code></td>
+<td>Number</td>
+<td>End date of deployment in epoch (Unix timestamp), converted to milliseconds (ms)</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>String</td>
+<td>Enumerated string describing the status of the deployment. See below for the list of enums.</td>
+</tr>
+<tr>
+<td><code>create_date</code></td>
+<td>Number</td>
+<td>Date of creation of the deployment in epoch (Unix timestamp), converted to milliseconds (ms).</td>
+</tr>
+<tr>
+<td><code>last_modified_date</code></td>
+<td>Number</td>
+<td>Last modified date of the deployment in epoch (Unix timestamp), converted to milliseconds (ms).</td>
+</tr>
+<tr>
+<td><code>last_modified_by</code></td>
+<td>String</td>
+<td>User ID of the last user that modified this deployment.</td>
+</tr>
+</tbody></table>
+
+<p>The property <code>purpose</code> in a each <code>deployment</code> is represented by a set of enumerations. When creating a new <code>deployment</code>, you should specify one or more of the following <code>purposes</code> as an array of strings:</p>
+
+<table><thead>
+<tr>
+<th>Purpose</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>Aerial Photography</code>, <code>Demonstration</code>, <code>Inspection (Building, Facility)</code>, <code>Surveillance (Security)</code>, <code>First Response</code>, <code>Recreational, Internal Training</code>, <code>Research &amp; Development</code>, <code>Aerial Videography</code>, <code>Training (Academy)</code>, <code>Survey (Land, Plantation)</code>, <code>Delivery, Discharge</code></td>
+</tr>
+</tbody></table>
+
+<p>The property <code>status</code> represents the status of deployment, and can be one of the following 4 enums:</p>
+
+<table><thead>
+<tr>
+<th>Status</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>new</code>, <code>draft</code>, <code>pending</code>, <code>ready to fly</code>, <code>cancelled</code></td>
+</tr>
+</tbody></table>
+<h3 id='get-all-deployments'>Get all deployments</h3>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'rest-client'</span>
+<span class="nb">require</span> <span class="s1">'json'</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">get</span> <span class="s1">'https://api.garuda.io/v2/deployments'</span><span class="p">,</span>
+  <span class="ss">params: </span><span class="p">{</span>
+  <span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
+
+<span class="nb">p</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.garuda.io/v2/deployments'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+
+<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+</code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="s1">'https://api.garuda.io/v2/deployments'</span> <span class="se">\</span>
+     -H <span class="s1">'Authorization: Bearer &lt;AUTH_TOKEN&gt;'</span> <span class="se">\</span>
+     -H <span class="s1">'X-API-Key: &lt;API_KEY&gt;'</span> <span class="se">\</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
+
+<span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
+
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.garuda.io/v2/deployments'</span><span class="p">,</span>
+<span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
+
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre>
+<blockquote>
+<p>Successful call returns a 200 OK response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DEPLOYMENT-001"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ca42ab884a633d6a823b45e6ebe9534c"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"deployment_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9703889c2bb4322025815ed1a0509eba"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"project_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2b6d1671011c488c6583f07824fbf2c1"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"deployment_lead"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USER-001"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3b20c067ab91da9436ddaea6b83a9536"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"drones"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DRONE-001"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"drone_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ceaf7e6dc205b365e156bf4f86930408"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"model_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"M400 UAV"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"model_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7bd6798cdb0dcb26ca6d3c0ca9c2ae79"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"checklist"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DRONE-001"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Equipment"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"checked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"purpose"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"Aerial Photography"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"start_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1559571926000</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"end_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1559572026000</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"create_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1552216203843</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"last_modified_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1552216203843</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"last_modified_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3b20c067ab91da9436ddaea6b83a9536"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DEPLOYMENT-002"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ca42ab884a633d6a823b45e6ebe9534c"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"deployment_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d3ad29d17ef123309de61c0d74ad595b"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"project_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2b6d1671011c488c6583f07824fbf2c1"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"drones"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DRONE-001"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"drone_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ceaf7e6dc205b365e156bf4f86930408"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"model_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"M400 UAV"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"model_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7bd6798cdb0dcb26ca6d3c0ca9c2ae79"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"batteries"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BATTERY-001"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"battery_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f42074ff0948fbb1d11f7a96c07cdcdd"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"model_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Multistar 6S 6600"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"model_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4b38b7383fdb23fbff8c3a6a694e4533"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"checklist"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DRONE-001"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Equipment"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"checked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BATTERY-001"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Equipment"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"checked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"deployment_lead"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USER-001"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3b20c067ab91da9436ddaea6b83a9536"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"purpose"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"Demonstration"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"start_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1559571926000</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"end_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1559572026000</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"create_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1552216203843</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"last_modified_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1552216203843</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"last_modified_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3b20c067ab91da9436ddaea6b83a9536"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><code>GET /deployments</code></p>
+
+<p><code>GET /deployments?project_id=&lt;PROJECT_ID&gt;</code></p>
+
+<p>Get all deployments belonging to the company of the user. Calling this endpoint will return you an array of JSON objects representing each deployment created under the company.</p>
+
+<p>You can retrieve all deployments belonging to your company via this endpoint. This endpoint also allows you to specify if you would like to filter by <code>project</code> via query strings. </p>
+
+<p>You can also specify the extent of which to fetch the data via query strings:</p>
+
+<table><thead>
+<tr>
+<th>Query</th>
+<th>Values</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>options</code></td>
+<td><code>shallow</code>, <code>deep</code></td>
+<td>Specify if data retrieved should be a deep or shallow fetch</td>
+</tr>
+</tbody></table>
+
+<p>For a <code>shallow</code> fetch (which is the default behaviour), the <code>drones</code>, <code>batteries</code>, <code>cameras</code> and <code>personnel</code> will be retrieved with only their <code>name</code> and <code>id</code> (see sample response on the left for how this will look like). A <code>deep</code> fetch will retrieve more information for each of the objects -- to see the exact properties that will be retrieved with a <code>deep</code> fetch, refer to the <a href="#fleet-api">Fleet API</a>.</p>
+
+<div></div>
+<h3 id='create-new-deployment'>Create new deployment</h3>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'rest-client'</span>
+<span class="nb">require</span> <span class="s1">'json'</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Content-Type'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span><span class="p">,</span>
+  <span class="s1">'Accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
+<span class="p">}</span>
+<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">post</span> <span class="s1">'https://api.garuda.io/v2/deployments'</span><span class="p">,</span>
+  <span class="ss">params: </span><span class="p">{</span>
+  <span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
+<span class="nb">p</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">,</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.garuda.io/v2/deployments'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+
+<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+</code></pre><pre class="highlight shell tab-shell"><code>curl -X POST <span class="s1">'https://api.garuda.io/v2/deployments'</span> <span class="se">\</span>
+     -H <span class="s1">'Authorization: Bearer &lt;AUTH_TOKEN&gt;'</span> <span class="se">\</span>
+     -H <span class="s1">'X-API-Key: &lt;API_KEY&gt;'</span> <span class="se">\</span>
+     -d <span class="s1">'{
+       "name": "DEPLOYMENT-001",
+       "project_id": "2b6d1671011c488c6583f07824fbf2c1",
+       "drones": [
+         "082e8ea46f49d95ef08233fde6da72ac"
+       ],
+       "deployment_lead_id": "3b20c067ab91da9436ddaea6b83a9536",
+       "purpose": [
+         "Aerial Photography"
+       ],
+       "start_date": 1559571926000,
+       "end_date": 1559572026000,
+       "targets": {
+         "type": "FeatureCollection",
+         "features": [
+           {
+             "type": "Feature",
+             "properties": {},
+             "geometry": {
+               "type": "Polygon",
+               "coordinates": [
+                 [
+                   [
+                     103.78140449523926,
+                     1.292500533024804
+                   ],
+                   [
+                     103.78011703491211,
+                     1.2929295772415663
+                   ],
+                   [
+                     103.78028869628905,
+                     1.2908701643402538
+                   ],
+                   [
+                     103.78286361694336,
+                     1.2922431064599564
+                   ],
+                   [
+                     103.78140449523926,
+                     1.292500533024804
+                   ]
+                 ]
+               ]
+             }
+           }
+         ]
+       }
+      }'</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="s1">'{
+  "name": "DEPLOYMENT-001",
+  "project_id": "2b6d1671011c488c6583f07824fbf2c1",
+  "drones": [
+    "082e8ea46f49d95ef08233fde6da72ac"
+  ],
+  "deployment_lead_id": "3b20c067ab91da9436ddaea6b83a9536",
+  "purpose": [
+    "Aerial Photography"
+  ],
+  "start_date": 1559571926000,
+  "end_date": 1559572026000,
+  "targets": {
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                103.78140449523926,
+                1.292500533024804
+              ],
+              [
+                103.78011703491211,
+                1.2929295772415663
+              ],
+              [
+                103.78028869628905,
+                1.2908701643402538
+              ],
+              [
+                103.78286361694336,
+                1.2922431064599564
+              ],
+              [
+                103.78140449523926,
+                1.292500533024804
+              ]
+            ]
+          ]
+        }
+      }
+    ]
+  }
+}'</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/json'</span><span class="p">,</span>
+  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
+
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.garuda.io/v2/deployments'</span><span class="p">,</span>
+<span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
+  <span class="na">body</span><span class="p">:</span> <span class="nx">inputBody</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+
+</code></pre>
+<blockquote>
+<p>Successful call returns a 200 OK response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DEPLOYMENT-001"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"deployment_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9703889c2bb4322025815ed1a0509eba"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ca42ab884a633d6a823b45e6ebe9534c"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"project_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2b6d1671011c488c6583f07824fbf2c1"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"drones"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DRONE-001"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"drone_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ceaf7e6dc205b365e156bf4f86930408"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"model_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"M400 UAV"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"model_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7bd6798cdb0dcb26ca6d3c0ca9c2ae79"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"deployment_lead"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USER-001"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3b20c067ab91da9436ddaea6b83a9536"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"purpose"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"Aerial Photography"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"start_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1559571926000</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"end_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1559572026000</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FeatureCollection"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"features"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Feature"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+        </span><span class="s2">"geometry"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Polygon"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">[</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">103.78140449523926</span><span class="p">,</span><span class="w">
+                </span><span class="mf">1.292500533024804</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">103.78011703491211</span><span class="p">,</span><span class="w">
+                </span><span class="mf">1.2929295772415663</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">103.78028869628905</span><span class="p">,</span><span class="w">
+                </span><span class="mf">1.2908701643402538</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">103.78286361694336</span><span class="p">,</span><span class="w">
+                </span><span class="mf">1.2922431064599564</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">103.78140449523926</span><span class="p">,</span><span class="w">
+                </span><span class="mf">1.292500533024804</span><span class="w">
+              </span><span class="p">]</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"create_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1562216203843</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"last_modified_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1562216203843</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"last_modified_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3b20c067ab91da9436ddaea6b83a9536"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><code>POST /deployments</code></p>
+
+<p>Create a new <code>deployment</code> belonging to the company of the user. At minimum, you should pass in the following details in the request body:</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>name</code></td>
+<td>String</td>
+<td>Name of the deployment</td>
+</tr>
+<tr>
+<td><code>project_id</code></td>
+<td>String</td>
+<td>Project that this deployment belongs to</td>
+</tr>
+<tr>
+<td><code>start_date</code></td>
+<td>String</td>
+<td>Start date of deployment in epoch (Unix timestamp), converted to milliseconds (ms)</td>
+</tr>
+<tr>
+<td><code>end_date</code></td>
+<td>String</td>
+<td>End date of deployment in epoch (Unix timestamp), converted to milliseconds (ms)</td>
+</tr>
+</tbody></table>
+
+<p>There are some additional details that you can add to the request body to flesh out your deployment details even further:</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>deployment_lead_id</code></td>
+<td>String</td>
+<td>User ID of the deployment lead</td>
+</tr>
+<tr>
+<td><code>purpose</code></td>
+<td>Array</td>
+<td>Array of <a href="#deployments">enumerated strings of purposes</a> of deployment.</td>
+</tr>
+<tr>
+<td><code>drones</code></td>
+<td>Array</td>
+<td>Array of drone IDs to be used for the deployment</td>
+</tr>
+<tr>
+<td><code>batteries</code></td>
+<td>Array</td>
+<td>Array of battery IDs to be used for the deployment</td>
+</tr>
+<tr>
+<td><code>cameras</code></td>
+<td>Array</td>
+<td>Array of camera IDs to be used for the deployment</td>
+</tr>
+<tr>
+<td><code>payloads</code></td>
+<td>Array</td>
+<td>Array of strings, each describing a payload used for the deployment</td>
+</tr>
+<tr>
+<td><code>personnel</code></td>
+<td>Array</td>
+<td>Array of user IDs of the personnel involved in the deployment</td>
+</tr>
+<tr>
+<td><code>targets</code></td>
+<td>Object</td>
+<td>GeoJSON FeatureCollection of the deployment targets.</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>String</td>
+<td>Enumerated strings describing the status of the deployment.</td>
+</tr>
+<tr>
+<td><code>checklist</code></td>
+<td>Array</td>
+<td>Array of objects, each describing a an equipment (drone, battery or camera) that is registered to the deployment, or a custom object that is also needed for the deployment.</td>
+</tr>
+</tbody></table>
+
+<p>If no <code>deployment_lead_id</code> was provided, the deployment lead will be defaulted to the user that created the deployment. The <code>checklist</code> will automatically add the <code>drones</code>, <code>batteries</code> and <code>cameras</code> that are defined in the deployment.</p>
+
+<blockquote>
+<p><em>Instead of only passing in IDs, we can support passing in entire objects as well (i.e. entire drone objects, entire camera objects, etc.). Passing in the entire object will automatically create the drone for the user in the backend in addition to creating the deployment as well. This is NOT supported as of now.</em></p>
+</blockquote>
+
+<p>A <code>deployment</code> that has been successfully created will return a response with a <code>&quot;success&quot;: true</code> body and a <code>200 OK</code> status. The response body will also return the actual <code>deployment</code> object that was created.</p>
+
+<div></div>
+<h3 id='get-a-deployment'>Get a deployment</h3>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'rest-client'</span>
+<span class="nb">require</span> <span class="s1">'json'</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">get</span> <span class="s1">'https://api.garuda.io/v2/deployments/{deployment_id}'</span><span class="p">,</span>
+  <span class="ss">params: </span><span class="p">{</span>
+  <span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
+
+<span class="nb">p</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.garuda.io/v2/deployments/{deployment_id}'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+
+<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+</code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="s1">'https://api.garuda.io/v2/deployments/{deployment_id}'</span> <span class="se">\</span>
+     -H <span class="s1">'Authorization: Bearer &lt;AUTH_TOKEN&gt;'</span> <span class="se">\</span>
+     -H <span class="s1">'X-API-Key: &lt;API_KEY&gt;'</span> <span class="se">\</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
+
+<span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
+
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.garuda.io/v2/deployments/{deployment_id}'</span><span class="p">,</span>
+<span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
+
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+
+</code></pre>
+<blockquote>
+<p>200 Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DEPLOYMENT-001"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"deployment_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9703889c2bb4322025815ed1a0509eba"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ca42ab884a633d6a823b45e6ebe9534c"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"project_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2b6d1671011c488c6583f07824fbf2c1"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"drones"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DRONE-001"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"drone_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ceaf7e6dc205b365e156bf4f86930408"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ca42ab884a633d6a823b45e6ebe9534c"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"model_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7bd6798cdb0dcb26ca6d3c0ca9c2ae79"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"model"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"M400 UAV"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"provider_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0c5c21b6a42fadb018a5d1863c34b35d"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Quadcopter"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"compatibility"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"batteries"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"0c5c21b6a42fadb018a5d1863c37bb31"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"0c5c21b6a42fadb018a5d1863c36abd6"</span><span class="w">
+          </span><span class="p">],</span><span class="w">
+          </span><span class="s2">"cameras"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"0c5c21b6a42fadb018a5d1863c35dc93"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"0c5c21b6a42fadb018a5d1863c35fea4"</span><span class="w">
+          </span><span class="p">],</span><span class="w">
+          </span><span class="s2">"payloads"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"weight_kg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.100"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"dimensions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"width"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.82"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"length"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.82"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.28"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="s2">"max_flight_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"25"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"rc_frequency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.400 - 2.483GHz"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"provider"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Garuda Robotics Pte Ltd"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Garuda"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"company_logo"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Singapore"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0c5c21b6a42fadb018a5d1863c34b35d"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Industrial-grade quadrotor UAV suitable for a variety of applications."</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"shared"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"serviceable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"aquired_on"</span><span class="p">:</span><span class="w"> </span><span class="mi">1532103688243</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"deployment_lead"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USER-001"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3b20c067ab91da9436ddaea6b83a9536"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"purpose"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"Aerial Photography"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"start_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1559571926000</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"end_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1559572026000</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FeatureCollection"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"features"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Feature"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+        </span><span class="s2">"geometry"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Polygon"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">[</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">103.78140449523926</span><span class="p">,</span><span class="w">
+                </span><span class="mf">1.292500533024804</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">103.78011703491211</span><span class="p">,</span><span class="w">
+                </span><span class="mf">1.2929295772415663</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">103.78028869628905</span><span class="p">,</span><span class="w">
+                </span><span class="mf">1.2908701643402538</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">103.78286361694336</span><span class="p">,</span><span class="w">
+                </span><span class="mf">1.2922431064599564</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">103.78140449523926</span><span class="p">,</span><span class="w">
+                </span><span class="mf">1.292500533024804</span><span class="w">
+              </span><span class="p">]</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"create_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1562216203843</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"last_modified_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1562216203843</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"last_modified_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3b20c067ab91da9436ddaea6b83a9536"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><code>GET /deployments/{deployment_id}</code></p>
+
+<p>Get a specific deployment belonging to the company of the user. A valid <code>deployment_id</code> in the path parameter is required for a successful call.</p>
+
+<p>The <code>deployment</code> object returned will be the complete <code>deployment</code> object (i.e. <code>deep</code> fetch).</p>
+
+<div></div>
+<h3 id='update-a-deployment'>Update a deployment</h3>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'rest-client'</span>
+<span class="nb">require</span> <span class="s1">'json'</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Content-Type'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span><span class="p">,</span>
+  <span class="s1">'Accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">patch</span> <span class="s1">'https://api.garuda.io/v2/deployments/{deployment_id}'</span><span class="p">,</span>
+  <span class="ss">params: </span><span class="p">{</span>
+  <span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
+
+<span class="nb">p</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">,</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span><span class="s">'https://api.garuda.io/v2/deployments/{deployment_id}'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+
+<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+</code></pre><pre class="highlight shell tab-shell"><code>curl -X PATCH <span class="s1">'https://api.garuda.io/v2/deployments/{deployment_id}'</span> <span class="se">\</span>
+     -H <span class="s1">'Authorization: Bearer &lt;AUTH_TOKEN&gt;'</span> <span class="se">\</span>
+     -H <span class="s1">'X-API-Key: &lt;API_KEY&gt;'</span> <span class="se">\</span>
+     -d <span class="s1">'{
+       "purpose": [
+         "Demonstration",
+         "Training (Academy)"
+       ]
+     }'</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="s1">'{
+  "purpose": [
+    "Demonstration",
+    "Training (Academy)"
+  ]
+}'</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/json'</span><span class="p">,</span>
+  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
+
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.garuda.io/v2/deployments/{deployment_id}'</span><span class="p">,</span>
+<span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s1">'PATCH'</span><span class="p">,</span>
+  <span class="na">body</span><span class="p">:</span> <span class="nx">inputBody</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+
+</code></pre>
+<blockquote>
+<p>200 Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DEPLOYMENT-001"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"deployment_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9703889c2bb4322025815ed1a0509eba"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ca42ab884a633d6a823b45e6ebe9534c"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"project_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2b6d1671011c488c6583f07824fbf2c1"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"drones"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DRONE-001"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"drone_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ceaf7e6dc205b365e156bf4f86930408"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ca42ab884a633d6a823b45e6ebe9534c"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"model_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7bd6798cdb0dcb26ca6d3c0ca9c2ae79"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"model"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"M400 UAV"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"provider_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0c5c21b6a42fadb018a5d1863c34b35d"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Quadcopter"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"compatibility"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"batteries"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"0c5c21b6a42fadb018a5d1863c37bb31"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"0c5c21b6a42fadb018a5d1863c36abd6"</span><span class="w">
+          </span><span class="p">],</span><span class="w">
+          </span><span class="s2">"cameras"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"0c5c21b6a42fadb018a5d1863c35dc93"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"0c5c21b6a42fadb018a5d1863c35fea4"</span><span class="w">
+          </span><span class="p">],</span><span class="w">
+          </span><span class="s2">"payloads"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"weight_kg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.100"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"dimensions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"width"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.82"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"length"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.82"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.28"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="s2">"max_flight_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"25"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"rc_frequency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.400 - 2.483GHz"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"provider"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Garuda Robotics Pte Ltd"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Garuda"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"company_logo"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Singapore"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0c5c21b6a42fadb018a5d1863c34b35d"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Industrial-grade quadrotor UAV suitable for a variety of applications."</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"shared"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"serviceable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"aquired_on"</span><span class="p">:</span><span class="w"> </span><span class="mi">1532103688243</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"deployment_lead"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USER-001"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3b20c067ab91da9436ddaea6b83a9536"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"purpose"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"Demonstration"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Training (Academy)"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"start_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1559571926000</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"end_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1559572026000</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FeatureCollection"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"features"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Feature"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+        </span><span class="s2">"geometry"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Polygon"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">[</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">103.78140449523926</span><span class="p">,</span><span class="w">
+                </span><span class="mf">1.292500533024804</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">103.78011703491211</span><span class="p">,</span><span class="w">
+                </span><span class="mf">1.2929295772415663</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">103.78028869628905</span><span class="p">,</span><span class="w">
+                </span><span class="mf">1.2908701643402538</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">103.78286361694336</span><span class="p">,</span><span class="w">
+                </span><span class="mf">1.2922431064599564</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">103.78140449523926</span><span class="p">,</span><span class="w">
+                </span><span class="mf">1.292500533024804</span><span class="w">
+              </span><span class="p">]</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"create_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1562216203843</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"last_modified_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1562216203843</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"last_modified_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3b20c067ab91da9436ddaea6b83a9536"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><code>PATCH /deployments/{deployment_id}</code></p>
+
+<p>Update a specific deployment belonging to the company of the user.</p>
+
+<p>To update a specific deployment, you can pass whichever properties that you wish to update in the request body. All properties are optional.</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>name</code></td>
+<td>String</td>
+<td>Name of the deployment</td>
+</tr>
+<tr>
+<td><code>project_id</code></td>
+<td>String</td>
+<td>Project ID that this deployment is part of</td>
+</tr>
+<tr>
+<td><code>drones</code></td>
+<td>Array</td>
+<td>Array of drone IDs to be used for the deployment</td>
+</tr>
+<tr>
+<td><code>deployment_lead_id</code></td>
+<td>String</td>
+<td>User ID of the deployment lead</td>
+</tr>
+<tr>
+<td><code>start_date</code></td>
+<td>Number</td>
+<td>Start date of deployment in epoch (Unix timestamp), converted to milliseconds (ms)</td>
+</tr>
+<tr>
+<td><code>end_date</code></td>
+<td>Number</td>
+<td>End date of deployment in epoch (Unix timestamp), converted to milliseconds (ms)</td>
+</tr>
+<tr>
+<td><code>targets</code></td>
+<td>Object</td>
+<td>GeoJSON FeatureCollection representation of the deployment area</td>
+</tr>
+<tr>
+<td><code>purpose</code></td>
+<td>String</td>
+<td>Description of the purpose of deployment</td>
+</tr>
+<tr>
+<td><code>batteries</code></td>
+<td>Array</td>
+<td>Array of battery IDs to be used for the deployment</td>
+</tr>
+<tr>
+<td><code>cameras</code></td>
+<td>Array</td>
+<td>Array of camera IDs to be used for the deployment</td>
+</tr>
+<tr>
+<td><code>payloads</code></td>
+<td>Array</td>
+<td>Array of strings, each describing a payload tagged to the deployment</td>
+</tr>
+<tr>
+<td><code>personnel</code></td>
+<td>Array</td>
+<td>Array of user IDs of the personnel involved in the deployment</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>String</td>
+<td>Enumerated string describing the status of the deployment.</td>
+</tr>
+<tr>
+<td><code>checklist</code></td>
+<td>Array</td>
+<td>Array of objects, each describing a an equipment (drone, battery or camera) that is registered to the deployment, or a custom object that is also needed for the deployment.</td>
+</tr>
+</tbody></table>
+
+<p>A deployment that has been successfully updated will return a response with a <code>&quot;success&quot;: true</code> body and a <code>200 OK</code> status. Response body will also contain the updated <code>deployment</code> object.</p>
+
+<div></div>
+<h3 id='delete-a-deployment'>Delete a deployment</h3>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'rest-client'</span>
+<span class="nb">require</span> <span class="s1">'json'</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">delete</span> <span class="s1">'https://api.garuda.io/v2/deployments/{deployment_id}'</span><span class="p">,</span>
+  <span class="ss">params: </span><span class="p">{</span>
+  <span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
+
+<span class="nb">p</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">'https://api.garuda.io/v2/deployments/{deployment_id}'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+
+<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+</code></pre><pre class="highlight shell tab-shell"><code>curl -X DELETE <span class="s1">'https://api.garuda.io/v2/deployments/{deployment_id}'</span> <span class="se">\</span>
+     -H <span class="s1">'Authorization: Bearer &lt;AUTH_TOKEN&gt;'</span> <span class="se">\</span>
+     -H <span class="s1">'X-API-Key: &lt;API_KEY&gt;'</span> <span class="se">\</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
+
+<span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
+
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.garuda.io/v2/deployments/{deployment_id}'</span><span class="p">,</span>
+<span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s1">'DELETE'</span><span class="p">,</span>
+
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+
+</code></pre>
+<blockquote>
+<p>200 Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DEPLOYMENT-001"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"deployment_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9703889c2bb4322025815ed1a0509eba"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ca42ab884a633d6a823b45e6ebe9534c"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"project_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2b6d1671011c488c6583f07824fbf2c1"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"drones"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DRONE-001"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"drone_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ceaf7e6dc205b365e156bf4f86930408"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ca42ab884a633d6a823b45e6ebe9534c"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"model_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7bd6798cdb0dcb26ca6d3c0ca9c2ae79"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"model"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"M400 UAV"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"provider_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0c5c21b6a42fadb018a5d1863c34b35d"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Quadcopter"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"compatibility"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"batteries"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"0c5c21b6a42fadb018a5d1863c37bb31"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"0c5c21b6a42fadb018a5d1863c36abd6"</span><span class="w">
+          </span><span class="p">],</span><span class="w">
+          </span><span class="s2">"cameras"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"0c5c21b6a42fadb018a5d1863c35dc93"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"0c5c21b6a42fadb018a5d1863c35fea4"</span><span class="w">
+          </span><span class="p">],</span><span class="w">
+          </span><span class="s2">"payloads"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"weight_kg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.100"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"dimensions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"width"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.82"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"length"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.82"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.28"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="s2">"max_flight_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"25"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"rc_frequency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.400 - 2.483GHz"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"provider"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Garuda Robotics Pte Ltd"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Garuda"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"company_logo"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Singapore"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0c5c21b6a42fadb018a5d1863c34b35d"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Industrial-grade quadrotor UAV suitable for a variety of applications."</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"shared"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"serviceable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"aquired_on"</span><span class="p">:</span><span class="w"> </span><span class="mi">1532103688243</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"deployment_lead"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USER-001"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3b20c067ab91da9436ddaea6b83a9536"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"purpose"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"Aerial Photography"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"start_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1559571926000</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"end_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1559572026000</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FeatureCollection"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"features"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Feature"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+        </span><span class="s2">"geometry"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Polygon"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">[</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">103.78140449523926</span><span class="p">,</span><span class="w">
+                </span><span class="mf">1.292500533024804</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">103.78011703491211</span><span class="p">,</span><span class="w">
+                </span><span class="mf">1.2929295772415663</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">103.78028869628905</span><span class="p">,</span><span class="w">
+                </span><span class="mf">1.2908701643402538</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">103.78286361694336</span><span class="p">,</span><span class="w">
+                </span><span class="mf">1.2922431064599564</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">103.78140449523926</span><span class="p">,</span><span class="w">
+                </span><span class="mf">1.292500533024804</span><span class="w">
+              </span><span class="p">]</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"create_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1562216203843</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"last_modified_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1562216203843</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"last_modified_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3b20c067ab91da9436ddaea6b83a9536"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><code>DELETE /deployments/{deployment_id}</code></p>
+
+<p>Delete a specific deployment belonging to the company of the user. A valid <code>deployment_id</code> in the path parameter is required for a successful call.</p>
+
+<p>A successful deletion will return a <code>200 OK</code> status and the deleted deployment object in the response body.</p>
+
+<div></div>

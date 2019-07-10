@@ -1,0 +1,633 @@
+<h2 id='drone-models'>Drone Models</h2>
+<p>Fleet APIs allow you to manage drone models. Each <code>drone_model</code> object contains information regarding a specific drone model provided by a drone provider. A <code>drone_model</code> object has the following properties:</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>name</code></td>
+<td>String</td>
+<td>Name of the drone model</td>
+</tr>
+<tr>
+<td><code>model_id</code></td>
+<td>String</td>
+<td>Drone model ID</td>
+</tr>
+<tr>
+<td><code>provider</code></td>
+<td>Object</td>
+<td>Object representing the drone provider. Contains the <code>name</code> of the provider and the <code>provider_id</code></td>
+</tr>
+<tr>
+<td><code>category</code></td>
+<td>String</td>
+<td>Name of category of drone</td>
+</tr>
+<tr>
+<td><code>avatar</code></td>
+<td>String</td>
+<td>Path to the avatar file for the drone model</td>
+</tr>
+<tr>
+<td><code>compatibility</code></td>
+<td>Object</td>
+<td>An object containing two arrays, <code>batteries</code> and <code>cameras</code>, each containing a list of <code>battery</code> and <code>camera</code> objects respectively that are compatible with this drone model.</td>
+</tr>
+<tr>
+<td><code>weight</code></td>
+<td>String</td>
+<td>Weight of the drone in kilograms (kg)</td>
+</tr>
+<tr>
+<td><code>properties</code></td>
+<td>Object</td>
+<td>Object representing the properties of this drone model. (see below)</td>
+</tr>
+</tbody></table>
+
+<p>Each <code>drone_model</code> has a set of <code>properties</code> that describes the specifications of the drone model. The <code>properties</code> in the <code>drone_model</code> is an object with the following properties:</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>dimensions</code></td>
+<td>Object</td>
+<td>Dimensions of drone. Object has the properties <code>width</code>, <code>length</code>, and <code>height</code> (m)</td>
+</tr>
+<tr>
+<td><code>max_flight_time</code></td>
+<td>String</td>
+<td>Description of the maximum flight time of the drone</td>
+</tr>
+<tr>
+<td><code>rc_frequency</code></td>
+<td>String</td>
+<td>The RC frequency at which the drone operates at</td>
+</tr>
+</tbody></table>
+<h3 id='get-all-drone-models'>Get all drone models</h3>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'rest-client'</span>
+<span class="nb">require</span> <span class="s1">'json'</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">get</span> <span class="s1">'https://api.garuda.io/v2/fleet/drone-providers/{drone_provider_id}/drone-models'</span><span class="p">,</span>
+  <span class="ss">params: </span><span class="p">{</span>
+  <span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
+
+<span class="nb">p</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.garuda.io/v2/fleet/drone-providers/{drone_provider_id}/drone-models'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+
+<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+</code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="s1">'https://api.garuda.io/v2/fleet/drone-providers/{drone_provider_id}/drone-models'</span> <span class="se">\</span>
+     -H <span class="s1">'Authorization: Bearer &lt;AUTH_TOKEN&gt;'</span> <span class="se">\</span>
+     -H <span class="s1">'X-API-Key: &lt;API_KEY&gt;'</span> <span class="se">\</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
+
+<span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
+
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.garuda.io/v2/fleet/drone-providers/{drone_provider_id}/drone-models'</span><span class="p">,</span>
+<span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
+
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+
+</code></pre>
+<blockquote>
+<p>200 Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"M400 UAV"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"model_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"04e181a4b0dc28898b6f51f9d918bb8e"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"provider"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Garuda Robotics Pte. Ltd."</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"provider_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d2a99141fd4122869b5099138a5124d2"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Quadcopter"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><code>GET /fleet/drone-providers/{drone_provider_id}/drone-models</code></p>
+
+<p>When getting all <code>drone_models</code> belonging to a specific drone provider in your company, you have to provide a valid and existing <code>drone_provider_id</code>. The HTTP response body will contain an array of <code>drone_model</code> objects belonging to your specified <code>drone_provider</code>.</p>
+
+<p>You can specify the extent of which to fetch the data via query strings:</p>
+
+<table><thead>
+<tr>
+<th>Query</th>
+<th>Default</th>
+<th>Values</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>options</code></td>
+<td><code>shallow</code></td>
+<td><code>shallow</code>, <code>deep</code></td>
+<td>Specify if data retrieved should be a deep or shallow fetch</td>
+</tr>
+</tbody></table>
+
+<p>For a <code>shallow</code> fetch (which is the default behaviour), only the <code>name</code>, <code>provider</code>, <code>avatar</code> and <code>category</code> will be retrieved (see sample response on the left for how this will look like). A <code>deep</code> fetch will retrieve more information for each of the objects -- to see the exact properties that will be retrieved with a <code>deep</code> fetch, refer to the <a href="#drone-models">beginning of this section</a>.</p>
+
+<div></div>
+<h3 id='create-new-drone-model'>Create new drone model</h3>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'rest-client'</span>
+<span class="nb">require</span> <span class="s1">'json'</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Content-Type'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span><span class="p">,</span>
+  <span class="s1">'Accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">post</span> <span class="s1">'https://api.garuda.io/v2/fleet/drone-providers/{drone_provider_id}/drone-models'</span><span class="p">,</span>
+  <span class="ss">params: </span><span class="p">{</span>
+  <span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
+
+<span class="nb">p</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">,</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.garuda.io/v2/fleet/drone-providers/{drone_provider_id}/drone-models'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+
+<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+</code></pre><pre class="highlight shell tab-shell"><code>curl -X POST <span class="s1">'https://api.garuda.io/v2/fleet/drone-providers/{drone_provider_id}/drone-models'</span> <span class="se">\</span>
+     -H <span class="s1">'Authorization: Bearer &lt;AUTH_TOKEN&gt;'</span> <span class="se">\</span>
+     -H <span class="s1">'X-API-Key: &lt;API_KEY&gt;'</span> <span class="se">\</span>
+     -d <span class="s1">'{
+      "name": "M400 UAV",
+      "provider_id": "d2a99141fd4122869b5099138a5124d2",
+      "category": "Quadcopter",
+      "weight": 2.8,
+      "properties": {
+        "dimensions": {
+          "width": "1.30",
+          "length": "1.30",
+          "height": "0.30"
+        },
+        "max_flight_time": "26 mins",
+        "rc_frequency": "2.400GHz"
+      }
+     }'</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="s1">'{
+  "name": "M400 UAV",
+  "provider_id": "d2a99141fd4122869b5099138a5124d2",
+  "category": "Quadcopter",
+  "weight": 2.8,
+  "properties": {
+    "dimensions": {
+      "width": "1.30",
+      "length": "1.30",
+      "height": "0.30"
+    },
+    "max_flight_time": "26 mins",
+    "rc_frequency": "2.400GHz"
+  }
+}'</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/json'</span><span class="p">,</span>
+  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
+
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.garuda.io/v2/fleet/drone-providers/{drone_provider_id}/drone-models'</span><span class="p">,</span>
+<span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
+  <span class="na">body</span><span class="p">:</span> <span class="nx">inputBody</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+
+</code></pre>
+<blockquote>
+<p>200 Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"M400 UAV"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"provider"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Garuda Robotics Pte. Ltd."</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"provider_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d2a99141fd4122869b5099138a5124d2"</span><span class="p">,</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Quadcopter"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"weight"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.8</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"dimensions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"width"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.30"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"length"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.30"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.30"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"max_flight_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"26 mins"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"rc_frequency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.400GHz"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><code>POST /fleet/drone-providers/{drone_provider_id}/drone-models</code></p>
+
+<p>Every created <code>drone_model</code> has to belong to a valid and existing <code>drone_provider</code>. When calling this API, the <code>drone_provider_id</code> parameter has to be valid for a successful call.</p>
+
+<p>When creating a new <code>drone_model</code>, at minimum, you should pass in values for the following properties:</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>name</code></td>
+<td>String</td>
+<td>Name of the drone model</td>
+</tr>
+<tr>
+<td><code>model_id</code></td>
+<td>String</td>
+<td>Drone model ID</td>
+</tr>
+<tr>
+<td><code>provider</code></td>
+<td>Object</td>
+<td>Object representing the drone provider. Contains the <code>name</code> of the provider and the <code>provider_id</code></td>
+</tr>
+<tr>
+<td><code>category</code></td>
+<td>String</td>
+<td>Name of category of drone</td>
+</tr>
+<tr>
+<td><code>avatar</code></td>
+<td>String</td>
+<td>Path to the avatar file for the drone model</td>
+</tr>
+<tr>
+<td><code>weight</code></td>
+<td>String</td>
+<td>Weight of the drone in kilograms (kg)</td>
+</tr>
+<tr>
+<td><code>properties</code></td>
+<td>Object</td>
+<td>Object representing the properties of this drone model. (see below)</td>
+</tr>
+</tbody></table>
+
+<p>For more information on these properties, refer to the <code>drone_model</code> object description at the <a href="#drone-models">beginning of this section</a></p>
+
+<p>You can also choose to pass in equipment <code>compatibility</code> information if you wish.</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>compatibility</code></td>
+<td>Object</td>
+<td>An object containing two arrays, <code>batteries</code> and <code>cameras</code>, each containing a list of <code>battery</code> and <code>camera</code> objects respectively that are compatible with this drone model.</td>
+</tr>
+</tbody></table>
+
+<p>Otherwise, <code>compatibility</code> can also be added at a later time with the <a href="#update-a-drone-model"><code>PATCH</code> endpoint</a>.</p>
+
+<div></div>
+<h3 id='update-a-drone-model'>Update a drone model</h3>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'rest-client'</span>
+<span class="nb">require</span> <span class="s1">'json'</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Content-Type'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span><span class="p">,</span>
+  <span class="s1">'Accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">patch</span> <span class="s1">'https://api.garuda.io/v2/fleet/drone-providers/{drone_provider_id}/drone-models/{drone_model_id}'</span><span class="p">,</span>
+  <span class="ss">params: </span><span class="p">{</span>
+  <span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
+
+<span class="nb">p</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">,</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span><span class="s">'https://api.garuda.io/v2/fleet/drone-providers/{drone_provider_id}/drone-models/{drone_model_id}'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+
+<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+</code></pre><pre class="highlight shell tab-shell"><code>curl -X PATCH <span class="s1">'https://api.garuda.io/v2/fleet/drone-providers/{drone_provider_id}/drone-models/{drone_model_id}'</span> <span class="se">\</span>
+     -H <span class="s1">'Authorization: Bearer &lt;AUTH_TOKEN&gt;'</span> <span class="se">\</span>
+     -H <span class="s1">'X-API-Key: &lt;API_KEY&gt;'</span> <span class="se">\</span>
+     -d <span class="s1">'{
+      "compatibility": {
+        "batteries": [
+          {
+            "name": "BATTERY-001",
+            "battery_id": "f42074ff0948fbb1d11f7a96c07cdcdd",
+            "model_name": "Multistar 6S 6600",
+          }
+        ],
+        "cameras": [
+          {
+            "name": "CAMERA-001",
+            "camera_id": "0b53479856488f542a18fef96b84119d",
+            "model_name": "Powershot S100",
+          }
+        ]
+      }
+     }'</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="s1">'{
+  "compatibility": {
+    "batteries": [
+      {
+        "name": "BATTERY-001",
+        "battery_id": "f42074ff0948fbb1d11f7a96c07cdcdd",
+        "model_name": "Multistar 6S 6600",
+      }
+    ],
+    "cameras": [
+      {
+        "name": "CAMERA-001",
+        "camera_id": "0b53479856488f542a18fef96b84119d",
+        "model_name": "Powershot S100",
+      }
+    ]
+  }
+}'</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/json'</span><span class="p">,</span>
+  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
+
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.garuda.io/v2/fleet/drone-providers/{drone_provider_id}/drone-models/{drone_model_id}'</span><span class="p">,</span>
+<span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s1">'PATCH'</span><span class="p">,</span>
+  <span class="na">body</span><span class="p">:</span> <span class="nx">inputBody</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+
+</code></pre>
+<blockquote>
+<p>200 Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"M400 UAV"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"provider"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Garuda Robotics Pte. Ltd."</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"provider_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d2a99141fd4122869b5099138a5124d2"</span><span class="p">,</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Quadcopter"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"weight"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.8</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"compatibility"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"batteries"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BATTERY-001"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"battery_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f42074ff0948fbb1d11f7a96c07cdcdd"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"model_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Multistar 6S 6600"</span><span class="p">,</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"cameras"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CAMERA-001"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"camera_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0b53479856488f542a18fef96b84119d"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"model_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Powershot S100"</span><span class="p">,</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"dimensions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"width"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.30"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"length"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.30"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.30"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"max_flight_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"26 mins"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"rc_frequency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.400GHz"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><code>PATCH /fleet/drone-providers/{drone_provider_id}/drone-models/{drone_model_id}</code></p>
+
+<p>This endpoint allows you to edit and update information regarding a <code>drone_model</code> that has already been created. For the request body of this endpoint, it is not necessary to pass in values for all the properties of a <code>drone_model</code>. All of the following properties are optional: </p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>name</code></td>
+<td>String</td>
+<td>Name of the drone model</td>
+</tr>
+<tr>
+<td><code>model_id</code></td>
+<td>String</td>
+<td>Drone model ID</td>
+</tr>
+<tr>
+<td><code>provider</code></td>
+<td>Object</td>
+<td>Object representing the drone provider. Contains the <code>name</code> of the provider and the <code>provider_id</code></td>
+</tr>
+<tr>
+<td><code>category</code></td>
+<td>String</td>
+<td>Name of category of drone</td>
+</tr>
+<tr>
+<td><code>avatar</code></td>
+<td>String</td>
+<td>Path to the avatar file for the drone model</td>
+</tr>
+<tr>
+<td><code>compatibility</code></td>
+<td>Object</td>
+<td>An object containing two arrays, <code>batteries</code> and <code>cameras</code>, each containing a list of <code>battery</code> and <code>camera</code> objects respectively that are compatible with this drone model.</td>
+</tr>
+<tr>
+<td><code>weight</code></td>
+<td>String</td>
+<td>Weight of the drone in kilograms (kg)</td>
+</tr>
+<tr>
+<td><code>properties</code></td>
+<td>Object</td>
+<td>Object representing the properties of this drone model. (see below)</td>
+</tr>
+</tbody></table>
+
+<p>For more information on these properties, refer to the <code>drone_model</code> object description at the <a href="#drone-models">beginning of this section</a></p>
+
+<p>A <code>drone_model</code> that has been successfully updated will return a response with a <code>&quot;success&quot;: true</code> body and a <code>200 OK</code> status. Response body will also contain the updated <code>drone_model</code> object.</p>
+
+<div></div>
+<h3 id='delete-a-drone-model'>Delete a drone model</h3>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'rest-client'</span>
+<span class="nb">require</span> <span class="s1">'json'</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">delete</span> <span class="s1">'https://api.garuda.io/v2/fleet/drone-providers/{drone_provider_id}/drone-models/{drone_model_id}'</span><span class="p">,</span>
+  <span class="ss">params: </span><span class="p">{</span>
+  <span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
+
+<span class="nb">p</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">'https://api.garuda.io/v2/fleet/drone-providers/{drone_provider_id}/drone-models/{drone_model_id}'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+
+<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+</code></pre><pre class="highlight shell tab-shell"><code>curl -X DELETE <span class="s1">'https://api.garuda.io/v2/fleet/drone-providers/{drone_provider_id}/drone-models/{drone_model_id}'</span> <span class="se">\</span>
+     -H <span class="s1">'Authorization: Bearer &lt;AUTH_TOKEN&gt;'</span> <span class="se">\</span>
+     -H <span class="s1">'X-API-Key: &lt;API_KEY&gt;'</span> <span class="se">\</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
+
+<span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
+
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.garuda.io/v2/fleet/drone-providers/{drone_provider_id}/drone-models/{drone_model_id}'</span><span class="p">,</span>
+<span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s1">'DELETE'</span><span class="p">,</span>
+
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+
+</code></pre>
+<blockquote>
+<p>200 Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"M400 UAV"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"provider"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Garuda Robotics Pte. Ltd."</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"provider_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d2a99141fd4122869b5099138a5124d2"</span><span class="p">,</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Quadcopter"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"weight"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.8</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"compatibility"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"batteries"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BATTERY-001"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"battery_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f42074ff0948fbb1d11f7a96c07cdcdd"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"model_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Multistar 6S 6600"</span><span class="p">,</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"cameras"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CAMERA-001"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"camera_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0b53479856488f542a18fef96b84119d"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"model_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Powershot S100"</span><span class="p">,</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"dimensions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"width"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.30"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"length"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.30"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.30"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"max_flight_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"26 mins"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"rc_frequency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.400GHz"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><code>DELETE /fleet/drone-providers/{drone_provider_id}/drone-models/{drone_model_id}</code></p>
+
+<p>Delete a specific drone model of a specific drone provider belonging to the company of the user.</p>

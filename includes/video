@@ -1,0 +1,58 @@
+<p>our video server is hosted on wowza streaming service
+currently we have secured both the source streaming and the playback streaming
+  - source streaming is secured with username and password
+  - playback streaming is secured with sha256 hashing of secret key</p>
+
+<p>one problem is that the secure playback streaming is &quot;limited&quot; to application level, which means in order to prevent our clients from reading/receiving each other&#39;s streams, we need to create an application for each client</p>
+
+<p>as far as we can tell, there&#39;s no limit to the number of applications that we can create on the server, and applications can be created with API calls --&gt; which means that this can be automated sometime down the road</p>
+
+<p>for now, it might be adequate to stick with manual application creation for each of our clients, and then provide them with the client secret and also instructions on how to push their video stream to wowza, as well as pulling back the stream.</p>
+
+<p>upload: rtmp
+receive: rtsp</p>
+
+<p>wowza API reference: https://www.wowza.com/docs/application-management-query-examples</p>
+
+<p>python script for video playback:
+```python
+import cv2</p>
+<h1 id='default_input-quot-rtsp-skystream-int-garuda-io-1935-live-test1-quot'>DEFAULT_INPUT = &quot;rtsp://skystream.int.garuda.io:1935/live/test1&quot;</h1><h1 id='default_input-quot-rtsp-skystream-int-garuda-io-1935-live-test1-wowzatoken-yxh4b25zb2z0-amp-wowzatokenstarttime-0-amp-wowzatokenendtime-0-quot'>DEFAULT_INPUT = &quot;rtsp://skystream.int.garuda.io:1935/live/test1?wowzatoken=YXh4b25zb2Z0&amp;wowzatokenstarttime=0&amp;wowzatokenendtime=0&quot;</h1>
+<p>DEFAULT_INPUT = &quot;rtsp://skystream.int.garuda.io:1935/live/test1?wowzatokenendtime=1561871986&amp;wowzatokenhash=7WpAmB3qHA74Ma6mnivhD8cpcZ4oQUTICX9rBg=&quot;</p>
+
+<p>vcap = cv2.VideoCapture(DEFAULT_INPUT)
+while(1):
+   ret, frame = vcap.read()
+   cv2.imshow(&#39;VIDEO&#39;, frame)
+   cv2.waitKey(1)
+```</p>
+
+<p>nodeJS script for hashing of url and secret:
+```javascript
+const crypto = require(&quot;crypto&quot;)</p>
+
+<p>const startTime = 1561267186
+const endTime = 1561871986</p>
+
+<p>// const url = <code>live/test1?&amp;axxonsoft&amp;wowzatokenendtime=${endTime}&amp;wowzatokenstarttime=${startTime}</code>
+const url = <code>live/test1?axxonsoft&amp;wowzatokenendtime=${endTime}</code>
+console.log(&quot;Url: &quot;, url)</p>
+
+<p>const sha256Sum = crypto
+  .createHash(&quot;sha256&quot;)
+  .update(url, &quot;utf-8&quot;)
+  .digest(&quot;base64&quot;)</p>
+
+<p>console.log(sha256Sum)</p>
+
+<p>// console.log(
+//     <code>rtsp://skystream.int.garuda.io:1935/live/test1?wowzatokenstarttime=${startTime}&amp;wowzatokenendtime=${endTime}&amp;wowzatokenhash=${sha256Sum}</code>
+// )
+console.log(
+  <code>rtsp://skystream.int.garuda.io:1935/live/test1?wowzatokenendtime=${endTime}&amp;wowzatokenhash=${sha256Sum}</code>
+)</p>
+<pre class="highlight plaintext"><code>
+ffmpeg command for uploading of the stream to our server:
+</code></pre>
+<p>ffmpeg -re -i /home/darren/Documents/garuda-work/garuda-analytics/realtime-web-server/sample_videos/DJI_0180-baseline-real.mp4 -vcodec h264 -codec copy -f flv rtmp://axxonsoft:axxonstream1@skystream.int.garuda.io:1935/live/test1
+```</p>

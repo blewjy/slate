@@ -1,0 +1,81 @@
+{
+  "_id": "ffbf66f8ac1a6d339584eca83b92da3b",
+  "_rev": "2-0b0202780e6196dcc9d856a77a430fd2",
+  "plan_type": "ardupilot",
+  "deployment_id": "ffbf66f8ac1a6d339584eca83b656d0a",
+  "company_id": "4e63faa7eb83cb0f3dfc498c5017acad",
+  "description": "Ohr 2",
+  "last_modified_date": 1562656279437,
+  "last_modified_by": "ffbf66f8ac1a6d339584eca83b059a01",
+  "plan": {
+    "requirements": {},
+    "commands": [
+      {
+        "id": "22",
+        "param1": "",
+        "param2": "",
+        "param3": "",
+        "param4": "",
+        "param5": "1.3270692",
+        "param6": "103.7858093",
+        "param7": "30",
+        "description": "Take Off"
+      },
+      {
+        "id": "178",
+        "param1": "0",
+        "param2": "5",
+        "param3": "-1",
+        "param4": "0",
+        "param5": "",
+        "param6": "",
+        "param7": "",
+        "description": "Change Drone Speed to 5m/s"
+      },
+      {
+        "id": "16",
+        "param1": "0",
+        "param2": "",
+        "param3": "",
+        "param4": "",
+        "param5": "1.3274473",
+        "param6": "103.7853419",
+        "param7": "30",
+        "description": "Navigate to Waypoint"
+      },
+      {
+        "id": "16",
+        "param1": "0",
+        "param2": "",
+        "param3": "",
+        "param4": "",
+        "param5": "1.3279031",
+        "param6": "103.7859585",
+        "param7": "30",
+        "description": "Navigate to Waypoint"
+      },
+      {
+        "id": "16",
+        "param1": "0",
+        "param2": "",
+        "param3": "",
+        "param4": "",
+        "param5": "1.3274727",
+        "param6": "103.7864421",
+        "param7": "30",
+        "description": "Navigate to Waypoint"
+      },
+      {
+        "id": "21",
+        "param1": "",
+        "param2": "",
+        "param3": "",
+        "param4": "",
+        "param5": "1.3270728",
+        "param6": "103.7858444",
+        "param7": "0",
+        "description": "Land"
+      }
+    ]
+  }
+}

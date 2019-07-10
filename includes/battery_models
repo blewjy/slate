@@ -1,0 +1,576 @@
+<h2 id='battery-models'>Battery Models</h2>
+<p>Fleet APIs allow you to manage battery models. Each <code>battery_model</code> object contains information regarding a specific battery model provided by a battery provider. A <code>battery_model</code> object has the following properties:</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>name</code></td>
+<td>String</td>
+<td>Name of the battery model</td>
+</tr>
+<tr>
+<td><code>model_id</code></td>
+<td>String</td>
+<td>Battery model ID</td>
+</tr>
+<tr>
+<td><code>provider</code></td>
+<td>Object</td>
+<td>Object representing the battery provider. Contains the <code>name</code> of the provider and the <code>provider_id</code></td>
+</tr>
+<tr>
+<td><code>chemistry</code></td>
+<td>String</td>
+<td>The chemistry composition of the battery</td>
+</tr>
+<tr>
+<td><code>series</code></td>
+<td>String</td>
+<td>Enumerated string description of the series settings of the battery</td>
+</tr>
+<tr>
+<td><code>parallel</code></td>
+<td>String</td>
+<td>Enumerated string description of the parallel settings of the battery</td>
+</tr>
+<tr>
+<td><code>capacity</code></td>
+<td>String</td>
+<td>Capacity of the battery in milliamp-hours (mAh)</td>
+</tr>
+<tr>
+<td><code>weight</code></td>
+<td>String</td>
+<td>Weight of the battery in kilograms (kg)</td>
+</tr>
+<tr>
+<td><code>discharge_rate</code></td>
+<td>String</td>
+<td>String description of the discharge rate of the battery</td>
+</tr>
+<tr>
+<td><code>dimensions</code></td>
+<td>Object</td>
+<td>Dimensions of drone. Object has the properties <code>width</code>, <code>length</code>, and <code>height</code> (m)</td>
+</tr>
+</tbody></table>
+
+<p>The <code>series</code> and <code>parallel</code> characteristic of the battery will only accept pre-defined enumerations. They are listed as follows:</p>
+
+<table><thead>
+<tr>
+<th>Series</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>1S</code>, <code>2S</code>, <code>3S</code>, <code>4S</code>, <code>5S</code>, <code>6S</code>, <code>7S</code>, <code>8S</code>, <code>9S</code>, <code>10S</code>, <code>11S</code>, <code>12S</code></td>
+</tr>
+</tbody></table>
+
+<table><thead>
+<tr>
+<th>Parallel</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>1P</code>, <code>2P</code>, <code>3P</code>, <code>4P</code></td>
+</tr>
+</tbody></table>
+<h3 id='get-all-battery-models'>Get all battery models</h3>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'rest-client'</span>
+<span class="nb">require</span> <span class="s1">'json'</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">get</span> <span class="s1">'https://api.garuda.io/v2/fleet/battery-providers/{battery_provider_id}/battery-models'</span><span class="p">,</span>
+  <span class="ss">params: </span><span class="p">{</span>
+  <span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
+
+<span class="nb">p</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.garuda.io/v2/fleet/battery-providers/{battery_provider_id}/battery-models'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+
+<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+</code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="s1">'https://api.garuda.io/v2/fleet/battery-providers/{battery_provider_id}/battery-models'</span> <span class="se">\</span>
+     -H <span class="s1">'Authorization: Bearer &lt;AUTH_TOKEN&gt;'</span> <span class="se">\</span>
+     -H <span class="s1">'X-API-Key: &lt;API_KEY&gt;'</span> <span class="se">\</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
+
+<span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
+
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.garuda.io/v2/fleet/battery-providers/{battery_provider_id}/battery-models'</span><span class="p">,</span>
+<span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
+
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+
+</code></pre>
+<blockquote>
+<p>200 Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Multistar 6S 6600"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"model_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4b38b7383fdb23fbff8c3a6a694e4533"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"provider"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DJI"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"provider_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1c9e81a9a3352cd010857331acd63a92"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"chemistry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LiPo"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"series"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"parallel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6600"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><code>GET /fleet/battery-providers/{battery_provider_id}/battery-models</code></p>
+
+<p>When getting all <code>battery_models</code> belonging to a specific battery provider in your company, you have to provide a valid and existing <code>battery_provider_id</code>. The HTTP response body will contain an array of <code>battery_model</code> objects belonging to your specified <code>battery_provider</code>.</p>
+
+<p>You can specify the extent of which to fetch the data via query strings:</p>
+
+<table><thead>
+<tr>
+<th>Query</th>
+<th>Default</th>
+<th>Values</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>options</code></td>
+<td><code>shallow</code></td>
+<td><code>shallow</code>, <code>deep</code></td>
+<td>Specify if data retrieved should be a deep or shallow fetch</td>
+</tr>
+</tbody></table>
+
+<p>For a <code>shallow</code> fetch (which is the default behaviour), only the <code>name</code>, <code>model_id</code>, <code>provider</code>, <code>chemistry</code>, <code>series</code>, <code>parallel</code>, and <code>capacity</code> will be retrieved (see sample response on the left for how this will look like). A <code>deep</code> fetch will retrieve more information for each of the objects -- to see the exact properties that will be retrieved with a <code>deep</code> fetch, refer to the <a href="#battery-models">beginning of this section</a>.</p>
+
+<div></div>
+<h3 id='create-new-battery-model'>Create new battery model</h3>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'rest-client'</span>
+<span class="nb">require</span> <span class="s1">'json'</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Content-Type'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span><span class="p">,</span>
+  <span class="s1">'Accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">post</span> <span class="s1">'https://api.garuda.io/v2/fleet/battery-providers/{battery_provider_id}/battery-models'</span><span class="p">,</span>
+  <span class="ss">params: </span><span class="p">{</span>
+  <span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
+
+<span class="nb">p</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">,</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.garuda.io/v2/fleet/battery-providers/{battery_provider_id}/battery-models'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+
+<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+</code></pre><pre class="highlight shell tab-shell"><code>curl -X POST <span class="s1">'https://api.garuda.io/v2/fleet/battery-providers/{battery_provider_id}/battery-models'</span> <span class="se">\</span>
+     -H <span class="s1">'Authorization: Bearer &lt;AUTH_TOKEN&gt;'</span> <span class="se">\</span>
+     -H <span class="s1">'X-API-Key: &lt;API_KEY&gt;'</span> <span class="se">\</span>
+     -d <span class="s1">'{
+      "name": "Multistar 6S 6600",
+      "provider_id": "1c9e81a9a3352cd010857331acd63a92",
+      "chemistry": "LiPo",
+      "series": "6",
+      "parallel": "1",
+      "capacity": "6600"
+     }'</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="s1">'{
+  "name": "Multistar 6S 6600",
+  "provider_id": "1c9e81a9a3352cd010857331acd63a92",
+  "chemistry": "LiPo",
+  "series": "6",
+  "parallel": "1",
+  "capacity": "6600"
+}'</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/json'</span><span class="p">,</span>
+  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
+
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.garuda.io/v2/fleet/battery-providers/{battery_provider_id}/battery-models'</span><span class="p">,</span>
+<span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
+  <span class="na">body</span><span class="p">:</span> <span class="nx">inputBody</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+
+</code></pre>
+<blockquote>
+<p>200 Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Multistar 6S 6600"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"model_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4b38b7383fdb23fbff8c3a6a694e4533"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"provider"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DJI"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"provider_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1c9e81a9a3352cd010857331acd63a92"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"chemistry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LiPo"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"series"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"parallel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6600"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><code>POST /fleet/battery-providers/{battery_provider_id}/battery-models</code></p>
+
+<p>Every created <code>battery_model</code> has to belong to a valid and existing <code>battery_provider</code>. When calling this API, the <code>battery_provider_id</code> parameter has to be valid for a successful call.</p>
+
+<p>When creating a new <code>battery_model</code>, at minimum, you should pass in values for the following properties:</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>name</code></td>
+<td>String</td>
+<td>Name of the battery model</td>
+</tr>
+<tr>
+<td><code>provider_id</code></td>
+<td>String</td>
+<td>Battery provider ID</td>
+</tr>
+<tr>
+<td><code>chemistry</code></td>
+<td>String</td>
+<td>The chemistry composition of the battery</td>
+</tr>
+<tr>
+<td><code>series</code></td>
+<td>String</td>
+<td>Enumerated string description of the series settings of the battery</td>
+</tr>
+<tr>
+<td><code>parallel</code></td>
+<td>String</td>
+<td>Enumerated string description of the parallel settings of the battery</td>
+</tr>
+<tr>
+<td><code>capacity</code></td>
+<td>String</td>
+<td>Capacity of the battery in milliamp-hours (mAh)</td>
+</tr>
+</tbody></table>
+
+<p>For more information on these properties, refer to the <code>battery_model</code> object description at the <a href="#battery-models">beginning of this section</a></p>
+
+<p>You can also choose to pass in more information on the battery model to flesh out the rest of the object:</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>weight</code></td>
+<td>String</td>
+<td>Weight of the battery in kilograms (kg)</td>
+</tr>
+<tr>
+<td><code>discharge_rate</code></td>
+<td>String</td>
+<td>String description of the discharge rate of the battery</td>
+</tr>
+<tr>
+<td><code>dimensions</code></td>
+<td>Object</td>
+<td>Dimensions of drone. Object has the properties <code>width</code>, <code>length</code>, and <code>height</code> (m)</td>
+</tr>
+</tbody></table>
+
+<p>Otherwise, these properties can also be added at a later time with the <a href="#update-a-battery-model"><code>PATCH</code> endpoint</a>.</p>
+
+<div></div>
+<h3 id='update-a-battery-model'>Update a battery model</h3>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'rest-client'</span>
+<span class="nb">require</span> <span class="s1">'json'</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Content-Type'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span><span class="p">,</span>
+  <span class="s1">'Accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">patch</span> <span class="s1">'https://api.garuda.io/v2/fleet/battery-providers/{battery_provider_id}/battery-models/{battery_model_id}'</span><span class="p">,</span>
+  <span class="ss">params: </span><span class="p">{</span>
+  <span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
+
+<span class="nb">p</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">,</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span><span class="s">'https://api.garuda.io/v2/fleet/battery-providers/{battery_provider_id}/battery-models/{battery_model_id}'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+
+<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+</code></pre><pre class="highlight shell tab-shell"><code>curl -X PATCH <span class="s1">'https://api.garuda.io/v2/fleet/battery-providers/{battery_provider_id}/battery-models/{battery_model_id}'</span> <span class="se">\</span>
+     -H <span class="s1">'Authorization: Bearer &lt;AUTH_TOKEN&gt;'</span> <span class="se">\</span>
+     -H <span class="s1">'X-API-Key: &lt;API_KEY&gt;'</span> <span class="se">\</span>
+     -d <span class="s1">'{
+      "dimensions": {
+        "width": "0.056",
+        "length": "0.0145",
+        "height": "0.052"
+      }
+     }'</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="s1">'{
+  "dimensions": {
+    "width": "0.056",
+    "length": "0.0145",
+    "height": "0.052"
+  }
+}'</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/json'</span><span class="p">,</span>
+  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
+
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.garuda.io/v2/fleet/battery-providers/{battery_provider_id}/battery-models/{battery_model_id}'</span><span class="p">,</span>
+<span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s1">'PATCH'</span><span class="p">,</span>
+  <span class="na">body</span><span class="p">:</span> <span class="nx">inputBody</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+
+</code></pre>
+<blockquote>
+<p>200 Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Multistar 6S 6600"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"model_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4b38b7383fdb23fbff8c3a6a694e4533"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"provider"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DJI"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"provider_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1c9e81a9a3352cd010857331acd63a92"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"chemistry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LiPo"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"series"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"parallel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6600"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"dimensions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"width"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.056"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"length"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0145"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.052"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><code>PATCH /fleet/battery-providers/{battery_provider_id}/battery-models/{battery_model_id}</code></p>
+
+<p>This endpoint allows you to edit and update information regarding a <code>battery_model</code> that has already been created. For the request body of this endpoint, it is not necessary to pass in values for all the properties of a <code>battery_model</code>. All of the following properties are optional: </p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>name</code></td>
+<td>String</td>
+<td>Name of the battery model</td>
+</tr>
+<tr>
+<td><code>model_id</code></td>
+<td>String</td>
+<td>Battery model ID</td>
+</tr>
+<tr>
+<td><code>provider</code></td>
+<td>Object</td>
+<td>Object representing the battery provider. Contains the <code>name</code> of the provider and the <code>provider_id</code></td>
+</tr>
+<tr>
+<td><code>chemistry</code></td>
+<td>String</td>
+<td>The chemistry composition of the battery</td>
+</tr>
+<tr>
+<td><code>series</code></td>
+<td>String</td>
+<td>Enumerated string description of the series settings of the battery</td>
+</tr>
+<tr>
+<td><code>parallel</code></td>
+<td>String</td>
+<td>Enumerated string description of the parallel settings of the battery</td>
+</tr>
+<tr>
+<td><code>capacity</code></td>
+<td>String</td>
+<td>Capacity of the battery in milliamp-hours (mAh)</td>
+</tr>
+<tr>
+<td><code>weight</code></td>
+<td>String</td>
+<td>Weight of the battery in kilograms (kg)</td>
+</tr>
+<tr>
+<td><code>discharge_rate</code></td>
+<td>String</td>
+<td>String description of the discharge rate of the battery</td>
+</tr>
+<tr>
+<td><code>dimensions</code></td>
+<td>Object</td>
+<td>Dimensions of drone. Object has the properties <code>width</code>, <code>length</code>, and <code>height</code> (m)</td>
+</tr>
+</tbody></table>
+
+<p>For more information on these properties, refer to the <code>battery_model</code> object description at the <a href="#battery-models">beginning of this section</a></p>
+
+<p>A <code>battery_model</code> that has been successfully updated will return a response with a <code>&quot;success&quot;: true</code> body and a <code>200 OK</code> status. Response body will also contain the updated <code>battery_model</code> object.</p>
+
+<div></div>
+<h3 id='delete-a-battery-model'>Delete a battery model</h3>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'rest-client'</span>
+<span class="nb">require</span> <span class="s1">'json'</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">delete</span> <span class="s1">'https://api.garuda.io/v2/fleet/battery-providers/{battery_provider_id}/battery-models/{battery_model_id}'</span><span class="p">,</span>
+  <span class="ss">params: </span><span class="p">{</span>
+  <span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
+
+<span class="nb">p</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">'https://api.garuda.io/v2/fleet/battery-providers/{battery_provider_id}/battery-models/{battery_model_id}'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+
+<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+</code></pre><pre class="highlight shell tab-shell"><code>curl -X DELETE <span class="s1">'https://api.garuda.io/v2/fleet/battery-providers/{battery_provider_id}/battery-models/{battery_model_id}'</span> <span class="se">\</span>
+     -H <span class="s1">'Authorization: Bearer &lt;AUTH_TOKEN&gt;'</span> <span class="se">\</span>
+     -H <span class="s1">'X-API-Key: &lt;API_KEY&gt;'</span> <span class="se">\</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
+
+<span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
+
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.garuda.io/v2/fleet/battery-providers/{battery_provider_id}/battery-models/{battery_model_id}'</span><span class="p">,</span>
+<span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s1">'DELETE'</span><span class="p">,</span>
+
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+
+</code></pre>
+<blockquote>
+<p>200 Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Multistar 6S 6600"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"model_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4b38b7383fdb23fbff8c3a6a694e4533"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"provider"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DJI"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"provider_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1c9e81a9a3352cd010857331acd63a92"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"chemistry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LiPo"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"series"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"parallel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6600"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><code>DELETE /fleet/battery-providers/{battery_provider_id}/battery-models/{battery_model_id}</code></p>
+
+<p>Delete a specific battery model of a specific battery provider belonging to the company of the user.</p>

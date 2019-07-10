@@ -1,0 +1,70 @@
+<h1 id='authentication'>Authentication</h1>
+<p>APIs that involve interacting with your organization&#39;s data, such as pilots and drones, requires <strong>authentication</strong>. Other APIs such as weather and airspace data only require your API Key.</p>
+
+<p>For authentication, Garuda Plex uses the <strong><a href="https://openid.net/connect/">OpenID Connect (OIDC)</a> implicit flow</strong>. Here&#39;s how you can add Garuda Plex authentication to your own application:</p>
+
+<p><img src="/images/oidc_flow.jpeg" alt="oidc_flow" /></p>
+
+<p><strong>(1)</strong> Your application directs the user to <strong>Garuda Plex Identity Service</strong> URL with the required query parameters to allow the user to login to Garuda Plex. Refer to the right for an example. The required parameters are as follows:</p>
+
+<blockquote>
+<p>URL Template (contains whitespace for readability):</p>
+</blockquote>
+<pre class="highlight plaintext"><code>https://&lt;URL&gt;?
+  client_id=&lt;CLIENT_ID&gt;&amp;
+  redirect_url=&lt;REDIRECT_URL&gt;&amp;
+  response_type=&lt;RESPONSE_TYPES&gt;&amp;
+  scope=&lt;SCOPES&gt;&amp;
+  nonce=&lt;NONCE&gt;
+</code></pre>
+<blockquote>
+<p>Example URL:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>https://identity.stg.garuda.io/auth?
+  client_id=de5dee51-ded8-43b3-a51d-476545039ecb&amp;
+  redirect_uri=https%3A%2F%2Fyour-website%2Fcallback&amp;
+  response_type=id_token%20token&amp;
+  scope=openid%20email&amp;
+  nonce=cf6a9372cad19c4809a325167a519230
+</code></pre>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>client_id</code></td>
+<td>The client ID that is provided to you when you register as a developer (provided along with API Key)</td>
+</tr>
+<tr>
+<td><code>redirect_uri</code></td>
+<td>Page to return to after successful login. Has to be URL encoded.</td>
+</tr>
+<tr>
+<td><code>response_type</code></td>
+<td>OpenID response type. This will be provided to you when you register as a developer.</td>
+</tr>
+<tr>
+<td><code>scope</code></td>
+<td>OpenID scope. The following are supported: <code>openid</code>, <code>offline_access</code>, <code>email</code>, <code>profile</code>, <code>address</code>, <code>plex</code></td>
+</tr>
+<tr>
+<td><code>nonce</code></td>
+<td>A case sensitive string value used to associate a Client session with an ID Token, and to mitigate replay attacks. <code>nonce</code> will be returned to the client together with the authorization token.Use the <code>nonce</code> to validate the token received against the initial authorization request</td>
+</tr>
+</tbody></table>
+
+<p><strong>(2)</strong> Garuda Plex Identity Service will validate your user&#39;s credentials.</p>
+
+<blockquote>
+<p>Example redirect URL:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>https://your-website/callback?
+  id_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InNpZy1ycy0wIn&amp;
+  access_token=eyJ0eXAiOiJKV1QiR5kpXVCIscCI6ILCJhbGciOiJSUzI6InI1NiIsImtpZC&amp;
+  expires_in=3600&amp;
+  token_type=Bearer&amp;
+  session_state=bfefcc5422b376ec61650c6b165f0d758f9a4b741460c72
+</code></pre>
+<p><strong>(3)</strong> If validation is successful, the user will be redirected back to your application via the <code>redirect_uri</code>, with the requested tokens attached in the query string of the URL. Use the <code>access_token</code> attached to make authenticated calls to Garuda Plex Platform. (<em>Note: Tokens have been shortened for brevity</em>)</p>

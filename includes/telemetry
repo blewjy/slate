@@ -1,0 +1,329 @@
+<h2 id='telemetry'>Telemetry</h2>
+<p>A drone telemetry consists of simple data and relevant information about your drone flight, including the location (lat, long), altitude, position, speed, power consumption, system and battery information of your drone. Usually recorded and logged either in real-time or post-flight, telemetry of your flight gives you vital information about the condition of your drone, what it is doing, it&#39;s surroundings at each point of the flight, and more.</p>
+
+<p>Garuda Plex Telemetry APIs allow you to submit and receive telemetry. This is done largely via web socket connections. </p>
+
+<blockquote>
+<p><img src="/images/telemetry_diagram.jpg" alt="telemetry_diagram" /></p>
+</blockquote>
+
+<p>The diagram and explanation below briefly details how telemetry (and other diagnostics from the drone) is passed from the drone (or your servers) in live flight to our servers and then back down to consumers/users like yourself.</p>
+
+<ol>
+<li>During a live flight, you can submit telemetry data via Garuda Plex Telemetry APIs using a web socket connection. This can be done either from the drone directly (if your drone supports it), or via your own service(s) that can support web socket connections.</li>
+<li>These <code>telemetry</code> data will be pushed into our database servers, and also a telemetry web service we are running that exposes a web socket to allow users to consume the same data as well.</li>
+<li>This data can then be displayed on either a frontend of your choice, or simply logged to your own servers.</li>
+</ol>
+
+<p>Each of these <code>telemetry</code> object is a JSON object that has the following format and properties:</p>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"droneId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4e63faa7eb83cb0f3dfc498c5020a35e"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1560495518277"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"lat"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30.30516"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"long"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-214.74836"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"alt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100.00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"yaw"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-6.94"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"pitch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"roll"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"agl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100.00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"flightState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"init"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"failsafe"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"flightTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3600000"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"velocity_x"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"velocity_y"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"velocity_z"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"battVolt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12587.00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"battCurr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12587.00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"battLife"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100.00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"satCount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"gpsHAcc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"121"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"gpsVAcc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"65535"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"homeLat"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30.305168"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"homeLong"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-214.7483648"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"homeAlt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"rssi"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123.123"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"network_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Singtel"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>droneId</code></td>
+<td>String</td>
+<td>Drone ID of this telemetry</td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td>Number</td>
+<td>Timestamp of telemetry in epoch (Unix timestamp), converted to milliseconds</td>
+</tr>
+<tr>
+<td><code>lat</code></td>
+<td>Number</td>
+<td>Telemetry latitude, to 5 decimal places</td>
+</tr>
+<tr>
+<td><code>long</code></td>
+<td>Number</td>
+<td>Telemetry longitude, to 5 decimal places</td>
+</tr>
+<tr>
+<td><code>alt</code></td>
+<td>Number</td>
+<td>Altitude above mean sea level, in meters. (2 decimal places)</td>
+</tr>
+<tr>
+<td><code>agl</code></td>
+<td>String</td>
+<td>Altitude above ground level, in meters. (2 decimal places)</td>
+</tr>
+<tr>
+<td><code>yaw</code></td>
+<td>String</td>
+<td>Drone yaw degree (-180 deg to 180 deg)</td>
+</tr>
+<tr>
+<td><code>pitch</code></td>
+<td>String</td>
+<td>Drone pitch degree (-90 deg to 90 deg)</td>
+</tr>
+<tr>
+<td><code>roll</code></td>
+<td>String</td>
+<td>Drone roll degree (-180 deg to 180 deg)</td>
+</tr>
+<tr>
+<td><code>flightState</code></td>
+<td>String</td>
+<td>Enumerated string of flight states of the drone</td>
+</tr>
+<tr>
+<td><code>daaState</code></td>
+<td>Boolean</td>
+<td>Boolean to indicate if DAA has been activated</td>
+</tr>
+<tr>
+<td><code>failsafe</code></td>
+<td>String</td>
+<td>Current fail safe status if its activated</td>
+</tr>
+<tr>
+<td><code>flightTime</code></td>
+<td>String</td>
+<td>Flight time in milliseconds</td>
+</tr>
+<tr>
+<td><code>velocity_x</code></td>
+<td>Number</td>
+<td>Velocity in x-direction in meters per second, using the North-East-Down coordinate system</td>
+</tr>
+<tr>
+<td><code>velocity_y</code></td>
+<td>Number</td>
+<td>Velocity in y-direction in meters per second, using the North-East-Down coordinate system</td>
+</tr>
+<tr>
+<td><code>velocity_z</code></td>
+<td>Number</td>
+<td>Velocity in z-direction in meters per second, using the North-East-Down coordinate system</td>
+</tr>
+<tr>
+<td><code>battVolt</code></td>
+<td>String</td>
+<td>Battery voltage, in volts, up to 2 decimal places</td>
+</tr>
+<tr>
+<td><code>battCurr</code></td>
+<td>String</td>
+<td>Battery current output, in amperes, up to 2 decimal places</td>
+</tr>
+<tr>
+<td><code>battLife</code></td>
+<td>String</td>
+<td>battery charge remaining in percentage (0 - 100%)</td>
+</tr>
+<tr>
+<td><code>satCount</code></td>
+<td>String</td>
+<td>Number of GPD satellites that drone is connected to</td>
+</tr>
+<tr>
+<td><code>gpsHAcc</code></td>
+<td>String</td>
+<td>GPS Horizontal accuracy in metres measures up to micrometres</td>
+</tr>
+<tr>
+<td><code>gpsVAcc</code></td>
+<td>String</td>
+<td>GPS Vertical accuracy in metres measures up to micrometres</td>
+</tr>
+<tr>
+<td><code>homeLat</code></td>
+<td>String</td>
+<td>Latitude of home point</td>
+</tr>
+<tr>
+<td><code>homeLong</code></td>
+<td>String</td>
+<td>Longitude of home point</td>
+</tr>
+<tr>
+<td><code>homeAlt</code></td>
+<td>String</td>
+<td>Altitude of home point, in meters above mean sea level</td>
+</tr>
+<tr>
+<td><code>rssi</code></td>
+<td>String</td>
+<td>Received signal strength indicator on connected network (by percentage)</td>
+</tr>
+<tr>
+<td><code>network_name</code></td>
+<td>String</td>
+<td>Name of the connected network</td>
+</tr>
+</tbody></table>
+
+<p>The flight states of the drone follows a state diagram and changes depending on at which state of the flight the drone is in:</p>
+
+<blockquote>
+<p><img src="/images/drone_state_diagram.jpg" alt="drone-state-diagram" /></p>
+</blockquote>
+
+<table><thead>
+<tr>
+<th>Flight States</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>RTF</code></td>
+<td>Drone is ready to fly</td>
+</tr>
+<tr>
+<td><code>TAKE OFF</code></td>
+<td>When the command has been given to take off. NOTE: DJI does not have arm procedure whereas Mavlink has.</td>
+</tr>
+<tr>
+<td><code>HOLD</code></td>
+<td>When the drone is not moving in air</td>
+</tr>
+<tr>
+<td><code>AUTO</code></td>
+<td>When the drone is executing the current mission plan.</td>
+</tr>
+<tr>
+<td><code>GUIDED</code></td>
+<td>When the drone is in manual navigation, going to specific point, etc.</td>
+</tr>
+<tr>
+<td><code>LAND</code></td>
+<td>When the drone is landing.</td>
+</tr>
+<tr>
+<td><code>OG</code></td>
+<td>When the drone has landed (on ground).</td>
+</tr>
+</tbody></table>
+<h3 id='submitting-telemetry'>Submitting telemetry</h3>
+<p>Garuda Plex APIs uses web sockets to receive telemetry from users. Given an <code>access_token</code>, <code>drone_id</code> and your <code>company_id</code>, you will be able to connect to the web socket and send live telemetry.</p>
+
+<div class="center-column"></div>
+<pre class="highlight plaintext"><code>wss://&lt;URL&gt;?access_token=&lt;ACCESS_TOKEN&gt;&amp;companyId=&lt;COMPANY_ID&gt;&amp;droneId=&lt;DRONE_ID&gt;
+</code></pre>
+<p>This web socket will accept incoming messages that conforms to the <code>telemetry</code> JSON object defined above.</p>
+
+<p>There are many ways you can implement a server to send web socket messages. Listed below is a quick example using a Google Chrome extension and also an example with a NodeJS library and Javascript.</p>
+
+<p><strong>With Google Chrome extension <a href="https://chrome.google.com/webstore/detail/simple-websocket-client/pfdhoblngboilpfeibdedpjgfnlcodoo">Simple WebSocket Client</a></strong></p>
+
+<p>This is a lightweight extension for Google Chrome that gives you a very simple interface that allows you to establish a web socket connection as a client with a listening server, and send/receive message through the web socket.</p>
+
+<p>After <a href="https://chrome.google.com/webstore/detail/simple-websocket-client/pfdhoblngboilpfeibdedpjgfnlcodoo">installing the extension</a> in Google Chrome, simply open up the extension, which will bring you to a new tab with the application UI.</p>
+
+<p>You should see that under <code>Server Location</code>, the <code>STATUS</code> should be <code>CLOSED</code>.</p>
+
+<p>With your <code>access_token</code>, <code>drone_id</code> and <code>company_id</code> entered as query parameters into the URL above, simply paste it into the URL textfield and click on <code>Open</code>. </p>
+
+<p>The <code>STATUS</code> should change to <code>OPENED</code> once the web socket connection has been successfully established, and you can start to send telemetry under the <code>REQUEST</code> section.</p>
+
+<p><strong>With NodeJS and Javascript</strong></p>
+
+<p><em>This example assumes you already have NodeJS installed on your machine</em></p>
+
+<p>Implementing a web socket client using Node and Javascript is also very simple and straightforward. The npm library <a href="https://www.npmjs.com/package/websocket"><code>websocket</code></a> allows you to spin up a web socket client very quickly with minimal code.</p>
+
+<p>To install this library, <code>cd</code> into your Node project directory and run <code>npm install websocket</code>.</p>
+
+<p>Download the two sample files provided here to get started quickly. The first file is the source code for running the web socket client, while the second file provides some mock telemetry data (10 in total) for testing out this service.</p>
+
+<p><a href="../downloads/fleet.md">ws-send-telem.js</a></p>
+
+<p><a href="#">mock-telemetry.js</a></p>
+
+<p><strong>NOTE: Remeber to replace <code>&lt;ACCESS_TOKEN&gt;</code>, <code>&lt;DRONE_ID&gt;</code> and <code>&lt;COMPANY_ID&gt;</code> with the appropriate values.</strong></p>
+
+<p>Lastly, run the project with <code>node ws-send-telem.js</code> and your client should be connected to the web socket server and sending telemetry defined in <code>mock-telemetry.js</code>. Each time you run the node program, a telemetry message will be sent every 1 second to our servers. Feel free to change the frequency of the telemetry or the total number of telemetry to be sent by editing the source files.</p>
+<h3 id='getting-live-telemetry'>Getting live telemetry</h3>
+<p>After sending the telemetry, you will also be able to listen and retrieve this telemetry with another web socket client. Receiving telemetry is done on a company wide level.</p>
+
+<div class="center-column"></div>
+<pre class="highlight plaintext"><code>wss://&lt;URL&gt;?access_token=&amp;company_id=
+</code></pre>
+<p><strong>With Google Chrome extension <a href="https://chrome.google.com/webstore/detail/simple-websocket-client/pfdhoblngboilpfeibdedpjgfnlcodoo">Simple WebSocket Client</a></strong></p>
+
+<p>Instructions for the extension is similar to the sender above.</p>
+
+<p>With your <code>access_token</code> and <code>company_id</code> entered as query parameters into the URL above, simply paste it into the URL textfield and click on <code>Open</code>. </p>
+
+<p>The <code>STATUS</code> should change to <code>OPENED</code> once the web socket connection has been successfully established, and you should start to receive the telemetry data in raw JSON format in the message log console during your live flight.</p>
+<pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">WebSocketClient</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'websocket'</span><span class="p">).</span><span class="nx">client</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WebSocketClient</span><span class="p">();</span>
+
+<span class="nx">client</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'connectFailed'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Connect Error: '</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+<span class="p">});</span>
+
+<span class="nx">client</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'connect'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">connection</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'WebSocket Client Connected'</span><span class="p">);</span>
+    <span class="nx">connection</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'error'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Connection Error: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+    <span class="p">});</span>
+    <span class="nx">connection</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'close'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'echo-protocol Connection Closed'</span><span class="p">);</span>
+    <span class="p">});</span>
+    <span class="nx">connection</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'message'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="s1">'utf8'</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Received: '"</span> <span class="o">+</span> <span class="nx">message</span><span class="p">.</span><span class="nx">utf8Data</span> <span class="o">+</span> <span class="s2">"'"</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+
+    <span class="kd">function</span> <span class="nx">sendNumber</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">connection</span><span class="p">.</span><span class="nx">connected</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">number</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="mh">0xFFFFFF</span><span class="p">);</span>
+            <span class="nx">connection</span><span class="p">.</span><span class="nx">sendUTF</span><span class="p">(</span><span class="nx">number</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+            <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">sendNumber</span><span class="p">,</span> <span class="mi">1000</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="nx">sendNumber</span><span class="p">();</span>
+<span class="p">});</span>
+
+<span class="nx">client</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="s1">'wss://&lt;URL&gt;?access_token=&lt;ACCESS_TOKEN&gt;&amp;company_id=&lt;COMPANY_ID&gt;'</span><span class="p">,</span> <span class="s1">'echo-protocol'</span><span class="p">);</span>
+</code></pre>
+<p><strong>With NodeJS and Javascript</strong></p>
+
+<p><em>This example assumes you already have NodeJS installed on your machine</em></p>
+
+<p>We will use the same npm library, <a href="https://www.npmjs.com/package/websocket"><code>websocket</code></a>, to implement the receiver for the telemetry.</p>
+
+<p>Next, create a file <code>ws-receive-telem.js</code> and paste the provided example code on the right into it. Remeber to replace <code>&lt;ACCESS_TOKEN&gt;</code> and <code>&lt;COMPANY_ID&gt;</code> with the appropriate values. <strong>NOTE: Select the <code>javascript</code> tab at the top of the code section if you don&#39;t see the example code!</strong></p>
+
+<p>Alternatively, you can download the file directly: <a href="#">ws-receive-telem.js</a></p>
+
+<p>Run the project with <code>node ws-receive-telem.js</code> and your client should be connected to the web socket server and listening for telemetry. Once your drone is in active flight and telemetry is being logged, you should see the telemetry JSON objects printed out on the console.</p>
